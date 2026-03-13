@@ -1,81 +1,57 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function Loading({ setIsLoading }: { setIsLoading: (loading: boolean) => void }) {
-  const name = 'Neel Shah*';
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showCursor, setShowCursor] = useState(true);
+  const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    setCurrentIndex(0);
-    setShowCursor(true);
-    let i = 0;
-    let timeoutId: ReturnType<typeof setTimeout>;
-    const type = () => {
-      if (i < name.length) {
-        setCurrentIndex(i + 1);
-        i++;
-        timeoutId = setTimeout(type, 220);
-      }
-    };
-    type();
-    const cursorInterval = setInterval(() => setShowCursor(c => !c), 500);
+    const exitTimer = setTimeout(() => {
+      setExiting(true);
+    }, 1800);
+
+    const unmountTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2800);
+
     return () => {
-      clearInterval(cursorInterval);
-      clearTimeout(timeoutId);
+      clearTimeout(exitTimer);
+      clearTimeout(unmountTimer);
     };
-  }, [name, setIsLoading]);
-
-  useEffect(() => {
-    if (currentIndex === name.length) {
-      const doneTimeout = setTimeout(() => setIsLoading(false), 1800);
-      return () => clearTimeout(doneTimeout);
-    }
-  }, [currentIndex, name.length, setIsLoading]);
+  }, [setIsLoading]);
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-neutral-200 dark:bg-black">
-      <span className="font-gambarino text-[2rem] text-neutral-900 dark:text-white bg-transparent drop-shadow-md inline-flex">
-        {name.split('').map((char, idx) => {
-          if (idx >= currentIndex) return null;
-          const isAsterisk = char === '*';
-          const isSpace = char === ' ';
-          if (idx === currentIndex - 1) {
-            return (
-              <motion.span
-                key={idx}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
-                className={
-                  isAsterisk
-                    ? 'inline-block text-orange-600'
-                    : isSpace
-                    ? ''
-                    : 'inline-block tracking-wider'
-                }
-              >
-                {isSpace ? ' ' : char}
-              </motion.span>
-            );
-          }
-          return (
-            <span
-              key={idx}
-              className={
-                isAsterisk
-                  ? 'text-orange-600'
-                  : isSpace
-                  ? ''
-                  : 'tracking-wider'
-              }
+    <AnimatePresence>
+      {!exiting && (
+        <motion.div
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#040810] overflow-hidden"
+          initial={{ y: 0 }}
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+            className="text-center"
+          >
+            <h1 className="text-4xl font-light tracking-tight text-white md:text-6xl lg:text-7xl">
+              Rishib Iyapady
+            </h1>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+              className="mt-5 flex items-center justify-center gap-4"
             >
-              {isSpace ? ' ' : char}
-            </span>
-          );
-        })}
-        <span className={showCursor ? 'inline' : 'invisible'}>|</span>
-      </span>
-    </div>
+              <div className="h-[1px] w-12 bg-white/20" />
+              <span className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
+                Hardware &amp; Software
+              </span>
+              <div className="h-[1px] w-12 bg-white/20" />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

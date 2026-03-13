@@ -1,88 +1,125 @@
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
+
+const values = [
+  {
+    number: "01",
+    title: "Hardware × Software",
+    description: "Living at the intersection of microelectronics and code. I design systems where raw silicon meets robust logic, bringing physical prototypes to life.",
+  },
+  {
+    number: "02",
+    title: "Edge Intelligence",
+    description: "Deploying TinyML models and containerized data pipelines directly to the device. Focusing on fast inference, low latency, and efficient power usage.",
+  },
+  {
+    number: "03",
+    title: "Shipped & Proven",
+    description: "Building tools that communities and teams actually deploy. Because code only matters when it survives real-world constraints and physical edge cases.",
+  },
+];
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+};
 
 export default function Value() {
-  const values = [
-    {
-      title: "Innovation",
-      description: "Pushing boundaries and exploring new possibilities in every project."
-    },
-    {
-      title: "Quality",
-      description: "Delivering excellence through attention to detail and best practices."
-    },
-    {
-      title: "Collaboration",
-      description: "Working together to create solutions that exceed expectations."
-    }
-  ];
-
-  const controls = useAnimation();
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { margin: '-100px', once: true });
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible');
-    }
-  }, [isInView, controls]);
-
-  const containerVariants = {
-    hidden: { opacity: 0, y: 100 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.3,
-        duration: 1,
-        ease: [0.25, 0.8, 0.25, 1], // easeOutCubic
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 60 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.8, 0.25, 1], // smoother
-      }
-    }
-  };
-
   return (
     <section
       id="values"
       aria-label="Core values section"
-      ref={sectionRef}
-      className="min-h-screen w-full flex flex-col items-start justify-center bg-neutral-200 dark:bg-black transition-colors px-6 sm:px-8 py-12 sm:py-8"
+      className="relative w-full overflow-hidden bg-[#070d18] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
     >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={controls}
-        className="flex flex-col items-start justify-center text-left max-w-4xl mx-auto"
-      >
-        <div className="grid md:grid-cols-3 gap-12">
-          {values.map((value) => (
+      {/* Background gradients */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#040810] to-transparent" />
+      
+      {/* Grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,1) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+      />
+
+      <div className="relative z-10 flex w-full flex-col items-center justify-between">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex w-full flex-col items-center justify-center max-w-7xl mx-auto"
+        >
+          <motion.div
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="mb-20 flex max-w-4xl flex-col items-center text-center"
+          >
             <motion.div
-              key={value.title}
-              variants={itemVariants}
-              className="flex flex-col"
+              variants={fadeUpVariants}
+              className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2.5 backdrop-blur-md"
             >
-              <h3 className="font-gambarino text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-orange-600 dark:text-orange-600">
-                {value.title}
-              </h3>
-              <p className="text-lg sm:text-xl text-neutral-700 dark:text-neutral-300">
-                {value.description}
+              <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+                Chapter 03 · Core Principles
               </p>
             </motion.div>
-          ))}
-        </div>
-      </motion.div>
+
+            <motion.h2 variants={fadeUpVariants} className="font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+              Engineering
+              <br />
+              <span className="text-white/40">Philosophy</span>
+            </motion.h2>
+          </motion.div>
+
+          <div className="grid w-full gap-5 lg:grid-cols-3">
+            {values.map((value) => (
+              <motion.div
+                key={value.title}
+                variants={itemVariants}
+                className="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-black/40 p-8 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/[0.08]"
+              >
+                {/* Number Watermark */}
+                <div className="pointer-events-none absolute -right-4 -top-8 font-pixel text-[8rem] text-white/[0.03] transition-colors group-hover:text-white/[0.06]">
+                  {value.number}
+                </div>
+
+                <div className="relative z-10">
+                  <span className="mb-6 inline-block font-mono text-[0.8rem] font-semibold text-white/40">
+                    // {value.number}
+                  </span>
+                  <h3 className="mb-4 font-display text-[1.4rem] font-semibold tracking-wide text-white/95 sm:text-2xl">
+                    {value.title}
+                  </h3>
+                  <p className="text-[0.95rem] leading-relaxed text-white/60 group-hover:text-white/80 transition-colors">
+                    {value.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }
