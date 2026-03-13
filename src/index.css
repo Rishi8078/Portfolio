@@ -43,6 +43,17 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
   }
+
+  /* CSS-only Custom Cursor for better performance */
+  @media (pointer: fine) {
+
+    *,
+    *::before,
+    *::after {
+      /* Base64 encoded, scaled down version of the stryds_cursor.svg */
+      cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxMjQgMTQ3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyB0cmFuc2Zvcm09InJvdGF0ZSgtMjUsIDYyLCA3My41KSI+CjxwYXRoIGQ9Ik01NS43NjM5IDUuMTkyMTNDNTQuMDMzNyA2LjM2MDQgNTIuNzkwMiA4LjM2MDA2IDUxLjYyMTQgMTAuNzM4MkM1MC40MjggMTMuMTY2MyA0OS4wOTkzIDE2LjQ2NDEgNDcuNDAwMyAyMC42ODFMNDcuMzU4NSAyMC43ODQ3TDguMzQ3MzUgMTE3LjYwOEw4LjMwNTQ2IDExNy43MTJDNi41NzQyNCAxMjIuMDA5IDUuMjIxNjMgMTI1LjM2NiA0LjM4NDA3IDEyNy45ODRDMy41NjQ5NiAxMzAuNTQ1IDMuMDY1ODMgMTMyLjg3OSAzLjUxMzk5IDEzNC45MzZDNC41MTk0MiAxMzkuNTUxIDguMjQzNjkgMTQzLjA4MSAxMi45MDUxIDE0My44MzlDMTQuOTgyOSAxNDQuMTc3IDE3LjI4NzQgMTQzLjU1NCAxOS44MDA5IDE0Mi41OTlDMjIuMzcxMiAxNDEuNjIzIDI1LjY1MTggMTQwLjA5MyAyOS44NTA4IDEzOC4xMzRMMjkuOTUwOSAxMzguMDg4TDUxLjg0MzYgMTI3Ljg3N0M1NS42NzIgMTI2LjA5MiA1Ny4yNDkgMTI1LjM3MiA1OC44NDM5IDEyNS4wMThDNjEuMDUzOSAxMjQuNTI4IDYzLjM0NDUgMTI0LjUyOCA2NS41NTQ1IDEyNS4wMThDNjcuMTQ5NSAxMjUuMzcyIDY4LjcyNjQgMTI2LjA5MiA3Mi41NTQ4IDEyNy44NzdMOTQuNDQ3NiAxMzguMDg4TDk0LjU0NzkgMTM4LjEzNUM5OC43NDY3IDE0MC4wOTMgMTAyLjAyNyAxNDEuNjIzIDEwNC41OTggMTQyLjU5OUMxMDcuMTExIDE0My41NTQgMTA5LjQxNiAxNDQuMTc3IDExMS40OTMgMTQzLjgzOUMxMTYuMTU1IDE0My4wODEgMTE5Ljg3OSAxMzkuNTUxIDEyMC44ODQgMTM0LjkzNkMxMjEuMzMzIDEzMi44NzkgMTIwLjgzMyAxMzAuNTQ1IDEyMC4wMTQgMTI3Ljk4NEMxMTkuMTc3IDEyNS4zNjUgMTE3LjgyNCAxMjIuMDA4IDExNi4wOTMgMTE3LjcxMUwxMTYuMDUxIDExNy42MDhMNzcuMDM5OSAyMC43ODQ3TDc2Ljk5ODEgMjAuNjgwOUM3NS4yOTkxIDE2LjQ2NCA3My45NzA0IDEzLjE2NjMgNzIuNzc3MSAxMC43MzgyQzcxLjYwODIgOC4zNjAwNSA3MC4zNjQ4IDYuMzYwNCA2OC42MzQ1IDUuMTkyMTNDNjQuNzQ2IDIuNTY2NTkgNTkuNjUyNCAyLjU2NjU5IDU1Ljc2MzkgNS4xOTIxM1oiIGZpbGw9IiNGREZERkQiIHN0cm9rZT0iIzEwMTAxMCIgc3Ryb2tlLXdpZHRoPSI1Ii8+CjwvZz4KPC9zdmc+') 4 2, auto !important;
+    }
+  }
 }
 
 /* ========== CLEAN MODERN DESIGN SYSTEM ========== */
@@ -52,23 +63,23 @@
   background: #FFFFFF;
   border: 1px solid #E5E7EB;
   border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .dark .soft-card {
   background: #1E293B;
   border-color: #334155;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .soft-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .dark .soft-card:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* --- Soft Button --- */
@@ -81,7 +92,7 @@
   background: #FFFFFF;
   color: #1A1A2E;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .dark .soft-btn {
@@ -94,7 +105,7 @@
   background: #4A6CF7;
   color: #FFFFFF;
   border-color: #4A6CF7;
-  box-shadow: 0 4px 12px rgba(74,108,247,0.3);
+  box-shadow: 0 4px 12px rgba(74, 108, 247, 0.3);
 }
 
 .dark .soft-btn:hover {
@@ -113,7 +124,7 @@
   background: #4A6CF7;
   color: #FFFFFF;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(74,108,247,0.25);
+  box-shadow: 0 2px 8px rgba(74, 108, 247, 0.25);
 }
 
 .dark .soft-btn-accent {
@@ -123,7 +134,7 @@
 
 .soft-btn-accent:hover {
   background: #3451B2;
-  box-shadow: 0 4px 16px rgba(74,108,247,0.4);
+  box-shadow: 0 4px 16px rgba(74, 108, 247, 0.4);
 }
 
 /* --- Pill Tag --- */
