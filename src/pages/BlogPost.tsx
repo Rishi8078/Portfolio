@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -72,6 +72,7 @@ function normalizeObsidianMarkdown(markdown: string) {
 
 export default function BlogPost() {
   const { id } = useParams();
+  const location = useLocation();
   const post = id ? getPostById(id) : null;
   const markdownContent = useMemo(() => normalizeObsidianMarkdown(post?.content ?? ''), [post?.content]);
 
@@ -98,19 +99,31 @@ export default function BlogPost() {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className="relative w-full min-h-screen pt-32 pb-24 px-6 sm:px-8 lg:px-16 max-w-4xl mx-auto"
     >
-      <Link to="/" className="inline-flex flex-row items-center gap-2 mb-12 font-mono text-xs text-white/50 hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
-        <span>←</span> Back home
-      </Link>
-
-      <div className="flex items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-white/50 mb-6">
-        <span>{post.date}</span>
-        <span className="text-white/30">/</span>
-        <span className="rounded-full border border-white/20 bg-white/5 px-2 py-0.5 text-white">{post.category}</span>
+      <div className="mb-12 flex items-center justify-between">
+        <Link
+          to={location.state?.fromArchive ? "/blog" : "/#blog"}
+          className="group inline-flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 hover:text-white/90 transition-colors uppercase"
+        >
+          <span className="transition-transform group-hover:-translate-x-1">←</span>
+          <span>{location.state?.fromArchive ? "Back to all posts" : "Back to home"}</span>
+        </Link>
       </div>
 
-      <h1 className="font-display text-4xl sm:text-5xl lg:text-[4rem] font-bold leading-[1.05] tracking-tight text-white uppercase text-balance mb-8">
-        {post.title}
-      </h1>
+      <div className="mb-8 flex flex-col gap-4">
+        <div className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-widest text-white/40">
+          <span>{post.date}</span>
+          {post.category && (
+            <>
+              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span className="text-white/70">{post.category}</span>
+            </>
+          )}
+        </div>
+
+        <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white/90 text-balance">
+          {post.title}
+        </h1>
+      </div>
 
       <div className="w-full h-px bg-white/10 mb-12" />
 

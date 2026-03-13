@@ -34,6 +34,7 @@ const PostMetadata = ({ post }: { post: any }) => (
 
 export default function Blog() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
 
   const swipeConfidenceThreshold = 10000;
   const swipePower = (offset: number, velocity: number) => {
@@ -44,11 +45,17 @@ export default function Blog() {
     const swipe = swipePower(offset.x, velocity.x);
 
     if (swipe < -swipeConfidenceThreshold) {
-      // swiped left
-      setCurrentSlide((prev) => Math.min(prev + 1, featuredPosts.length - 1));
+      // swiped left (next slide)
+      if (currentSlide < featuredPosts.length - 1) {
+        setDirection(1);
+        setCurrentSlide((prev) => prev + 1);
+      }
     } else if (swipe > swipeConfidenceThreshold) {
-      // swiped right
-      setCurrentSlide((prev) => Math.max(prev - 1, 0));
+      // swiped right (previous slide)
+      if (currentSlide > 0) {
+        setDirection(-1);
+        setCurrentSlide((prev) => prev - 1);
+      }
     }
   };
 
@@ -83,8 +90,20 @@ export default function Blog() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mb-16 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
+          className="relative mb-16 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
         >
+          {/* Symmetrical Decorative Elements */}
+          <motion.div 
+            animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
+            className="absolute -left-10 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-emerald-600/20 blur-[3rem]" 
+          />
+          <motion.div 
+            animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
+            className="absolute -right-10 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[3rem]" 
+          />
+
           <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/50 backdrop-blur-md">
             Chapter 05 · Writings
           </motion.div>
@@ -104,12 +123,13 @@ export default function Blog() {
           variants={fadeUpVariants}
           className="relative w-full min-h-[900px] sm:min-h-[650px] lg:min-h-[500px] mt-4 flex flex-col"
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={`slide-${currentSlide}`}
-              initial={{ opacity: 0, x: 100 }}
+              custom={direction}
+              initial={{ opacity: 0, x: direction > 0 ? 100 : -100 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
+              exit={{ opacity: 0, x: direction > 0 ? -100 : 100 }}
               transition={{ type: "spring", stiffness: 200, damping: 25 }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
@@ -148,6 +168,7 @@ export default function Blog() {
                   key={i}
                   onClick={(e) => {
                     e.stopPropagation();
+                    setDirection(i > currentSlide ? 1 : -1);
                     setCurrentSlide(i);
                   }}
                   className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-6 bg-white/80' : 'w-2 bg-white/20 hover:bg-white/40'}`}
@@ -156,7 +177,10 @@ export default function Blog() {
               ))}
             </div>
 
-            <Link to="/blog" className="flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 hover:text-white/90 transition-colors uppercase group">
+            <Link 
+              to="/blog"
+              className="flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 hover:text-white/90 transition-colors uppercase group"
+            >
               <span>View All Posts</span>
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>

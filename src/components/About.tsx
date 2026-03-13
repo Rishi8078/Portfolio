@@ -68,7 +68,19 @@ export default function About() {
         </motion.div>
 
         {/* Centered Content Layout */}
-        <div className="flex w-full max-w-4xl flex-col items-center text-center">
+        <div className="relative flex w-full max-w-4xl flex-col items-center text-center">
+          {/* Symmetrical Decorative Elements */}
+          <motion.div 
+            animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }} 
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
+            className="absolute -left-10 top-1/4 -z-10 h-40 w-40 rounded-full bg-blue-600/20 blur-[4rem]" 
+          />
+          <motion.div 
+            animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }} 
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
+            className="absolute -right-10 bottom-1/4 -z-10 h-40 w-40 rounded-full bg-purple-600/20 blur-[4rem]" 
+          />
+
           <motion.div
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
             initial="hidden"

@@ -114,8 +114,20 @@ export default function Work() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col items-center text-center max-w-4xl"
+          className="relative flex flex-col items-center text-center max-w-4xl"
         >
+          {/* Symmetrical Decorative Elements */}
+          <motion.div 
+            animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
+            className="absolute -left-12 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[3rem]" 
+          />
+          <motion.div 
+            animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
+            className="absolute -right-12 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-emerald-600/20 blur-[3rem]" 
+          />
+
           {/* Tag */}
           <motion.div
             variants={fadeUpVariants}

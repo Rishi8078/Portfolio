@@ -92,8 +92,20 @@ export default function Value() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="mb-20 flex max-w-4xl flex-col items-center text-center"
+            className="relative mb-20 flex max-w-4xl flex-col items-center text-center"
           >
+            {/* Symmetrical Decorative Elements */}
+            <motion.div 
+              animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
+              className="absolute -left-16 top-1/2 -z-10 h-40 w-40 -translate-y-1/2 rounded-full bg-indigo-600/20 blur-[4rem]" 
+            />
+            <motion.div 
+              animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
+              className="absolute -right-16 top-1/2 -z-10 h-40 w-40 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[4rem]" 
+            />
+
             <motion.div
               variants={fadeUpVariants}
               className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2.5 backdrop-blur-md"
