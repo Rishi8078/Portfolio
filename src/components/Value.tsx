@@ -45,12 +45,27 @@ export default function Value() {
     <section
       id="values"
       aria-label="Core values section"
-      className="relative w-full overflow-hidden bg-[#070d18] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
+      className="relative w-full overflow-hidden bg-[#040810] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
     >
       {/* Background gradients */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),transparent_50%)]" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#040810] to-transparent" />
-      
+
+      {/* Grid pattern glows */}
+      <motion.div
+        animate={{
+          opacity: [0.1, 0.25, 0.1],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute top-1/4 left-1/4 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-[120px]"
+      />
+      <motion.div
+        animate={{
+          opacity: [0.1, 0.25, 0.1],
+        }}
+        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="pointer-events-none absolute bottom-1/4 right-0 h-[35rem] w-[35rem] translate-x-1/4 translate-y-1/4 rounded-full bg-indigo-500/10 blur-[120px]"
+      />
+
       {/* Grid pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -60,6 +75,9 @@ export default function Value() {
           backgroundSize: '40px 40px',
         }}
       />
+
+      {/* Section Vignette for smooth blending */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#040810_100%)]" />
 
       <div className="relative z-10 flex w-full flex-col items-center justify-between">
         <motion.div
@@ -85,7 +103,7 @@ export default function Value() {
               </p>
             </motion.div>
 
-              <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+            <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
               Engineering
               <br />
               <span className="text-white/40">Philosophy</span>

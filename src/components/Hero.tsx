@@ -111,7 +111,7 @@ export default function Hero() {
             className="absolute inset-0 z-0"
             style={{ backgroundImage: radialOverlay }}
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-46 bg-gradient-to-t from-[black] via-[black]/70 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-64 bg-gradient-to-t from-[#040810] via-[#040810]/70 to-transparent" />
 
           <div
             className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"

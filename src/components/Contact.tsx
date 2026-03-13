@@ -12,12 +12,33 @@ export default function Contact() {
       className="relative flex min-h-[90vh] w-full flex-col items-center justify-center overflow-hidden bg-[#040810] px-6 py-24 sm:px-12 lg:px-24"
       aria-labelledby="contact-title"
     >
-      {/* Cinematic Background */}
-      <div className="pointer-events-none absolute inset-0 z-0">
+      {/* Cinematic Background with Glow */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.08),transparent_50%)]" />
+
+        {/* Dynamic Glow */}
+        <motion.div
+          animate={{
+            opacity: [0.2, 0.4, 0.2],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="pointer-events-none absolute h-[60rem] w-[60rem] rounded-full bg-indigo-900/10 blur-[150px]"
+        />
+        <motion.div
+          animate={{
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          className="pointer-events-none absolute bottom-0 right-0 h-[40rem] w-[40rem] translate-x-1/4 translate-y-1/4 rounded-full bg-blue-800/10 blur-[120px]"
+        />
       </div>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-64 bg-gradient-to-t from-[#040810] to-transparent" />
-      
+
       {/* Grid pattern */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
@@ -28,8 +49,11 @@ export default function Contact() {
         }}
       />
 
+      {/* Section Vignette for smooth blending */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#040810_100%)]" />
+
       <div className="relative z-20 flex w-full max-w-5xl flex-col items-center">
-        
+
         {/* Header Section */}
         <motion.div
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
@@ -43,7 +67,7 @@ export default function Contact() {
               Chapter 07 · Connect
             </span>
           </motion.div>
-            <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+          <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
             Let's <span className="text-white/40">Build</span>
           </motion.h2>
           <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
@@ -53,9 +77,9 @@ export default function Contact() {
 
         {/* Center Portrait and Cards */}
         <div className="flex w-full flex-col items-center gap-16">
-          
+
           {/* Symmetrical Portrait Container */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
@@ -74,14 +98,14 @@ export default function Contact() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#040810]/80 via-transparent to-transparent" />
               </div>
             </div>
-            
+
             {/* Symmetrical Decorative Elements */}
             <div className="absolute -left-12 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-blue-600/10 blur-[3rem] transition-all duration-500 group-hover:bg-blue-600/20" />
             <div className="absolute -right-12 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-emerald-600/10 blur-[3rem] transition-all duration-500 group-hover:bg-emerald-600/20" />
           </motion.div>
 
           {/* Interactive Links Array */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -119,7 +143,7 @@ export default function Contact() {
       </div>
 
       {/* Footer */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

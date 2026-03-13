@@ -74,9 +74,24 @@ export default function Work() {
       className="relative -mt-10 min-h-screen w-full overflow-hidden bg-[#040810] pt-24 transition-colors sm:-mt-14 sm:pt-28 lg:pt-32"
       aria-labelledby="portfolio-title"
     >
-      {/* Redesigned Cinematic Background */}
-      <div className="absolute inset-0 z-0">
+      {/* Redesigned Cinematic Background with Glow */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        {/* Deep background */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1d2b45]/20 via-[#040810]/80 to-[#040810]" />
+
+        {/* Dynamic Glow */}
+        <motion.div
+          animate={{
+            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/4 h-[40rem] w-[40rem] rounded-full bg-blue-900/20 blur-[120px]"
+        />
       </div>
 
       {/* Subdued Grid overlay */}
@@ -89,7 +104,8 @@ export default function Work() {
         }}
       />
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-56 bg-gradient-to-b from-[#040810] via-[#040810]/80 to-transparent" />
+      {/* Section Vignette for smooth blending */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#040810_100%)]" />
 
       <div className="relative z-10 flex w-full flex-col items-center justify-between px-6 pb-12 sm:px-10 lg:px-16">
         {/* Striking Centered Header similar to Hero */}
@@ -134,12 +150,12 @@ export default function Work() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.04] hover:border-white/20"
+              className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.06] hover:border-white/30 hover:shadow-[0_0_30px_rgba(29,43,69,0.5)]"
               variants={cardVariants}
             >
               {/* Hover Gradient Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
               {/* Top line accent */}
               <div className="absolute left-0 top-0 h-[2px] w-0 bg-white/20 transition-all duration-500 group-hover:w-full" />
 
@@ -176,7 +192,7 @@ export default function Work() {
                       </span>
                     ))}
                   </div>
-                  
+
                   {/* Action link */}
                   <div className="flex items-center text-xs font-mono tracking-widest text-white/30 transition-colors uppercase group-hover:text-white/90">
                     <span className="mr-3 font-semibold">View Repository</span>

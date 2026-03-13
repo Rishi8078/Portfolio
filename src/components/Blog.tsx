@@ -15,12 +15,12 @@ const ImageBlock = ({ className = "", src }: { className?: string; src?: string 
     ) : (
       <>
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent backdrop-blur-sm opacity-50" />
-        <div 
-          className="pointer-events-none absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity duration-500" 
-          style={{ 
-            backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', 
-            backgroundSize: '24px 24px' 
-          }} 
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity duration-500"
+          style={{
+            backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+            backgroundSize: '24px 24px'
+          }}
         />
         <div className="absolute inset-0 grid place-items-center opacity-20 transition-opacity duration-300 group-hover:opacity-40">
           <svg className="w-8 h-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,8 +68,31 @@ export default function Blog() {
       className="relative w-full overflow-hidden bg-[#040810] py-24 sm:py-32"
       aria-labelledby="blog-title"
     >
-      {/* Background Gradients */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,#040810_120%)]" />
+      {/* Background Gradients with Glow */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#040810_120%)]" />
+
+        {/* Dynamic Glow */}
+        <motion.div
+          animate={{
+            opacity: [0.15, 0.35, 0.15],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="pointer-events-none absolute top-1/3 h-[45rem] w-[45rem] rounded-full bg-emerald-900/10 blur-[140px]"
+        />
+        <motion.div
+          animate={{
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="pointer-events-none absolute bottom-1/4 left-1/4 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-blue-900/10 blur-[150px]"
+        />
+      </div>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-56 bg-gradient-to-t from-[#040810] via-[#040810]/90 to-transparent" />
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
@@ -79,11 +102,12 @@ export default function Blog() {
           backgroundSize: '40px 40px',
         }}
       />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#040810]/55 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 -top-16 h-40 bg-[#040810]/35 blur-3xl" />
-      
+
+      {/* Section Vignette for smooth blending */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#040810_100%)]" />
+
       <div className="relative z-20 mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16">
-        
+
         {/* Header Section */}
         <motion.div
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
@@ -108,7 +132,7 @@ export default function Blog() {
         </motion.div>
 
         {/* CAROUSEL SECTION */}
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
@@ -137,16 +161,16 @@ export default function Blog() {
                     <span className="text-white/30">/</span>
                     <span className="rounded-full border border-white/20 bg-white/5 px-2 py-0.5 text-white">{featuredPosts[0].category}</span>
                   </div>
-                  
+
                   <h2 className="font-display text-4xl sm:text-5xl lg:text-[5rem] font-bold leading-[1.05] tracking-tight text-white uppercase text-balance group-hover:text-white/90 transition-colors">
                     {featuredPosts[0].title}
                   </h2>
-                  
+
                   <p className="mt-4 font-mono text-sm leading-relaxed text-white/60 max-w-xl pr-6 font-medium">
                     {featuredPosts[0].description}
                   </p>
                 </Link>
-                
+
                 <Link to={`/post/${featuredPosts[0].id}`} className="lg:col-span-6 w-full h-[400px] lg:h-[550px] z-0 cursor-pointer block group">
                   <ImageBlock className="w-full h-full object-cover" src={featuredPosts[0]?.image} />
                 </Link>
@@ -234,10 +258,10 @@ export default function Blog() {
                 />
               ))}
             </div>
-            
+
             <a href="#" className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.1em] text-white/80 hover:text-white transition-colors group">
-               View All Posts
-               <span className="group-hover:translate-x-1 transition-transform">→</span>
+              View All Posts
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
             </a>
           </div>
         </motion.div>

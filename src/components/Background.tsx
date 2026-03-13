@@ -63,6 +63,23 @@ export default function Background() {
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1d2b45]/20 via-[#040810]/60 to-[#070d18]" />
       </div>
+
+      {/* Dynamic Grid Glows */}
+      <motion.div
+        animate={{
+          opacity: [0.1, 0.25, 0.1],
+        }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute top-1/3 left-1/2 h-[50rem] w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/10 blur-[150px]"
+      />
+      <motion.div
+        animate={{
+          opacity: [0.1, 0.25, 0.1],
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="pointer-events-none absolute bottom-1/3 left-1/4 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-indigo-600/10 blur-[120px]"
+      />
+
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
@@ -71,7 +88,8 @@ export default function Background() {
           backgroundSize: '40px 40px',
         }}
       />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#070d18] to-transparent" />
+      {/* Section Vignette for smooth blending */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#040810_100%)]" />
 
       <div className="relative z-10 w-full">
         <motion.div
