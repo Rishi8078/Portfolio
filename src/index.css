@@ -266,3 +266,133 @@
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
+
+/* ========== OBSIDIAN-LIKE MARKDOWN ========== */
+
+.obsidian-markdown {
+  line-height: 1.8;
+}
+
+.obsidian-markdown p,
+.obsidian-markdown li {
+  letter-spacing: 0.01em;
+}
+
+.obsidian-markdown ul,
+.obsidian-markdown ol {
+  margin-top: 1rem;
+}
+
+.obsidian-markdown li + li {
+  margin-top: 0.35rem;
+}
+
+.obsidian-markdown ul.contains-task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.obsidian-markdown ul.contains-task-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.obsidian-markdown ul.contains-task-list li input[type='checkbox'] {
+  margin-top: 0.3rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 0.2rem;
+  accent-color: rgba(255, 255, 255, 0.85);
+}
+
+.obsidian-markdown pre code {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.obsidian-markdown :not(pre) > code {
+  font-family: 'Space Mono', monospace;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.35rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.88em;
+  line-height: 1;
+  padding: 0.16rem 0.38rem;
+  white-space: normal;
+}
+
+.obsidian-inline-code {
+  font-family: 'Space Mono', monospace;
+}
+
+.obsidian-markdown table tr:last-child td {
+  border-bottom: 0;
+}
+
+.obsidian-markdown blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.obsidian-markdown mark {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border-radius: 0.2rem;
+  padding: 0 0.25rem;
+}
+
+.obsidian-callout {
+  margin: 1.75rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left-width: 4px;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.9rem 1rem;
+}
+
+.obsidian-callout-title {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.55rem;
+}
+
+.obsidian-callout-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.obsidian-callout-note,
+.obsidian-callout-info,
+.obsidian-callout-tip,
+.obsidian-callout-example,
+.obsidian-callout-quote,
+.obsidian-callout-abstract,
+.obsidian-callout-summary,
+.obsidian-callout-tldr,
+.obsidian-callout-question,
+.obsidian-callout-help,
+.obsidian-callout-faq {
+  border-left-color: rgba(255, 255, 255, 0.35);
+}
+
+.obsidian-callout-warning,
+.obsidian-callout-caution,
+.obsidian-callout-attention,
+.obsidian-callout-danger,
+.obsidian-callout-bug,
+.obsidian-callout-failure,
+.obsidian-callout-fail,
+.obsidian-callout-missing {
+  border-left-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.obsidian-callout-success,
+.obsidian-callout-check,
+.obsidian-callout-done {
+  border-left-color: rgba(255, 255, 255, 0.45);
+}

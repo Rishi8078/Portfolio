@@ -150,7 +150,7 @@ export default function Work() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.06] hover:border-white/30 hover:shadow-[0_0_30px_rgba(29,43,69,0.5)]"
+              className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:bg-white/[0.06] hover:border-white/25"
               variants={cardVariants}
             >
               {/* Hover Gradient Effect */}
