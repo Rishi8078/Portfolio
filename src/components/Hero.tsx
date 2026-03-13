@@ -57,11 +57,31 @@ export default function Hero() {
   const heroContentY = useTransform(scrollYProgress, [0.52, 0.60], [50, 0]);
   const yParallax = useTransform(scrollYProgress, [0.80, 1], ["0%", "30%"]);
 
+  // Match the holds of the text sequences (0-0.08, 0.16-0.22, 0.30-0.37, 0.45-0.52)
+  // At the end of T4 (0.60), we want it fully open
   const radialOverlay = useTransform(
     scrollYProgress,
-    [0, 1],
+    [
+      0, 0.08,       // T1 hold
+      0.16, 0.22,    // T2 hold 
+      0.30, 0.37,    // T3 hold
+      0.45, 0.52,    // T4 hold
+      0.60, 1        // Expand to max and stay open
+    ],
     [
       "radial-gradient(circle at center, transparent 0%, black 0%)",
+      "radial-gradient(circle at center, transparent 0%, black 0%)",
+
+      "radial-gradient(circle at center, transparent 0%, black 30%)",
+      "radial-gradient(circle at center, transparent 0%, black 30%)",
+
+      "radial-gradient(circle at center, transparent 0%, black 60%)",
+      "radial-gradient(circle at center, transparent 0%, black 60%)",
+
+      "radial-gradient(circle at center, transparent 0%, black 90%)",
+      "radial-gradient(circle at center, transparent 0%, black 90%)",
+
+      "radial-gradient(circle at center, transparent 0%, black 130%)",
       "radial-gradient(circle at center, transparent 0%, black 130%)"
     ]
   );
