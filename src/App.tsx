@@ -23,8 +23,8 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-cream dark:bg-dark-bg transition-colors relative z-0">
-        <AnimatePresence mode="wait">
+      <div className="min-h-screen bg-[#040810] text-white selection:bg-white/30 transition-colors relative z-0">
+        <AnimatePresence>
           {isLoading && !hasLoadedOnce && (
             <Loading setIsLoading={setIsLoading} />
           )}
@@ -37,7 +37,7 @@ export default function App() {
               key="app-content"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 1.2 }}
               className="pb-safe-bottom"
             >
               <Navigation />

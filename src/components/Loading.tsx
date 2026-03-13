@@ -24,17 +24,17 @@ export function Loading({ setIsLoading }: { setIsLoading: (loading: boolean) => 
       {!exiting && (
         <motion.div
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#040810] overflow-hidden"
-          initial={{ y: 0 }}
-          exit={{ y: "-100%" }}
-          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
         >
-          <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,#040810_120%)]" />
+          <div className="pointer-events-none absolute inset-0 z-0 bg-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-56 bg-gradient-to-t from-[#040810] via-[#040810]/90 to-transparent" />
           <div
             className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
             style={{
               backgroundImage:
-                'linear-gradient(to right, rgb(117, 113, 113) 1px, transparent 1px), linear-gradient(to bottom, rgb(117, 113, 113) 1px, transparent .1px)',
+                'linear-gradient(to right, rgb(255, 255, 255) 1px, transparent 1px), linear-gradient(to bottom, rgb(255, 255, 255) 1px, transparent .1px)',
               backgroundSize: '40px 40px',
             }}
           />
@@ -42,20 +42,25 @@ export function Loading({ setIsLoading }: { setIsLoading: (loading: boolean) => 
             initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-            className="relative z-10 text-center"
+            className="relative z-10 text-center flex flex-col items-center"
           >
-            <h1 className="text-4xl font-light tracking-tight text-white md:text-6xl lg:text-7xl">
+            <motion.h1 
+              initial={{ filter: "blur(10px)", opacity: 0 }}
+              animate={{ filter: "blur(0px)", opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+              className="font-pixel section-heading-glow text-4xl uppercase tracking-tight text-white md:text-5xl lg:text-7xl"
+            >
               Rishib Iyapady
-            </h1>
+            </motion.h1>
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-              className="mt-5 flex items-center justify-center gap-4"
+              className="mt-6 flex items-center justify-center gap-6"
             >
               <div className="h-[1px] w-12 bg-white/20" />
-              <span className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
-                Hardware &amp; Software
+              <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/50">
+                Embedded · Edge AI
               </span>
               <div className="h-[1px] w-12 bg-white/20" />
             </motion.div>
