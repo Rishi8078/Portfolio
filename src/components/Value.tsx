@@ -85,7 +85,7 @@ export default function Value() {
               </p>
             </motion.div>
 
-            <motion.h2 variants={fadeUpVariants} className="font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+              <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
               Engineering
               <br />
               <span className="text-white/40">Philosophy</span>

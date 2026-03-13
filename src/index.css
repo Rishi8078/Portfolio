@@ -216,6 +216,12 @@
   animation: marquee 18s linear infinite;
 }
 
+.section-heading-glow {
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.12),
+    0 0 28px rgba(96, 165, 250, 0.08);
+}
+
 
 
 /* ========== ANIMATIONS ========== */

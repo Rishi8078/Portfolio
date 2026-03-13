@@ -78,7 +78,7 @@ export default function Work() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1d2b45]/20 via-[#040810]/80 to-[#040810]" />
       </div>
-      
+
       {/* Subdued Grid overlay */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
@@ -88,7 +88,7 @@ export default function Work() {
           backgroundSize: '40px 40px',
         }}
       />
-      
+
       <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-56 bg-gradient-to-b from-[#040810] via-[#040810]/80 to-transparent" />
 
       <div className="relative z-10 flex w-full flex-col items-center justify-between px-6 pb-12 sm:px-10 lg:px-16">
@@ -110,7 +110,7 @@ export default function Work() {
             </p>
           </motion.div>
 
-          <motion.h2 variants={fadeUpVariants} className="font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+          <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
             Selected
             <br />
             <span className="text-white/40">Builds</span>
@@ -134,46 +134,56 @@ export default function Work() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-xl border border-white/20 bg-black/40 p-7 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-white/40 hover:bg-white/10"
+              className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.04] hover:border-white/20"
               variants={cardVariants}
             >
-              {/* Top Meta Area */}
-              <div>
-                <div className="mb-5 flex items-center justify-between">
-                  <span className="rounded bg-white/10 px-2.5 py-1 font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white">
+              {/* Hover Gradient Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              
+              {/* Top line accent */}
+              <div className="absolute left-0 top-0 h-[2px] w-0 bg-white/20 transition-all duration-500 group-hover:w-full" />
+
+              <div className="relative z-10 flex flex-col flex-grow">
+                {/* Header info */}
+                <div className="flex justify-between items-start mb-8">
+                  <div className="flex flex-col">
+                    <span className="font-pixel text-[2.5rem] leading-none text-white/10 transition-colors duration-300 group-hover:text-white/20">
+                      0{index + 1}
+                    </span>
+                  </div>
+                  <div className="rounded-full border border-white/10 bg-black/50 px-3 py-1 font-mono text-[0.6rem] font-medium tracking-[0.2em] text-white/50 transition-colors group-hover:border-white/30 group-hover:text-white/90">
                     {project.category}
-                  </span>
-                  <span className="font-pixel text-xs text-white/40 group-hover:text-white/80 transition-colors">0{index + 1}</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-display text-[1.4rem] font-semibold leading-tight text-white/95">
-                    {project.title}
-                  </h3>
-                </div>
-
-                <p className="text-[0.92rem] leading-relaxed text-white/70">
+                {/* Title & Desc */}
+                <h3 className="mb-4 font-display text-2xl font-semibold tracking-wide text-white/90 transition-colors duration-300 group-hover:text-white">
+                  {project.title}
+                </h3>
+                <p className="mb-8 text-[0.92rem] leading-relaxed text-white/50 transition-colors duration-300 flex-grow group-hover:text-white/75">
                   {project.description}
                 </p>
-              </div>
 
-              {/* Bottom Tech/Action Area */}
-              <div className="mt-6 flex flex-col items-start gap-6">
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="rounded border border-white/15 bg-black/50 px-2 py-1 font-mono text-[0.65rem] font-medium tracking-wide text-white/80"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-auto flex w-full justify-start pt-2">
-                  <span className="rounded-full border border-white/30 px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-white/80 transition group-hover:border-white/60 group-hover:bg-white group-hover:text-[#1a1a2e]">
-                    Explore Build
-                  </span>
+                {/* Tags area */}
+                <div className="mt-auto pt-6 border-t border-white/5 group-hover:border-white/10 transition-colors duration-300">
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="flex items-center gap-1.5 rounded-md bg-white/[0.03] px-2.5 py-1.5 font-mono text-[0.65rem] text-white/50 transition-colors group-hover:bg-white/[0.08] group-hover:text-white/90"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  {/* Action link */}
+                  <div className="flex items-center text-xs font-mono tracking-widest text-white/30 transition-colors uppercase group-hover:text-white/90">
+                    <span className="mr-3 font-semibold">View Repository</span>
+                    <svg className="h-4 w-4 transform transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </motion.a>

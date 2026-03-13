@@ -84,7 +84,7 @@ export default function Background() {
           <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
             Chapter 04 · Timeline
           </motion.div>
-          <motion.h2 variants={fadeUpVariants} className="font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+          <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
             Work &<br />
             <span className="text-white/40">Academia</span>
           </motion.h2>
