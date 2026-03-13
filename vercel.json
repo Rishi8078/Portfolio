@@ -5,10 +5,10 @@
       "has": [
         {
           "type": "host",
-          "value": "neelshha.com"
+          "value": "rishilabs.tech"
         }
       ],
-      "destination": "https://www.neelshha.com/$1",
+      "destination": "https://www.rishilabs.tech/$1",
       "permanent": true
     }
   ],
