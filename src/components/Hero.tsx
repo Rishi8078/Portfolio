@@ -93,7 +93,7 @@ export default function Hero() {
         {/* =========================================
             UNDERLYING HERO CONTENT (Revealed via animation)
             ========================================= */}
-        <div className="absolute inset-0 z-0 flex flex-col items-center justify-end pb-24 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-40 overflow-hidden bg-[black]">
+        <div className="absolute inset-0 z-0 flex flex-col items-center justify-end pb-32 sm:pb-40 lg:pb-48 overflow-hidden bg-[black]">
           {/* Background image */}
           <motion.div
             className="absolute inset-0 z-0"
@@ -103,7 +103,7 @@ export default function Hero() {
               src="/hero-bg.png"
               alt=""
               aria-hidden="true"
-              className="h-full w-full object-cover object-top sm:object-[center_5%] lg:object-[center_20%] opacity-80 sm:opacity-60"
+              className="h-full w-full object-cover object-[center_20%] sm:object-[center_30%] opacity-60"
             />
           </motion.div>
 
@@ -111,7 +111,7 @@ export default function Hero() {
             className="absolute inset-0 z-0"
             style={{ backgroundImage: radialOverlay }}
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-48 sm:h-64 bg-gradient-to-t from-[#040810] via-[#040810]/70 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-64 bg-gradient-to-t from-[#040810] via-[#040810]/70 to-transparent" />
 
           <div
             className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
@@ -126,29 +126,29 @@ export default function Hero() {
             style={{ opacity: opacityFade, y: heroContentY }}
           >
             <div className="flex flex-col items-center">
-              <div className="mb-4 sm:mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 sm:px-5 sm:py-2 backdrop-blur-md">
-                <p className="font-mono text-[0.55rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+              <div className="mb-6 rounded-full border border-white/10 bg-white/5 px-5 py-2 backdrop-blur-md">
+                <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
                   Hamburg · TUHH
                 </p>
               </div>
 
-              <h1 className="section-heading-glow font-pixel text-[2.5rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[3.5rem] md:text-[4rem] lg:text-[6rem] xl:text-[8rem]">
+              <h1 className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[5rem] md:text-[7.5rem] lg:text-[9rem]">
                 Embedded
                 <br />
                 <span className="text-white/40">Edge AI</span>
               </h1>
 
-              <p className="mt-6 max-w-2xl text-[0.8rem] leading-relaxed text-white/70 sm:mt-6 sm:text-[0.85rem] md:text-[0.9rem] lg:text-base xl:text-lg">
+              <p className="mt-8 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
                 Engineering the intelligent layer between hardware, edge logic, and software.
                 Building resilient systems connecting the physical and digital domains.
               </p>
 
-              <div className="mt-8 flex flex-col items-center gap-3 sm:mt-8 sm:flex-row sm:gap-4 lg:gap-5">
-                <a href="#work" className="group relative flex items-center justify-center overflow-hidden rounded-full bg-white px-6 py-3 sm:px-6 sm:py-3.5 lg:px-8 lg:py-4 text-[0.65rem] sm:text-[0.7rem] lg:text-[0.75rem] xl:text-xs font-bold uppercase tracking-[0.15em] text-black transition-transform hover:scale-105">
+              <div className="mt-10 flex flex-col items-center gap-5 sm:flex-row">
+                <a href="#work" className="group relative flex items-center justify-center overflow-hidden rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-black transition-transform hover:scale-105">
                   <span className="relative z-10">Explore Work</span>
                   <div className="absolute inset-0 z-0 bg-gradient-to-r from-gray-200 to-white opacity-0 transition-opacity group-hover:opacity-100" />
                 </a>
-                <a href="#about" className="group flex items-center justify-center rounded-full border border-white/20 bg-black/20 px-6 py-3 sm:px-6 sm:py-3.5 lg:px-8 lg:py-4 text-[0.65rem] sm:text-[0.7rem] lg:text-[0.75rem] xl:text-xs font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/10">
+                <a href="#about" className="group flex items-center justify-center rounded-full border border-white/20 bg-black/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/10">
                   About Me
                 </a>
               </div>
@@ -158,9 +158,9 @@ export default function Hero() {
           {/* Bottom Sleek Ticker */}
           <motion.div
             style={{ opacity: opacityFade }}
-            className="absolute bottom-4 z-20 w-full border-t border-white/5 bg-[black]/50 py-4 backdrop-blur-md sm:bottom-8 sm:py-6"
+            className="absolute bottom-6 z-20 w-full border-t border-white/5 bg-[black]/50 py-5 backdrop-blur-md sm:bottom-8 sm:py-6"
           >
-            <div className="flex w-max font-mono text-[0.6rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.25em] text-white/55 sm:text-[0.9rem]">
+            <div className="flex w-max font-mono text-[0.7rem] font-bold uppercase tracking-[0.25em] text-white/55 sm:text-[0.9rem]">
               <motion.div animate={{ x: [0, '-50%'] }} transition={{ repeat: Infinity, ease: 'linear', duration: 25 }} className="flex gap-16 whitespace-nowrap">
                 {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map((item, index) => (
                   <span key={`${item}-${index}`} className="inline-flex items-center gap-16">
