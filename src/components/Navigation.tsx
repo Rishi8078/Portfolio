@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
-import { ThemeToggle } from './ThemeToggle';
-import { useTheme } from '../contexts/ThemeContext';
 import resume from '../assets/resume.pdf';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,7 +10,6 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('intro');
   const observer = useRef<IntersectionObserver | null>(null);
-  const { } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -115,7 +112,6 @@ export default function Navigation() {
               >
                 Resume
               </a>
-              <ThemeToggle />
             </div>
           </div>
         </div>
@@ -135,7 +131,6 @@ export default function Navigation() {
           Rishib
         </a>
         <div className="flex items-center space-x-3">
-          <ThemeToggle />
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}

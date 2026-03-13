@@ -34,16 +34,23 @@ const ImageBlock = ({ className = "", src }: { className?: string; src?: string 
 
 // Content mapped from our centralized data file
 
+const PostMetadata = ({ post }: { post: any }) => (
+  <div className="flex flex-wrap items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-white/50">
+    <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] py-1 pl-1 pr-3">
+      <div className="flex h-4 w-4 items-center justify-center rounded-full bg-white/10">
+        <svg className="h-2.5 w-2.5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <span className="text-white/80">{post.date}</span>
+    </div>
+    <span className="text-white/20">•</span>
+    <span className="text-white/90">{post.category}</span>
+  </div>
+);
+
 export default function Blog() {
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    // 2 slides: Slide 0 (Hero) & Slide 1 (Grid)
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 2);
-    }, 10000);
-    return () => clearInterval(timer);
-  }, []);
 
   const swipeConfidenceThreshold = 10000;
   const swipePower = (offset: number, velocity: number) => {
@@ -126,7 +133,7 @@ export default function Blog() {
             <br />
             <span className="text-white/40">Thoughts</span>
           </motion.h2>
-          <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg md:text-xl">
+          <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
             Engineering logs, architectural decisions, and essays on <br className="hidden sm:block" />  building embedded edge systems.
           </motion.p>
         </motion.div>
@@ -143,10 +150,10 @@ export default function Blog() {
             {currentSlide === 0 ? (
               <motion.div
                 key="slide-0"
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ type: "spring", stiffness: 200, damping: 25 }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.2}
@@ -154,13 +161,7 @@ export default function Blog() {
                 className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-stretch flex-1 cursor-grab active:cursor-grabbing"
               >
                 <Link to={`/post/${featuredPosts[0].id}`} className="lg:col-span-6 flex flex-col justify-between h-full py-4 lg:py-4 z-10 w-full min-h-[400px] cursor-pointer group">
-                  <div className="flex flex-wrap items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-white/50">
-                    <span>{featuredPosts[0].date}</span>
-                    <span className="text-white/30">/</span>
-                    <span>By {featuredPosts[0].author}</span>
-                    <span className="text-white/30">/</span>
-                    <span className="rounded-full border border-white/20 bg-white/5 px-2 py-0.5 text-white">{featuredPosts[0].category}</span>
-                  </div>
+                  <PostMetadata post={featuredPosts[0]} />
 
                   <h2 className="font-display text-4xl sm:text-5xl lg:text-[5rem] font-bold leading-[1.05] tracking-tight text-white uppercase text-balance group-hover:text-white/90 transition-colors">
                     {featuredPosts[0].title}
@@ -178,10 +179,10 @@ export default function Blog() {
             ) : (
               <motion.div
                 key="slide-1"
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ type: "spring", stiffness: 200, damping: 25 }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.2}
@@ -194,11 +195,7 @@ export default function Blog() {
                     <ImageBlock className="absolute inset-0 w-full h-full object-cover" src={featuredPosts[1]?.image} />
                   </div>
                   <div className="flex flex-col gap-3 shrink-0">
-                    <div className="flex items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-white/50">
-                      <span>{featuredPosts[1].date}</span>
-                      <span className="text-white/20">/</span>
-                      <span className="rounded-full border border-white/15 bg-transparent px-2 py-0.5">{featuredPosts[1].category}</span>
-                    </div>
+                    <PostMetadata post={featuredPosts[1]} />
                     <h3 className="font-display text-2xl lg:text-4xl font-bold tracking-tight text-white uppercase leading-[1.05] group-hover:text-white/80 transition-colors">
                       {featuredPosts[1].title}
                     </h3>
@@ -212,11 +209,7 @@ export default function Blog() {
                       <ImageBlock className="absolute inset-0 w-full h-full object-cover" src={featuredPosts[2]?.image} />
                     </div>
                     <div className="flex flex-col gap-2 shrink-0 lg:pb-2">
-                      <div className="flex items-center gap-3 text-[0.6rem] font-mono font-bold uppercase tracking-widest text-white/50">
-                        <span>{featuredPosts[2].date}</span>
-                        <span className="text-white/20">/</span>
-                        <span className="rounded-full border border-white/15 bg-transparent px-2 py-0.5">{featuredPosts[2].category}</span>
-                      </div>
+                      <PostMetadata post={featuredPosts[2]} />
                       <h3 className="font-display text-lg lg:text-xl font-bold tracking-tight text-white uppercase leading-tight group-hover:text-white/80 transition-colors">
                         {featuredPosts[2].title}
                       </h3>
@@ -228,11 +221,7 @@ export default function Blog() {
                       <ImageBlock className="absolute inset-0 w-full h-full object-cover" src={featuredPosts[3]?.image} />
                     </div>
                     <div className="flex flex-col gap-2 shrink-0">
-                      <div className="flex items-center gap-3 text-[0.6rem] font-mono font-bold uppercase tracking-widest text-white/50">
-                        <span>{featuredPosts[3].date}</span>
-                        <span className="text-white/20">/</span>
-                        <span className="rounded-full border border-white/15 bg-transparent px-2 py-0.5">{featuredPosts[3].category}</span>
-                      </div>
+                      <PostMetadata post={featuredPosts[3]} />
                       <h3 className="font-display text-lg lg:text-xl font-bold tracking-tight text-white uppercase leading-tight group-hover:text-white/80 transition-colors">
                         {featuredPosts[3].title}
                       </h3>
