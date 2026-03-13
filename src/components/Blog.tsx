@@ -9,7 +9,7 @@ const fadeUpVariants = {
 };
 
 const ImageBlock = ({ className = "", src }: { className?: string; src?: string }) => (
-  <div className={`relative w-full h-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] transition-colors duration-500 group-hover:border-white/20 group-hover:bg-white/[0.05] ${className}`}>
+  <div className={`relative w-full h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-colors duration-500 group-hover:border-white/20 group-hover:bg-white/[0.05] ${className}`}>
     {src ? (
       <img src={src} alt="Post cover" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
     ) : (
@@ -65,7 +65,7 @@ export default function Blog() {
   return (
     <section
       id="blog"
-      className="relative w-full overflow-hidden bg-[#040810] pt-32 pb-24 sm:px-8 lg:px-16"
+      className="relative w-full overflow-hidden bg-[#040810] py-24 sm:py-32"
       aria-labelledby="blog-title"
     >
       {/* Background Gradients */}
@@ -82,7 +82,7 @@ export default function Blog() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#040810]/55 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 -top-16 h-40 bg-[#040810]/35 blur-3xl" />
       
-      <div className="relative z-20 mx-auto w-full max-w-6xl">
+      <div className="relative z-20 mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16">
         
         {/* Header Section */}
         <motion.div
@@ -130,7 +130,7 @@ export default function Blog() {
                 className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-stretch flex-1 cursor-grab active:cursor-grabbing"
               >
                 <Link to={`/post/${featuredPosts[0].id}`} className="lg:col-span-6 flex flex-col justify-between h-full py-4 lg:py-4 z-10 w-full min-h-[400px] cursor-pointer group">
-                  <div className="flex flex-wrap items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-[#60a5fa]">
+                  <div className="flex flex-wrap items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-white/50">
                     <span>{featuredPosts[0].date}</span>
                     <span className="text-white/30">/</span>
                     <span>By {featuredPosts[0].author}</span>

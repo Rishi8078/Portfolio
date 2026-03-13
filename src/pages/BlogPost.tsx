@@ -35,7 +35,7 @@ export default function BlogPost() {
         <span>←</span> Back home
       </Link>
 
-      <div className="flex items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-[#60a5fa] mb-6">
+      <div className="flex items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-white/50 mb-6">
         <span>{post.date}</span>
         <span className="text-white/30">/</span>
         <span className="rounded-full border border-white/20 bg-white/5 px-2 py-0.5 text-white">{post.category}</span>
@@ -72,7 +72,7 @@ export default function BlogPost() {
                   </code>
                 </pre>
               ) : (
-                <code className="bg-white/10 px-1 py-0.5 rounded text-sm font-mono text-[#60a5fa]" {...props}>
+                <code className="bg-white/10 px-1 py-0.5 rounded text-sm font-mono text-white/90" {...props}>
                   {children}
                 </code>
               )
