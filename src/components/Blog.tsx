@@ -1,67 +1,38 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { posts as featuredPosts } from '../data/posts';
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
 };
 
-const ImageBlock = ({ className = "" }) => (
+const ImageBlock = ({ className = "", src }: { className?: string; src?: string }) => (
   <div className={`relative w-full h-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] transition-colors duration-500 group-hover:border-white/20 group-hover:bg-white/[0.05] ${className}`}>
-    <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent backdrop-blur-sm opacity-50" />
-    <div 
-      className="pointer-events-none absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity duration-500" 
-      style={{ 
-        backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', 
-        backgroundSize: '24px 24px' 
-      }} 
-    />
-    <div className="absolute inset-0 grid place-items-center opacity-20 transition-opacity duration-300 group-hover:opacity-40">
-      <svg className="w-8 h-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    </div>
+    {src ? (
+      <img src={src} alt="Post cover" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+    ) : (
+      <>
+        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent backdrop-blur-sm opacity-50" />
+        <div 
+          className="pointer-events-none absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity duration-500" 
+          style={{ 
+            backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', 
+            backgroundSize: '24px 24px' 
+          }} 
+        />
+        <div className="absolute inset-0 grid place-items-center opacity-20 transition-opacity duration-300 group-hover:opacity-40">
+          <svg className="w-8 h-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+      </>
+    )}
   </div>
 );
 
-const featuredPosts = [
-  {
-    id: 1,
-    title: "The Reality of Edge ML",
-    date: "Mar 24, 2026",
-    author: "Rishib",
-    category: "Architecture",
-    description: "Deploying machine learning models to the edge is fraught with physical constraints. This architectural deep-dive explores how to optimize memory allocation, manage power states, and reduce inference latency on ultra-low-power microcontrollers without compromising accuracy.",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Building Resilient IoT Protocols For Remote Deployments",
-    date: "Feb 24, 2026",
-    author: "Rishib",
-    category: "Architecture",
-    description: "Why standard MQTT and CoAP fail when connection drops are the norm. We break down custom acknowledgement handshakes and message queuing strategies built to survive erratic remote sensor deployments in off-grid environments.",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "ROS vs Custom Stacks in Autonomy",
-    date: "Jan 12, 2026",
-    author: "Rishib",
-    category: "Robotics",
-    description: "An evaluation of the Robot Operating System (ROS) ecosystem against custom-built software stacks for autonomous vehicles and robotics platforms.",
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "When to avoid MQTT at the edge",
-    date: "Dec 08, 2025",
-    author: "Rishib",
-    category: "Networking",
-    description: "MQTT is the standard for IoT, but it has severe limitations in constrained, high-latency edge environments. Discover when and why you should look for lightweight alternatives.",
-    link: "#",
-  }
-];
+// Content mapped from our centralized data file
 
 export default function Blog() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -73,6 +44,24 @@ export default function Blog() {
     }, 10000);
     return () => clearInterval(timer);
   }, []);
+
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+  };
+
+  const handleDragEnd = (e: any, { offset, velocity }: any) => {
+    const swipe = swipePower(offset.x, velocity.x);
+
+    if (swipe < -swipeConfidenceThreshold) {
+      // swiped left
+      setCurrentSlide(1);
+    } else if (swipe > swipeConfidenceThreshold) {
+      // swiped right
+      setCurrentSlide(0);
+    }
+  };
+
   return (
     <section
       id="blog"
@@ -118,35 +107,6 @@ export default function Blog() {
           </motion.p>
         </motion.div>
 
-        {/* LATEST POSTS HEADER & FILTER */}
-        <motion.div 
-           initial={{ opacity: 0 }}
-           whileInView={{ opacity: 1 }}
-           viewport={{ once: true }}
-           transition={{ duration: 1, delay: 0.2 }}
-           className="mb-12 w-full flex flex-col md:flex-row justify-between items-center bg-white/[0.02] border border-white/10 backdrop-blur-md rounded-2xl px-6 py-4 gap-6"
-        >
-          <div className="flex items-center gap-3 text-white font-mono text-xs font-bold tracking-[0.14em] uppercase">
-             LATEST POSTS
-          </div>
-          
-          <div className="flex flex-wrap items-center justify-center gap-6 flex-1">
-            {['All', 'Hardware', 'Robotics', 'Systems'].map((cat, i) => (
-              <button 
-                key={cat} 
-                className={`text-[0.65rem] sm:text-xs font-mono tracking-[0.1em] transition-colors duration-300 uppercase ${i === 0 ? 'text-white font-bold' : 'text-white/40 hover:text-white/90'}`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <a href="#" className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.1em] text-white/80 hover:text-white transition-colors group">
-             View All
-             <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
-        </motion.div>
-
         {/* CAROUSEL SECTION */}
         <motion.div 
           initial="hidden"
@@ -159,13 +119,17 @@ export default function Blog() {
             {currentSlide === 0 ? (
               <motion.div
                 key="slide-0"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-stretch flex-1"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={handleDragEnd}
+                className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-stretch flex-1 cursor-grab active:cursor-grabbing"
               >
-                <div className="lg:col-span-6 flex flex-col justify-between h-full py-4 lg:py-4 z-10 w-full min-h-[400px]">
+                <Link to={`/post/${featuredPosts[0].id}`} className="lg:col-span-6 flex flex-col justify-between h-full py-4 lg:py-4 z-10 w-full min-h-[400px] cursor-pointer group">
                   <div className="flex flex-wrap items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-[#60a5fa]">
                     <span>{featuredPosts[0].date}</span>
                     <span className="text-white/30">/</span>
@@ -181,25 +145,29 @@ export default function Blog() {
                   <p className="mt-4 font-mono text-sm leading-relaxed text-white/60 max-w-xl pr-6 font-medium">
                     {featuredPosts[0].description}
                   </p>
-                </div>
+                </Link>
                 
-                <div className="lg:col-span-6 w-full h-[400px] lg:h-[550px] z-0">
-                  <ImageBlock className="w-full h-full object-cover" />
-                </div>
+                <Link to={`/post/${featuredPosts[0].id}`} className="lg:col-span-6 w-full h-[400px] lg:h-[550px] z-0 cursor-pointer block group">
+                  <ImageBlock className="w-full h-full object-cover" src={featuredPosts[0]?.image} />
+                </Link>
               </motion.div>
             ) : (
               <motion.div
                 key="slide-1"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 flex-1 mt-4 lg:mt-0"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={handleDragEnd}
+                className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 flex-1 mt-4 lg:mt-0 cursor-grab active:cursor-grabbing"
               >
                 {/* Left: 1 Large Post */}
-                <div className="lg:col-span-8 flex flex-col gap-5 h-[400px] lg:h-[550px] group cursor-pointer w-full">
+                <Link to={`/post/${featuredPosts[1].id}`} className="lg:col-span-8 flex flex-col gap-5 h-[400px] lg:h-[550px] group cursor-pointer w-full">
                   <div className="flex-1 w-full relative">
-                    <ImageBlock className="absolute inset-0 w-full h-full object-cover" />
+                    <ImageBlock className="absolute inset-0 w-full h-full object-cover" src={featuredPosts[1]?.image} />
                   </div>
                   <div className="flex flex-col gap-3 shrink-0">
                     <div className="flex items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-white/50">
@@ -211,13 +179,13 @@ export default function Blog() {
                       {featuredPosts[1].title}
                     </h3>
                   </div>
-                </div>
+                </Link>
 
                 {/* Right: 2 Smaller Posts */}
                 <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-8 h-auto lg:h-[550px]">
-                  <div className="flex-1 flex flex-col gap-4 group cursor-pointer h-[280px] lg:h-0 w-full">
+                  <Link to={`/post/${featuredPosts[2].id}`} className="flex-1 flex flex-col gap-4 group cursor-pointer h-[280px] lg:h-0 w-full">
                     <div className="flex-1 w-full relative">
-                      <ImageBlock className="absolute inset-0 w-full h-full object-cover" />
+                      <ImageBlock className="absolute inset-0 w-full h-full object-cover" src={featuredPosts[2]?.image} />
                     </div>
                     <div className="flex flex-col gap-2 shrink-0 lg:pb-2">
                       <div className="flex items-center gap-3 text-[0.6rem] font-mono font-bold uppercase tracking-widest text-white/50">
@@ -229,11 +197,11 @@ export default function Blog() {
                         {featuredPosts[2].title}
                       </h3>
                     </div>
-                  </div>
+                  </Link>
 
-                  <div className="flex-1 flex flex-col gap-4 group cursor-pointer h-[280px] lg:h-0 w-full">
+                  <Link to={`/post/${featuredPosts[3].id}`} className="flex-1 flex flex-col gap-4 group cursor-pointer h-[280px] lg:h-0 w-full">
                     <div className="flex-1 w-full relative">
-                      <ImageBlock className="absolute inset-0 w-full h-full object-cover" />
+                      <ImageBlock className="absolute inset-0 w-full h-full object-cover" src={featuredPosts[3]?.image} />
                     </div>
                     <div className="flex flex-col gap-2 shrink-0">
                       <div className="flex items-center gap-3 text-[0.6rem] font-mono font-bold uppercase tracking-widest text-white/50">
@@ -245,25 +213,32 @@ export default function Blog() {
                         {featuredPosts[3].title}
                       </h3>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Carousel Controls */}
-          <div className="mt-12 left-0 w-full flex items-center justify-center lg:justify-start gap-3 z-20 pb-4">
-            {[0, 1].map((i) => (
-              <button
-                key={i}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentSlide(i);
-                }}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-8 bg-white' : 'w-2 bg-white/20 hover:bg-white/40'}`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
+          {/* Carousel Controls & View All */}
+          <div className="mt-12 w-full flex flex-col sm:flex-row items-center justify-between gap-6 z-20 pb-4 border-t border-white/10 pt-6">
+            <div className="flex items-center gap-3">
+              {[0, 1].map((i) => (
+                <button
+                  key={i}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentSlide(i);
+                  }}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-8 bg-white' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+            
+            <a href="#" className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.1em] text-white/80 hover:text-white transition-colors group">
+               View All Posts
+               <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
           </div>
         </motion.div>
       </div>

@@ -18,46 +18,47 @@ export default function Hero() {
   });
 
   // --- Intro Sequence Transforms ---
-  // Container is h-[400vh]. Sticky is 100vh. Scrollable before release is 300vh.
-  // 300/400 = 0.75. So sticky releases and rolls up at exactly 0.75.
+  // Container is h-[500vh]. Sticky is 100vh. Scrollable before release is 400vh.
+  // 400/500 = 0.80. So sticky releases and rolls up exactly at 0.80.
+  // We compress the story sequence into the 0.0 - 0.6 range, leaving a "stop" (0.6 - 0.8) for UX pause!
   
   // T1: Initial text holds, then rolls up and away
-  const t1Rot = useTransform(scrollYProgress, [0, 0.10, 0.18], [0, 0, 90]);
-  const t1Y   = useTransform(scrollYProgress, [0, 0.10, 0.18], ["0%", "0%", "-50%"]);
-  const t1O   = useTransform(scrollYProgress, [0, 0.10, 0.18], [1, 1, 0]);
-  const t1B   = useTransform(scrollYProgress, [0, 0.10, 0.18], ["blur(0px)", "blur(0px)", "blur(10px)"]);
+  const t1Rot = useTransform(scrollYProgress, [0, 0.08, 0.14], [0, 0, 90]);
+  const t1Y   = useTransform(scrollYProgress, [0, 0.08, 0.14], ["0%", "0%", "-50%"]);
+  const t1O   = useTransform(scrollYProgress, [0, 0.08, 0.14], [1, 1, 0]);
+  const t1B   = useTransform(scrollYProgress, [0, 0.08, 0.14], ["blur(0px)", "blur(0px)", "blur(10px)"]);
 
   // T2: Rolls in from bottom, holds, rolls up
-  const t2Rot = useTransform(scrollYProgress, [0.13, 0.20, 0.28, 0.36], [-90, 0, 0, 90]);
-  const t2Y   = useTransform(scrollYProgress, [0.13, 0.20, 0.28, 0.36], ["50%", "0%", "0%", "-50%"]);
-  const t2O   = useTransform(scrollYProgress, [0.13, 0.20, 0.28, 0.36], [0, 1, 1, 0]);
-  const t2B   = useTransform(scrollYProgress, [0.13, 0.20, 0.28, 0.36], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
+  const t2Rot = useTransform(scrollYProgress, [0.10, 0.16, 0.22, 0.29], [-90, 0, 0, 90]);
+  const t2Y   = useTransform(scrollYProgress, [0.10, 0.16, 0.22, 0.29], ["50%", "0%", "0%", "-50%"]);
+  const t2O   = useTransform(scrollYProgress, [0.10, 0.16, 0.22, 0.29], [0, 1, 1, 0]);
+  const t2B   = useTransform(scrollYProgress, [0.10, 0.16, 0.22, 0.29], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
 
   // T3: Rolls in from bottom, holds, rolls up
-  const t3Rot = useTransform(scrollYProgress, [0.31, 0.38, 0.46, 0.54], [-90, 0, 0, 90]);
-  const t3Y   = useTransform(scrollYProgress, [0.31, 0.38, 0.46, 0.54], ["50%", "0%", "0%", "-50%"]);
-  const t3O   = useTransform(scrollYProgress, [0.31, 0.38, 0.46, 0.54], [0, 1, 1, 0]);
-  const t3B   = useTransform(scrollYProgress, [0.31, 0.38, 0.46, 0.54], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
+  const t3Rot = useTransform(scrollYProgress, [0.25, 0.30, 0.37, 0.43], [-90, 0, 0, 90]);
+  const t3Y   = useTransform(scrollYProgress, [0.25, 0.30, 0.37, 0.43], ["50%", "0%", "0%", "-50%"]);
+  const t3O   = useTransform(scrollYProgress, [0.25, 0.30, 0.37, 0.43], [0, 1, 1, 0]);
+  const t3B   = useTransform(scrollYProgress, [0.25, 0.30, 0.37, 0.43], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
 
   // T4: Rolls in from bottom, holds, then rolls up to reveal the hero
-  const t4Rot = useTransform(scrollYProgress, [0.49, 0.56, 0.65, 0.75], [-90, 0, 0, 90]);
-  const t4Y   = useTransform(scrollYProgress, [0.49, 0.56, 0.65, 0.75], ["50%", "0%", "0%", "-50%"]);
-  const t4O   = useTransform(scrollYProgress, [0.49, 0.56, 0.65, 0.75], [0, 1, 1, 0]);
-  const t4B   = useTransform(scrollYProgress, [0.49, 0.56, 0.65, 0.75], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
+  const t4Rot = useTransform(scrollYProgress, [0.39, 0.45, 0.52, 0.60], [-90, 0, 0, 90]);
+  const t4Y   = useTransform(scrollYProgress, [0.39, 0.45, 0.52, 0.60], ["50%", "0%", "0%", "-50%"]);
+  const t4O   = useTransform(scrollYProgress, [0.39, 0.45, 0.52, 0.60], [0, 1, 1, 0]);
+  const t4B   = useTransform(scrollYProgress, [0.39, 0.45, 0.52, 0.60], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
 
-  const overlayOpacity = useTransform(scrollYProgress, [0.70, 0.75], [1, 0]);
-  const overlayDisplay = useTransform(scrollYProgress, (p) => (p > 0.76 ? "none" : "flex"));
+  const overlayOpacity = useTransform(scrollYProgress, [0.55, 0.60], [1, 0]);
+  const overlayDisplay = useTransform(scrollYProgress, (p) => (p > 0.61 ? "none" : "flex"));
 
   // --- Hero Landing Sequence ---
   // Background starts large and scales down slowly throughout the whole text sequence.
-  // Then scales back up as parallax happens after 0.75.
-  const backgroundScale = useTransform(scrollYProgress, [0, 0.75, 1], [2, 1, 1.3]);
-  const opacityFade = useTransform(scrollYProgress, [0.65, 0.75, 0.85, 1], [0, 1, 1, 0.3]);
-  const heroContentY = useTransform(scrollYProgress, [0.65, 0.75], [50, 0]);
-  const yParallax = useTransform(scrollYProgress, [0.75, 1], ["0%", "30%"]);
+  // Then scales back up as parallax happens after 0.80.
+  const backgroundScale = useTransform(scrollYProgress, [0, 0.60, 1], [2, 1, 1.3]);
+  const opacityFade = useTransform(scrollYProgress, [0.52, 0.60, 0.80, 1], [0, 1, 1, 0.3]);
+  const heroContentY = useTransform(scrollYProgress, [0.52, 0.60], [50, 0]);
+  const yParallax = useTransform(scrollYProgress, [0.80, 1], ["0%", "30%"]);
 
   return (
-    <section ref={containerRef} id="intro" className="relative h-[400vh] w-full bg-[black]">
+    <section ref={containerRef} id="intro" className="relative h-[500vh] w-full bg-[black]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         
         {/* =========================================
