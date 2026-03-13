@@ -9,7 +9,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative flex w-full flex-col justify-center overflow-hidden bg-[#070d18] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
+      className="relative flex w-full flex-col justify-center overflow-hidden bg-[#040810] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
       aria-labelledby="about-title"
     >
       {/* Subtle Background */}
@@ -25,6 +25,8 @@ export default function About() {
         }}
       />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#040810] to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent via-[#040810]/65 to-[#040810]" />
+      <div className="pointer-events-none absolute inset-x-0 -bottom-20 h-44 bg-[#040810]/70 blur-3xl" />
 
       <div className="relative z-10 flex w-full flex-col items-center">
         {/* Header Section */}

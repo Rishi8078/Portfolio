@@ -73,7 +73,17 @@ export default function Statement() {
       className="relative w-full bg-[#040810] text-white"
       style={{ height: "400vh" }}
     >
-      <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center px-6">
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,#040810_120%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-56 bg-gradient-to-t from-[#040810] via-[#040810]/90 to-transparent" />
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgb(117, 113, 113) 1px, transparent 1px), linear-gradient(to bottom, rgb(117, 113, 113) 1px, transparent .1px)',
+          backgroundSize: '40px 40px',
+        }}
+      />
+      <div className="sticky top-0 z-10 flex h-screen w-full flex-col items-center justify-center px-6">
         <div className="flex max-w-5xl flex-col items-start gap-8 font-pixel text-4xl uppercase leading-[1.2] sm:text-5xl md:text-6xl lg:text-7xl">
           
           <motion.div style={{ opacity: part1Opacity, scale: part1Scale }} className="origin-left">

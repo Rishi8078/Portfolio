@@ -36,6 +36,18 @@ export default function Blog() {
       className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-[#040810] px-6 py-24 sm:px-12 lg:px-24"
       aria-labelledby="blog-title"
     >
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,#040810_120%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-56 bg-gradient-to-t from-[#040810] via-[#040810]/90 to-transparent" />
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgb(117, 113, 113) 1px, transparent 1px), linear-gradient(to bottom, rgb(117, 113, 113) 1px, transparent .1px)',
+          backgroundSize: '40px 40px',
+        }}
+      />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#040810]/55 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 -top-16 h-40 bg-[#040810]/35 blur-3xl" />
       <div className="relative z-20 flex w-full max-w-5xl flex-col items-center">
         
         {/* Header Section */}
