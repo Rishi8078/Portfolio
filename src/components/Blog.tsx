@@ -1,41 +1,85 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
 };
 
-const blogPosts = [
+const ImageBlock = ({ className = "" }) => (
+  <div className={`relative w-full h-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] transition-colors duration-500 group-hover:border-white/20 group-hover:bg-white/[0.05] ${className}`}>
+    <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent backdrop-blur-sm opacity-50" />
+    <div 
+      className="pointer-events-none absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity duration-500" 
+      style={{ 
+        backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', 
+        backgroundSize: '24px 24px' 
+      }} 
+    />
+    <div className="absolute inset-0 grid place-items-center opacity-20 transition-opacity duration-300 group-hover:opacity-40">
+      <svg className="w-8 h-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    </div>
+  </div>
+);
+
+const featuredPosts = [
   {
+    id: 1,
     title: "The Reality of Edge ML",
-    date: "Mars 2024",
-    link: "#",
-    category: "TinyML",
-    description: "Lessons learned while deploying low-power models to resource-constrained microcontrollers."
-  },
-  {
-    title: "Building Resilient IoT Protocols",
-    date: "Feb 2024",
-    link: "#",
+    date: "Mar 24, 2026",
+    author: "Rishib",
     category: "Architecture",
-    description: "Why MQTT and CoAP aren't enough for the erratic nature of remote sensor deployments."
+    description: "Deploying machine learning models to the edge is fraught with physical constraints. This architectural deep-dive explores how to optimize memory allocation, manage power states, and reduce inference latency on ultra-low-power microcontrollers without compromising accuracy.",
+    link: "#",
   },
   {
-    title: "ROS vs Custom Stacks",
-    date: "Jan 2024",
+    id: 2,
+    title: "Building Resilient IoT Protocols For Remote Deployments",
+    date: "Feb 24, 2026",
+    author: "Rishib",
+    category: "Architecture",
+    description: "Why standard MQTT and CoAP fail when connection drops are the norm. We break down custom acknowledgement handshakes and message queuing strategies built to survive erratic remote sensor deployments in off-grid environments.",
     link: "#",
+  },
+  {
+    id: 3,
+    title: "ROS vs Custom Stacks in Autonomy",
+    date: "Jan 12, 2026",
+    author: "Rishib",
     category: "Robotics",
-    description: "When to use standard middleware and when it makes sense to build a custom real-time OS from scratch."
+    description: "An evaluation of the Robot Operating System (ROS) ecosystem against custom-built software stacks for autonomous vehicles and robotics platforms.",
+    link: "#",
+  },
+  {
+    id: 4,
+    title: "When to avoid MQTT at the edge",
+    date: "Dec 08, 2025",
+    author: "Rishib",
+    category: "Networking",
+    description: "MQTT is the standard for IoT, but it has severe limitations in constrained, high-latency edge environments. Discover when and why you should look for lightweight alternatives.",
+    link: "#",
   }
 ];
 
 export default function Blog() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    // 2 slides: Slide 0 (Hero) & Slide 1 (Grid)
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % 2);
+    }, 10000);
+    return () => clearInterval(timer);
+  }, []);
   return (
     <section
       id="blog"
-      className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-[#040810] px-6 py-24 sm:px-12 lg:px-24"
+      className="relative w-full overflow-hidden bg-[#040810] pt-32 pb-24 sm:px-8 lg:px-16"
       aria-labelledby="blog-title"
     >
+      {/* Background Gradients */}
       <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,#040810_120%)]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-56 bg-gradient-to-t from-[#040810] via-[#040810]/90 to-transparent" />
       <div
@@ -48,7 +92,8 @@ export default function Blog() {
       />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#040810]/55 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 -top-16 h-40 bg-[#040810]/35 blur-3xl" />
-      <div className="relative z-20 flex w-full max-w-5xl flex-col items-center">
+      
+      <div className="relative z-20 mx-auto w-full max-w-6xl">
         
         {/* Header Section */}
         <motion.div
@@ -56,79 +101,171 @@ export default function Blog() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mb-20 flex w-full max-w-4xl flex-col items-center text-center"
+          className="mb-20 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
         >
-          <motion.div variants={fadeUpVariants} className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 backdrop-blur-md">
-            <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+          <motion.div variants={fadeUpVariants} className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2.5 backdrop-blur-md">
+            <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
               Chapter 05 · Writings
-            </span>
+            </p>
           </motion.div>
           <motion.h2 variants={fadeUpVariants} id="blog-title" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
-            My <span className="text-white/40">Thoughts</span>
+            My
+            <br />
+            <span className="text-white/40">Thoughts</span>
           </motion.h2>
-          <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
-            Engineering logs, architectural decisions, and essays on building embedded edge systems.
+          <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg md:text-xl">
+            Engineering logs, architectural decisions, and essays on <br className="hidden sm:block" />  building embedded edge systems.
           </motion.p>
         </motion.div>
 
-        {/* Blog List Sequence */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
-          className="flex w-full flex-col gap-6"
+        {/* LATEST POSTS HEADER & FILTER */}
+        <motion.div 
+           initial={{ opacity: 0 }}
+           whileInView={{ opacity: 1 }}
+           viewport={{ once: true }}
+           transition={{ duration: 1, delay: 0.2 }}
+           className="mb-12 w-full flex flex-col md:flex-row justify-between items-center bg-white/[0.02] border border-white/10 backdrop-blur-md rounded-2xl px-6 py-4 gap-6"
         >
-          {blogPosts.map((post, i) => (
-            <motion.a
-              key={i}
-              variants={fadeUpVariants}
-              href={post.link}
-              className="group relative flex w-full flex-col justify-between rounded-2xl border border-white/5 bg-white/[0.02] p-8 transition-all hover:bg-white/[0.05] sm:flex-row sm:items-center"
-            >
-              <div className="flex max-w-xl flex-col gap-2">
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-[0.65rem] uppercase tracking-widest text-[#60a5fa]">
-                    {post.category}
-                  </span>
-                  <span className="text-white/20">—</span>
-                  <span className="font-mono text-[0.65rem] uppercase tracking-widest text-white/40">
-                    {post.date}
-                  </span>
-                </div>
-                <h3 className="font-display text-xl font-medium tracking-tight text-white/90 transition-colors group-hover:text-white sm:text-2xl">
-                  {post.title}
-                </h3>
-                <p className="mt-2 font-mono text-xs leading-relaxed text-white/50 sm:text-sm">
-                  {post.description}
-                </p>
-              </div>
-              
-              <div className="mt-6 flex shrink-0 sm:mt-0">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/50 transition-all group-hover:border-white/20 group-hover:bg-white/10 group-hover:text-white">
-                  ↗
-                </div>
-              </div>
-            </motion.a>
-          ))}
-        </motion.div>
+          <div className="flex items-center gap-3 text-white font-mono text-xs font-bold tracking-[0.14em] uppercase">
+             LATEST POSTS
+          </div>
+          
+          <div className="flex flex-wrap items-center justify-center gap-6 flex-1">
+            {['All', 'Hardware', 'Robotics', 'Systems'].map((cat, i) => (
+              <button 
+                key={cat} 
+                className={`text-[0.65rem] sm:text-xs font-mono tracking-[0.1em] transition-colors duration-300 uppercase ${i === 0 ? 'text-white font-bold' : 'text-white/40 hover:text-white/90'}`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
 
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-          className="mt-16 flex w-full justify-center"
-        >
-          <a
-            href="#"
-            className="group flex items-center justify-center gap-3 rounded-full border border-white/20 bg-transparent px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/5"
-          >
-            <span>Read All Entries</span>
+          <a href="#" className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.1em] text-white/80 hover:text-white transition-colors group">
+             View All
+             <span className="group-hover:translate-x-1 transition-transform">→</span>
           </a>
         </motion.div>
 
+        {/* CAROUSEL SECTION */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariants}
+          className="relative w-full min-h-[1050px] sm:min-h-[750px] lg:min-h-[600px] mt-8 flex flex-col"
+        >
+          <AnimatePresence mode="wait">
+            {currentSlide === 0 ? (
+              <motion.div
+                key="slide-0"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-stretch flex-1"
+              >
+                <div className="lg:col-span-6 flex flex-col justify-between h-full py-4 lg:py-4 z-10 w-full min-h-[400px]">
+                  <div className="flex flex-wrap items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-[#60a5fa]">
+                    <span>{featuredPosts[0].date}</span>
+                    <span className="text-white/30">/</span>
+                    <span>By {featuredPosts[0].author}</span>
+                    <span className="text-white/30">/</span>
+                    <span className="rounded-full border border-white/20 bg-white/5 px-2 py-0.5 text-white">{featuredPosts[0].category}</span>
+                  </div>
+                  
+                  <h2 className="font-display text-4xl sm:text-5xl lg:text-[5rem] font-bold leading-[1.05] tracking-tight text-white uppercase text-balance group-hover:text-white/90 transition-colors">
+                    {featuredPosts[0].title}
+                  </h2>
+                  
+                  <p className="mt-4 font-mono text-sm leading-relaxed text-white/60 max-w-xl pr-6 font-medium">
+                    {featuredPosts[0].description}
+                  </p>
+                </div>
+                
+                <div className="lg:col-span-6 w-full h-[400px] lg:h-[550px] z-0">
+                  <ImageBlock className="w-full h-full object-cover" />
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="slide-1"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 flex-1 mt-4 lg:mt-0"
+              >
+                {/* Left: 1 Large Post */}
+                <div className="lg:col-span-8 flex flex-col gap-5 h-[400px] lg:h-[550px] group cursor-pointer w-full">
+                  <div className="flex-1 w-full relative">
+                    <ImageBlock className="absolute inset-0 w-full h-full object-cover" />
+                  </div>
+                  <div className="flex flex-col gap-3 shrink-0">
+                    <div className="flex items-center gap-3 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-white/50">
+                      <span>{featuredPosts[1].date}</span>
+                      <span className="text-white/20">/</span>
+                      <span className="rounded-full border border-white/15 bg-transparent px-2 py-0.5">{featuredPosts[1].category}</span>
+                    </div>
+                    <h3 className="font-display text-2xl lg:text-4xl font-bold tracking-tight text-white uppercase leading-[1.05] group-hover:text-white/80 transition-colors">
+                      {featuredPosts[1].title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Right: 2 Smaller Posts */}
+                <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-8 h-auto lg:h-[550px]">
+                  <div className="flex-1 flex flex-col gap-4 group cursor-pointer h-[280px] lg:h-0 w-full">
+                    <div className="flex-1 w-full relative">
+                      <ImageBlock className="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                    <div className="flex flex-col gap-2 shrink-0 lg:pb-2">
+                      <div className="flex items-center gap-3 text-[0.6rem] font-mono font-bold uppercase tracking-widest text-white/50">
+                        <span>{featuredPosts[2].date}</span>
+                        <span className="text-white/20">/</span>
+                        <span className="rounded-full border border-white/15 bg-transparent px-2 py-0.5">{featuredPosts[2].category}</span>
+                      </div>
+                      <h3 className="font-display text-lg lg:text-xl font-bold tracking-tight text-white uppercase leading-tight group-hover:text-white/80 transition-colors">
+                        {featuredPosts[2].title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="flex-1 flex flex-col gap-4 group cursor-pointer h-[280px] lg:h-0 w-full">
+                    <div className="flex-1 w-full relative">
+                      <ImageBlock className="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                    <div className="flex flex-col gap-2 shrink-0">
+                      <div className="flex items-center gap-3 text-[0.6rem] font-mono font-bold uppercase tracking-widest text-white/50">
+                        <span>{featuredPosts[3].date}</span>
+                        <span className="text-white/20">/</span>
+                        <span className="rounded-full border border-white/15 bg-transparent px-2 py-0.5">{featuredPosts[3].category}</span>
+                      </div>
+                      <h3 className="font-display text-lg lg:text-xl font-bold tracking-tight text-white uppercase leading-tight group-hover:text-white/80 transition-colors">
+                        {featuredPosts[3].title}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Carousel Controls */}
+          <div className="mt-12 left-0 w-full flex items-center justify-center lg:justify-start gap-3 z-20 pb-4">
+            {[0, 1].map((i) => (
+              <button
+                key={i}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentSlide(i);
+                }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-8 bg-white' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
