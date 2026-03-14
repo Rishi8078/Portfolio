@@ -71,7 +71,7 @@ export default function Work() {
   return (
     <section
       id="work"
-      className="relative -mt-10 min-h-screen w-full overflow-hidden bg-[#040810] pt-24 transition-colors sm:-mt-14 sm:pt-28 lg:pt-32"
+      className="relative -mt-10 min-h-screen w-full bg-[#040810] pt-24 transition-colors sm:-mt-14 sm:pt-28 lg:pt-32"
       aria-labelledby="portfolio-title"
     >
       {/* Redesigned Cinematic Background with Glow */}
@@ -80,17 +80,9 @@ export default function Work() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1d2b45]/20 via-[#040810]/80 to-[#040810]" />
 
         {/* Dynamic Glow */}
-        <motion.div
-          animate={{
-            opacity: [0.3, 0.5, 0.3],
-            scale: [1, 1.05, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/4 h-[40rem] w-[40rem] rounded-full bg-blue-900/20 blur-[120px]"
+        <div
+          className="absolute top-1/4 h-[60rem] w-[60rem] rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(30,58,138,0.15),transparent_100%)]"
+          style={{ animation: 'orb-pulse 8s ease-in-out infinite' }}
         />
       </div>
 
@@ -114,19 +106,8 @@ export default function Work() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="relative flex flex-col items-center text-center max-w-4xl"
+          className="flex flex-col items-center text-center max-w-4xl"
         >
-          {/* Symmetrical Decorative Elements */}
-          <motion.div 
-            animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
-            className="absolute -left-12 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[3rem]" 
-          />
-          <motion.div 
-            animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
-            className="absolute -right-12 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-emerald-600/20 blur-[3rem]" 
-          />
 
           {/* Tag */}
           <motion.div
@@ -150,12 +131,21 @@ export default function Work() {
 
         {/* Project Cards Grid */}
         <motion.div
-          className="mt-20 grid w-full max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="relative mt-20 grid w-full max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
+          {/* Symmetrical Decorative Elements */}
+          <div 
+            className="absolute -left-32 top-1/2 -z-10 h-[50rem] w-[50rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.1),transparent_100%)]"
+            style={{ animation: 'orb-glow-no-translate 5s ease-in-out infinite' }}
+          />
+          <div 
+            className="absolute -right-32 top-1/2 -z-10 h-[50rem] w-[50rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(5,150,105,0.1),transparent_100%)]"
+            style={{ animation: 'orb-glow-no-translate 6s ease-in-out 1s infinite' }}
+          />
           {projects.map((project, index) => (
             <motion.a
               key={index}
@@ -175,7 +165,7 @@ export default function Work() {
                 {/* Header info */}
                 <div className="flex justify-between items-start mb-8">
                   <div className="flex flex-col">
-                    <span className="font-pixel text-[2.5rem] leading-none text-white/10 transition-colors duration-300 group-hover:text-white/20">
+                    <span className="font-pixel text-[2.5rem] leading-none text-white/10 transition-colors duration-300 group-hover:text-white/20 select-none pointer-events-none">
                       0{index + 1}
                     </span>
                   </div>

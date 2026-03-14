@@ -45,25 +45,19 @@ export default function Value() {
     <section
       id="values"
       aria-label="Core values section"
-      className="relative w-full overflow-hidden bg-[#040810] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
+      className="relative w-full bg-[#040810] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
     >
       {/* Background gradients */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),transparent_50%)]" />
 
       {/* Grid pattern glows */}
-      <motion.div
-        animate={{
-          opacity: [0.1, 0.25, 0.1],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute top-1/4 left-1/4 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-[120px]"
+      <div
+        className="pointer-events-none absolute top-1/4 left-1/4 h-[60rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(59,130,246,0.15),transparent_100%)]"
+        style={{ animation: 'orb-pulse 8s ease-in-out infinite' }}
       />
-      <motion.div
-        animate={{
-          opacity: [0.1, 0.25, 0.1],
-        }}
-        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="pointer-events-none absolute bottom-1/4 right-0 h-[35rem] w-[35rem] translate-x-1/4 translate-y-1/4 rounded-full bg-indigo-500/10 blur-[120px]"
+      <div
+        className="pointer-events-none absolute bottom-1/4 right-0 h-[55rem] w-[55rem] translate-x-1/4 translate-y-1/4 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(99,102,241,0.15),transparent_100%)]"
+        style={{ animation: 'orb-pulse 11s ease-in-out 2s infinite' }}
       />
 
       {/* Grid pattern */}
@@ -92,19 +86,8 @@ export default function Value() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="relative mb-20 flex max-w-4xl flex-col items-center text-center"
+            className="mb-20 flex max-w-4xl flex-col items-center text-center"
           >
-            {/* Symmetrical Decorative Elements */}
-            <motion.div 
-              animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
-              className="absolute -left-16 top-1/2 -z-10 h-40 w-40 -translate-y-1/2 rounded-full bg-indigo-600/20 blur-[4rem]" 
-            />
-            <motion.div 
-              animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
-              className="absolute -right-16 top-1/2 -z-10 h-40 w-40 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[4rem]" 
-            />
 
             <motion.div
               variants={fadeUpVariants}
@@ -122,7 +105,16 @@ export default function Value() {
             </motion.h2>
           </motion.div>
 
-          <div className="grid w-full gap-5 lg:grid-cols-3">
+          <div className="relative grid w-full gap-5 lg:grid-cols-3">
+            {/* Symmetrical Decorative Elements */}
+            <div 
+              className="absolute -left-32 top-1/2 -z-10 h-[50rem] w-[50rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(79,70,229,0.1),transparent_100%)]"
+              style={{ animation: 'orb-glow-no-translate 5s ease-in-out infinite' }}
+            />
+            <div 
+              className="absolute -right-32 top-1/2 -z-10 h-[50rem] w-[50rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.1),transparent_100%)]"
+              style={{ animation: 'orb-glow-no-translate 6s ease-in-out 1s infinite' }}
+            />
             {values.map((value) => (
               <motion.div
                 key={value.title}
@@ -130,7 +122,7 @@ export default function Value() {
                 className="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-black/40 p-8 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/[0.08]"
               >
                 {/* Number Watermark */}
-                <div className="pointer-events-none absolute -right-4 -top-8 font-pixel text-[8rem] text-white/[0.03] transition-colors group-hover:text-white/[0.06]">
+                <div className="pointer-events-none absolute -right-4 -top-8 font-pixel text-[8rem] text-white/[0.03] transition-colors group-hover:text-white/[0.06] select-none">
                   {value.number}
                 </div>
 

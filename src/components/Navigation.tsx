@@ -24,7 +24,7 @@ export default function Navigation() {
     }, options);
     const secs = document.querySelectorAll('section[id]');
     secs.forEach(sec => observer.current?.observe(sec));
-    return () => secs.forEach(sec => observer.current?.unobserve(sec));
+    return () => observer.current?.disconnect();
   }, []);
 
   const isActive = (section: string) => activeSection === section;

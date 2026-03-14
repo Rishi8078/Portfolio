@@ -65,19 +65,13 @@ export default function Background() {
       </div>
 
       {/* Dynamic Grid Glows */}
-      <motion.div
-        animate={{
-          opacity: [0.1, 0.25, 0.1],
-        }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute top-1/3 left-1/2 h-[50rem] w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/10 blur-[150px]"
+      <div
+        className="pointer-events-none absolute top-1/3 left-1/2 h-[70rem] w-[70rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.15),transparent_100%)]"
+        style={{ animation: 'orb-pulse 9s ease-in-out infinite' }}
       />
-      <motion.div
-        animate={{
-          opacity: [0.1, 0.25, 0.1],
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="pointer-events-none absolute bottom-1/3 left-1/4 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-indigo-600/10 blur-[120px]"
+      <div
+        className="pointer-events-none absolute bottom-1/3 left-1/4 h-[60rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(79,70,229,0.15),transparent_100%)]"
+        style={{ animation: 'orb-pulse 12s ease-in-out 1s infinite' }}
       />
 
       <div

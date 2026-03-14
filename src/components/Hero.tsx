@@ -26,25 +26,21 @@ export default function Hero() {
   const t1Rot = useTransform(scrollYProgress, [0, 0.08, 0.14], [0, 0, 90]);
   const t1Y = useTransform(scrollYProgress, [0, 0.08, 0.14], ["0%", "0%", "-50%"]);
   const t1O = useTransform(scrollYProgress, [0, 0.08, 0.14], [1, 1, 0]);
-  const t1B = useTransform(scrollYProgress, [0, 0.08, 0.14], ["blur(0px)", "blur(0px)", "blur(10px)"]);
 
   // T2: Rolls in from bottom, holds, rolls up
   const t2Rot = useTransform(scrollYProgress, [0.10, 0.16, 0.22, 0.29], [-90, 0, 0, 90]);
   const t2Y = useTransform(scrollYProgress, [0.10, 0.16, 0.22, 0.29], ["50%", "0%", "0%", "-50%"]);
   const t2O = useTransform(scrollYProgress, [0.10, 0.16, 0.22, 0.29], [0, 1, 1, 0]);
-  const t2B = useTransform(scrollYProgress, [0.10, 0.16, 0.22, 0.29], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
 
   // T3: Rolls in from bottom, holds, rolls up
   const t3Rot = useTransform(scrollYProgress, [0.25, 0.30, 0.37, 0.43], [-90, 0, 0, 90]);
   const t3Y = useTransform(scrollYProgress, [0.25, 0.30, 0.37, 0.43], ["50%", "0%", "0%", "-50%"]);
   const t3O = useTransform(scrollYProgress, [0.25, 0.30, 0.37, 0.43], [0, 1, 1, 0]);
-  const t3B = useTransform(scrollYProgress, [0.25, 0.30, 0.37, 0.43], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
 
   // T4: Rolls in from bottom, holds, then rolls up to reveal the hero
   const t4Rot = useTransform(scrollYProgress, [0.39, 0.45, 0.52, 0.60], [-90, 0, 0, 90]);
   const t4Y = useTransform(scrollYProgress, [0.39, 0.45, 0.52, 0.60], ["50%", "0%", "0%", "-50%"]);
   const t4O = useTransform(scrollYProgress, [0.39, 0.45, 0.52, 0.60], [0, 1, 1, 0]);
-  const t4B = useTransform(scrollYProgress, [0.39, 0.45, 0.52, 0.60], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
 
   const overlayOpacity = useTransform(scrollYProgress, [0.55, 0.60], [1, 0]);
   const overlayDisplay = useTransform(scrollYProgress, (p) => (p > 0.61 ? "none" : "flex"));
@@ -155,20 +151,20 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Bottom Sleek Ticker */}
-          <motion.div
-            style={{ opacity: opacityFade }}
-            className="absolute bottom-6 z-20 w-full border-t border-white/5 bg-[black]/50 py-5 backdrop-blur-md sm:bottom-8 sm:py-6"
-          >
+        {/* Bottom Sleek Ticker */}
+        <motion.div
+          style={{ opacity: opacityFade }}
+          className="absolute bottom-6 z-20 w-full border-t border-white/5 bg-[black]/50 py-5 backdrop-blur-md sm:bottom-8 sm:py-6 pointer-events-none select-none"
+        >
             <div className="flex w-max font-mono text-[0.7rem] font-bold uppercase tracking-[0.25em] text-white/55 sm:text-[0.9rem]">
-              <motion.div animate={{ x: [0, '-50%'] }} transition={{ repeat: Infinity, ease: 'linear', duration: 25 }} className="flex gap-16 whitespace-nowrap">
+              <div className="flex gap-16 whitespace-nowrap" style={{ animation: 'ticker-scroll 25s linear infinite' }}>
                 {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map((item, index) => (
                   <span key={`${item}-${index}`} className="inline-flex items-center gap-16">
                     <span>{item}</span>
                     <span className="h-1 w-1 rounded-full bg-white/20" />
                   </span>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -183,32 +179,32 @@ export default function Hero() {
           <div className="relative z-10 flex h-full w-full items-center justify-center">
             {/* Slide 1 */}
             <motion.h1
-              style={{ opacity: t1O, rotateX: t1Rot, y: t1Y, filter: t1B }}
-              className="absolute font-pixel text-[2.5rem] uppercase leading-none tracking-tight text-white sm:text-[5rem] md:text-[6rem] lg:text-[7rem] section-heading-glow text-center transform-gpu"
+              style={{ opacity: t1O, rotateX: t1Rot, y: t1Y }}
+              className="absolute font-pixel text-[2.5rem] uppercase leading-none tracking-tight text-white sm:text-[5rem] md:text-[6rem] lg:text-[7rem] section-heading-glow text-center transform-gpu select-none pointer-events-none"
             >
               HI, I AM<br /><span className="text-white/40">RISHI</span>
             </motion.h1>
 
             {/* Slide 2 */}
             <motion.h1
-              style={{ opacity: t2O, rotateX: t2Rot, y: t2Y, filter: t2B }}
-              className="absolute font-pixel text-[2.5rem] uppercase leading-none tracking-tight text-white sm:text-[5rem] md:text-[6rem] lg:text-[7rem] section-heading-glow text-center transform-gpu"
+              style={{ opacity: t2O, rotateX: t2Rot, y: t2Y }}
+              className="absolute font-pixel text-[2.5rem] uppercase leading-none tracking-tight text-white sm:text-[5rem] md:text-[6rem] lg:text-[7rem] section-heading-glow text-center transform-gpu select-none pointer-events-none"
             >
               AND I<br /><span className="text-white/40">ENGINEER</span>
             </motion.h1>
 
             {/* Slide 3 */}
             <motion.h1
-              style={{ opacity: t3O, rotateX: t3Rot, y: t3Y, filter: t3B }}
-              className="absolute font-pixel text-[2.5rem] uppercase leading-none tracking-tight text-white sm:text-[5rem] md:text-[6rem] lg:text-[7rem] section-heading-glow text-center transform-gpu"
+              style={{ opacity: t3O, rotateX: t3Rot, y: t3Y }}
+              className="absolute font-pixel text-[2.5rem] uppercase leading-none tracking-tight text-white sm:text-[5rem] md:text-[6rem] lg:text-[7rem] section-heading-glow text-center transform-gpu select-none pointer-events-none"
             >
               I<br /><span className="text-white/40">AUTOMATE</span>
             </motion.h1>
 
             {/* Slide 4 (End of sequence) */}
             <motion.h1
-              style={{ opacity: t4O, rotateX: t4Rot, y: t4Y, filter: t4B }}
-              className="absolute font-pixel text-[2.5rem] uppercase leading-none tracking-tight text-white sm:text-[5rem] md:text-[6rem] lg:text-[7rem] section-heading-glow text-center transform-gpu"
+              style={{ opacity: t4O, rotateX: t4Rot, y: t4Y }}
+              className="absolute font-pixel text-[2.5rem] uppercase leading-none tracking-tight text-white sm:text-[5rem] md:text-[6rem] lg:text-[7rem] section-heading-glow text-center transform-gpu select-none pointer-events-none"
             >
               AND I<br /><span className="text-white/40">BUILD</span>
             </motion.h1>

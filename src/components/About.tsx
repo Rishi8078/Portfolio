@@ -9,7 +9,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative flex w-full flex-col justify-center overflow-hidden bg-[#040810] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
+      className="relative flex w-full flex-col justify-center bg-[#040810] px-6 py-24 sm:px-10 sm:py-32 lg:px-16"
       aria-labelledby="about-title"
     >
       {/* Subtle Background with Glow */}
@@ -18,24 +18,9 @@ export default function About() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.08),transparent_60%)]" />
 
         {/* Dynamic Glow */}
-        <motion.div
-          animate={{
-            opacity: [0.2, 0.4, 0.2],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/2 left-1/4 h-[50rem] w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-900/10 blur-[150px]"
-        />
-        <motion.div
-          animate={{
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-0 right-1/4 h-[40rem] w-[40rem] translate-x-1/2 translate-y-1/4 rounded-full bg-blue-800/10 blur-[120px]"
+        <div
+          className="absolute top-1/2 left-1/4 h-[70rem] w-[70rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(88,28,135,0.15),transparent_100%)]"
+          style={{ animation: 'orb-glow 10s ease-in-out infinite' }}
         />
       </div>
       <div
@@ -70,15 +55,13 @@ export default function About() {
         {/* Centered Content Layout */}
         <div className="relative flex w-full max-w-4xl flex-col items-center text-center">
           {/* Symmetrical Decorative Elements */}
-          <motion.div 
-            animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }} 
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
-            className="absolute -left-10 top-1/4 -z-10 h-40 w-40 rounded-full bg-blue-600/20 blur-[4rem]" 
+          <div 
+            className="absolute -left-32 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.1),transparent_100%)]"
+            style={{ animation: 'orb-glow-no-translate 5s ease-in-out infinite' }}
           />
-          <motion.div 
-            animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }} 
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
-            className="absolute -right-10 bottom-1/4 -z-10 h-40 w-40 rounded-full bg-purple-600/20 blur-[4rem]" 
+          <div 
+            className="absolute -right-32 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(147,51,234,0.1),transparent_100%)]"
+            style={{ animation: 'orb-glow-no-translate 6s ease-in-out 1s infinite' }}
           />
 
           <motion.div

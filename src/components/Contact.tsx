@@ -7,6 +7,56 @@ const fadeUpVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
 };
 
+function MagicContactCard({ link }: { link: any }) {
+  const handleMouseMove = (e: any) => {
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    target.style.setProperty("--mouse-x", `${x}px`);
+    target.style.setProperty("--mouse-y", `${y}px`);
+  };
+
+  return (
+    <a
+      href={link.href}
+      target={link.name !== 'Email' ? '_blank' : undefined}
+      rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
+      onMouseMove={handleMouseMove}
+      className="group relative flex flex-col items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.04]"
+    >
+      {/* Background Hover Highlight */}
+      <div 
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(300px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 255, 255, 0.05), transparent 40%)`
+        }}
+      />
+      
+      {/* Border Hover Highlight */}
+      <div 
+        className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          padding: "1px",
+          background: `radial-gradient(300px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 255, 255, 0.4), transparent 40%)`,
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+        }}
+      />
+
+      <div className="relative z-10 flex flex-col items-center gap-2">
+        <h3 className="font-display text-xl font-semibold tracking-tight text-white/80 transition-colors group-hover:text-white">
+          {link.name}
+        </h3>
+        <span className="font-mono text-[0.65rem] tracking-widest text-white/40 transition-colors group-hover:text-white/80">
+          {link.value}
+        </span>
+      </div>
+    </a>
+  );
+}
+
 export default function Contact() {
   return (
     <section
@@ -19,24 +69,13 @@ export default function Contact() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.08),transparent_50%)]" />
 
         {/* Dynamic Glow */}
-        <motion.div
-          animate={{
-            opacity: [0.2, 0.4, 0.2],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="pointer-events-none absolute h-[60rem] w-[60rem] rounded-full bg-indigo-900/10 blur-[150px]"
+        <div
+          className="pointer-events-none absolute h-[80rem] w-[80rem] rounded-full bg-[radial-gradient(circle,var(--tw-gradient-stops))] from-indigo-900/15 via-indigo-900/5 to-transparent"
+          style={{ animation: 'orb-pulse 15s ease-in-out infinite' }}
         />
-        <motion.div
-          animate={{
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-          className="pointer-events-none absolute bottom-0 right-0 h-[40rem] w-[40rem] translate-x-1/4 translate-y-1/4 rounded-full bg-blue-800/10 blur-[120px]"
+        <div
+          className="pointer-events-none absolute bottom-0 right-0 h-[60rem] w-[60rem] translate-x-1/4 translate-y-1/4 rounded-full bg-[radial-gradient(circle,var(--tw-gradient-stops))] from-blue-800/15 via-blue-800/5 to-transparent"
+          style={{ animation: 'orb-contact 11s ease-in-out 3s infinite' }}
         />
       </div>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-64 bg-gradient-to-t from-[#040810] to-transparent" />
@@ -97,8 +136,8 @@ export default function Contact() {
             </div>
             
             {/* Symmetrical Decorative Elements */}
-            <div className="absolute -left-8 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[3rem]" />
-            <div className="absolute -right-8 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-emerald-600/20 blur-[3rem]" />
+            <div className="absolute -left-8 top-1/2 -z-10 h-[30rem] w-[30rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.1),transparent_100%)]" />
+            <div className="absolute -right-8 top-1/2 -z-10 h-[30rem] w-[30rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(5,150,105,0.1),transparent_100%)]" />
           </motion.div>
 
           {/* Interactive Links Array */}
@@ -114,20 +153,7 @@ export default function Contact() {
               { name: 'GitHub', value: 'github.com/Rishi8078', href: 'https://github.com/Rishi8078' },
               { name: 'LinkedIn', value: 'in/rishib-iyapady', href: 'https://linkedin.com/in/rishib-iyapady' }
             ].map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                target={link.name !== 'Email' ? '_blank' : undefined}
-                rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
-                className="group flex flex-col items-center justify-center gap-2 rounded-xl border border-white/5 bg-white/[0.02] p-6 text-center transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]"
-              >
-                <h3 className="font-display text-xl font-semibold tracking-tight text-white/80 transition-colors group-hover:text-white">
-                  {link.name}
-                </h3>
-                <span className="font-mono text-[0.65rem] tracking-widest text-white/40 transition-colors group-hover:text-white/80">
-                  {link.value}
-                </span>
-              </a>
+              <MagicContactCard key={link.name} link={link} />
             ))}
           </motion.div>
         </div>

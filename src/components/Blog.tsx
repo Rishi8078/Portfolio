@@ -1,6 +1,7 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import useEmblaCarousel from 'embla-carousel-react';
 import { posts as featuredPosts } from '../data/posts';
 
 const fadeUpVariants = {
@@ -8,13 +9,15 @@ const fadeUpVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
 };
 
-const ImageBlock = ({ className = "", src }: { className?: string; src?: string }) => (
-  <div className={`relative w-full h-full overflow-hidden rounded-xl bg-white/[0.02] border border-white/10 transition-colors duration-300 group-hover:border-white/20 ${className}`}>
+const ImageBlock = ({ className = "", src, isActive }: { className?: string; src?: string, isActive?: boolean }) => (
+  <div className={`relative w-full h-full overflow-hidden rounded-xl bg-white/[0.02] border border-white/10 transition-colors duration-300 ${isActive ? 'group-hover:border-white/20' : ''} ${className}`}>
     {src ? (
-      <img src={src} alt="Post cover" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
+      <img src={src} alt="Post cover" className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? 'group-hover:scale-[1.02]' : ''}`} />
     ) : (
       <div className="absolute inset-0 bg-white/5" />
     )}
+    {/* Dark Overlay for inactive slides */}
+    {!isActive && <div className="absolute inset-0 bg-black/40 transition-opacity duration-500" />}
   </div>
 );
 
@@ -34,45 +37,37 @@ const PostMetadata = ({ post }: { post: any }) => (
 
 export default function Blog() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
 
-  const swipeConfidenceThreshold = 10000;
-  const swipePower = (offset: number, velocity: number) => {
-    return Math.abs(offset) * velocity;
-  };
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCurrentSlide(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
 
-  const handleDragEnd = (e: any, { offset, velocity }: any) => {
-    const swipe = swipePower(offset.x, velocity.x);
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
-    if (swipe < -swipeConfidenceThreshold) {
-      // swiped left (next slide)
-      if (currentSlide < featuredPosts.length - 1) {
-        setDirection(1);
-        setCurrentSlide((prev) => prev + 1);
-      }
-    } else if (swipe > swipeConfidenceThreshold) {
-      // swiped right (previous slide)
-      if (currentSlide > 0) {
-        setDirection(-1);
-        setCurrentSlide((prev) => prev - 1);
-      }
-    }
-  };
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+  }, [emblaApi]);
 
   return (
     <section
       id="blog"
-      className="relative w-full overflow-hidden bg-[#040810] py-24 sm:py-32"
+      className="relative w-full bg-[#040810] py-24 sm:py-32"
       aria-labelledby="blog-title"
     >
       {/* Minimal Background (matching Work section) */}
       <div className="absolute inset-0 z-0 flex items-center justify-center">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1d2b45]/10 via-[#040810]/80 to-[#040810]" />
-        <motion.div
-          animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.05, 1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 h-[30rem] w-[30rem] rounded-full bg-emerald-900/10 blur-[120px]"
-        />
       </div>
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.04]"
@@ -90,19 +85,8 @@ export default function Blog() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="relative mb-16 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
+          className="mb-16 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
         >
-          {/* Symmetrical Decorative Elements */}
-          <motion.div 
-            animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
-            className="absolute -left-10 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-emerald-600/20 blur-[3rem]" 
-          />
-          <motion.div 
-            animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.2, 1] }} 
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
-            className="absolute -right-10 top-1/2 -z-10 h-32 w-32 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[3rem]" 
-          />
 
           <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/50 backdrop-blur-md">
             Chapter 05 · Writings
@@ -123,42 +107,50 @@ export default function Blog() {
           variants={fadeUpVariants}
           className="relative w-full min-h-[900px] sm:min-h-[650px] lg:min-h-[500px] mt-4 flex flex-col"
         >
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={`slide-${currentSlide}`}
-              custom={direction}
-              initial={{ opacity: 0, x: direction > 0 ? 100 : -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction > 0 ? -100 : 100 }}
-              transition={{ type: "spring", stiffness: 200, damping: 25 }}
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
-              onDragEnd={handleDragEnd}
-              className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-stretch flex-1 cursor-grab active:cursor-grabbing"
-            >
-              <Link to={`/post/${featuredPosts[currentSlide].id}`} className="lg:col-span-6 flex flex-col justify-center gap-6 h-full py-4 z-10 w-full min-h-[250px] cursor-pointer group">
-                <PostMetadata post={featuredPosts[currentSlide]} />
+          {/* Symmetrical Decorative Elements */}
+          <div 
+            className="absolute -left-32 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(5,150,105,0.1),transparent_100%)]"
+            style={{ animation: 'orb-glow-no-translate 5s ease-in-out infinite' }}
+          />
+          <div 
+            className="absolute -right-32 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.1),transparent_100%)]"
+            style={{ animation: 'orb-glow-no-translate 6s ease-in-out 1s infinite' }}
+          />
+          <div className="overflow-hidden flex-1 w-full" ref={emblaRef}>
+            <div className="flex h-full touch-pan-y">
+              {featuredPosts.map((post, index) => (
+                <div 
+                  key={post.id} 
+                  className={`min-w-0 shrink-0 grow-0 basis-full transition-all duration-500 select-none ${
+                    index === currentSlide ? 'opacity-100 blur-0 scale-100' : 'opacity-30 blur-[4px] scale-[0.95]'
+                  }`}
+                >
+                  <div className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-stretch cursor-grab active:cursor-grabbing select-none">
+                    <Link to={`/post/${post.id}`} className="lg:col-span-6 flex flex-col justify-center gap-6 h-full py-4 z-10 w-full min-h-[250px] cursor-pointer group">
+                      <PostMetadata post={post} />
 
-                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white/90 group-hover:text-white transition-colors">
-                  {featuredPosts[currentSlide].title}
-                </h2>
+                      <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white/90 group-hover:text-white transition-colors">
+                        {post.title}
+                      </h2>
 
-                <p className="text-base leading-relaxed text-white/50 max-w-xl pr-6">
-                  {featuredPosts[currentSlide].description}
-                </p>
-                
-                <div className="mt-4 flex items-center text-xs font-mono tracking-widest text-white/40 transition-colors uppercase group-hover:text-white/90">
-                  <span className="mr-3 font-semibold">Read Article</span>
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                      <p className="text-base leading-relaxed text-white/50 max-w-xl pr-6">
+                        {post.description}
+                      </p>
+                      
+                      <div className="mt-4 flex items-center text-xs font-mono tracking-widest text-white/40 transition-colors uppercase group-hover:text-white/90">
+                        <span className="mr-3 font-semibold">Read Article</span>
+                        <span className="transition-transform group-hover:translate-x-1">→</span>
+                      </div>
+                    </Link>
+
+                    <Link to={`/post/${post.id}`} className="lg:col-span-6 w-full h-[300px] lg:h-[450px] z-0 cursor-pointer block group">
+                      <ImageBlock src={post.image} isActive={index === currentSlide} />
+                    </Link>
+                  </div>
                 </div>
-              </Link>
-
-              <Link to={`/post/${featuredPosts[currentSlide].id}`} className="lg:col-span-6 w-full h-[300px] lg:h-[450px] z-0 cursor-pointer block group">
-                <ImageBlock src={featuredPosts[currentSlide]?.image} />
-              </Link>
-            </motion.div>
-          </AnimatePresence>
+              ))}
+            </div>
+          </div>
 
           {/* Carousel Controls & View All */}
           <div className="mt-12 w-full flex flex-col sm:flex-row items-center justify-between gap-6 z-20 pb-4 border-t border-white/5 pt-6">
@@ -168,8 +160,7 @@ export default function Blog() {
                   key={i}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setDirection(i > currentSlide ? 1 : -1);
-                    setCurrentSlide(i);
+                    scrollTo(i);
                   }}
                   className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-6 bg-white/80' : 'w-2 bg-white/20 hover:bg-white/40'}`}
                   aria-label={`Go to slide ${i + 1}`}

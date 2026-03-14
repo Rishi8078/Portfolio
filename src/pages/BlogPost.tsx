@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { getPostById, posts, Post } from '../data/posts.js';
-import { useEffect, useMemo, Children, isValidElement } from 'react';
+import { useEffect, useLayoutEffect, useMemo, Children, isValidElement } from 'react';
 
 const CALLOUT_TITLES: Record<string, string> = {
   note: 'Note',
@@ -77,8 +77,8 @@ export default function BlogPost() {
   const markdownContent = useMemo(() => normalizeObsidianMarkdown(post?.content ?? ''), [post?.content]);
 
   // Scroll to top when opening a new post route
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [id]);
 
   if (!post) {
@@ -101,7 +101,8 @@ export default function BlogPost() {
     >
       <div className="mb-12 flex items-center justify-between">
         <Link
-          to={location.state?.fromArchive ? "/blog" : "/#blog"}
+          to={location.state?.fromArchive ? "/blog" : "/"}
+          state={location.state?.fromArchive ? undefined : { scrollTo: 'blog' }}
           className="group inline-flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 hover:text-white/90 transition-colors uppercase"
         >
           <span className="transition-transform group-hover:-translate-x-1">←</span>

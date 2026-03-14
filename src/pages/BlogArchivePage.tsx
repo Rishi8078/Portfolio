@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { posts as featuredPosts, Post } from '../data/posts';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 const ImageBlock = ({ className = "", src }: { className?: string; src?: string }) => (
   <div className={`relative w-full h-full overflow-hidden rounded-xl bg-white/[0.02] border border-white/10 transition-colors duration-300 group-hover:border-white/20 ${className}`}>
@@ -27,18 +27,17 @@ const PostMetadata = ({ post }: { post: Post }) => (
 
 export default function BlogArchivePage() {
   // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, []);
 
   return (
     <div className="min-h-screen bg-[#040810] relative overflow-hidden pt-32 pb-24">
       {/* Background Grid & Glow (matching main site) */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
-        <motion.div
-          animate={{ opacity: [0.15, 0.3, 0.15], scale: [1, 1.05, 1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        <div
           className="absolute top-1/4 h-[30rem] w-[30rem] rounded-full bg-emerald-900/10 blur-[120px]"
+          style={{ animation: 'orb-pulse 10s ease-in-out infinite' }}
         />
       </div>
       <div
@@ -56,7 +55,8 @@ export default function BlogArchivePage() {
         className="relative z-10 w-full max-w-4xl mx-auto px-6 sm:px-8 lg:px-16"
       >
         <Link
-          to="/#blog"
+          to="/"
+          state={{ scrollTo: 'blog' }}
           className="group inline-flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 hover:text-white/90 transition-colors uppercase mb-12"
         >
           <span className="transition-transform group-hover:-translate-x-1">←</span>

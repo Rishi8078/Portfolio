@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, useLayoutEffect, Suspense, lazy, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Loading } from './components/Loading';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,25 +15,7 @@ const Contact = lazy(() => import('./components/Contact'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const BlogArchivePage = lazy(() => import('./pages/BlogArchivePage'));
 
-function Home() {
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        // Using 'instant' instead of 'smooth' skips the scrolling animation
-        // and jumps directly to the section immediately on load.
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'instant' });
-        }, 0);
-      }
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, [location]);
-
+function HomeSection() {
   return (
     <>
       <Navigation />
@@ -50,11 +32,53 @@ function Home() {
   );
 }
 
+function AppContent() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const scrollPositionRef = useRef(0);
+
+  useLayoutEffect(() => {
+    if (isHome) {
+      const scrollTarget = location.state?.scrollTo;
+      if (scrollTarget) {
+        requestAnimationFrame(() => {
+          const el = document.getElementById(scrollTarget);
+          if (el) el.scrollIntoView({ behavior: 'instant' });
+        });
+      } else if (scrollPositionRef.current > 0) {
+        window.scrollTo(0, scrollPositionRef.current);
+      }
+    } else {
+      scrollPositionRef.current = window.scrollY;
+      window.scrollTo(0, 0);
+    }
+  }, [location.key, isHome]);
+
+  return (
+    <>
+      <div style={{ display: isHome ? 'block' : 'none' }}>
+        <HomeSection />
+      </div>
+      {!isHome && (
+        <Routes>
+          <Route path="/post/:id" element={<BlogPost />} />
+          <Route path="/blog" element={<BlogArchivePage />} />
+        </Routes>
+      )}
+    </>
+  );
+}
+
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
-  // once we flip loading → false, mark that we've shown it
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   useEffect(() => {
     if (!isLoading) setHasLoadedOnce(true);
   }, [isLoading]);
@@ -69,7 +93,6 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* main content only after first load completes */}
         {(!isLoading || hasLoadedOnce) && (
           <Suspense fallback={null}>
             <motion.div
@@ -79,11 +102,7 @@ export default function App() {
               transition={{ duration: 1.2 }}
               className="pb-safe-bottom"
             >
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/post/:id" element={<BlogPost />} />
-                <Route path="/blog" element={<BlogArchivePage />} />
-              </Routes>
+              <AppContent />
             </motion.div>
           </Suspense>
         )}
