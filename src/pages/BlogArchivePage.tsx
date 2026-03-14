@@ -33,27 +33,41 @@ export default function BlogArchivePage() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-full max-w-4xl mx-auto px-6 sm:px-8 lg:px-16"
       >
-        <Link
-          to="/"
-          state={{ scrollTo: 'blog' }}
-          className="group inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-white/40 transition-colors duration-300 hover:text-white mb-10"
-        >
-          <span className="text-white/20 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-white/80">{'<'}</span>
-          <span className="border-b border-transparent transition-colors duration-300 group-hover:border-white/40 pb-0.5">
-            Back to home
-          </span>
-        </Link>
+        {/* Header Section */}
+        <div className="flex flex-col gap-8 mb-16">
+          <Link
+            to="/"
+            state={{ scrollTo: 'blog' }}
+            className="group flex w-10 h-10 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+            aria-label="Back to home"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-500 group-hover:-translate-x-0.5"
+            >
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
+          </Link>
 
-        {/* Header */}
-        <div className="flex flex-col gap-4 mb-16">
-          <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md self-start">
-            <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
-              Archive
-            </p>
+          <div className="flex flex-col gap-4">
+            <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md self-start">
+              <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+                Archive
+              </p>
+            </div>
+            <h2 className="font-pixel text-4xl sm:text-5xl uppercase tracking-tight text-white/90">
+              All <span className="text-white/40">Posts</span>
+            </h2>
           </div>
-          <h2 className="font-pixel text-4xl sm:text-5xl uppercase tracking-tight text-white/90">
-            All <span className="text-white/40">Posts</span>
-          </h2>
         </div>
 
         {/* List Content */}

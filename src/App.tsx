@@ -12,8 +12,11 @@ const Background = lazy(() => import('./components/Background'));
 const About = lazy(() => import('./components/About'));
 const Blog = lazy(() => import('./components/Blog'));
 const Contact = lazy(() => import('./components/Contact'));
+const Hobbies = lazy(() => import('./components/Hobbies'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const BlogArchivePage = lazy(() => import('./pages/BlogArchivePage'));
+const PhotographyPage = lazy(() => import('./pages/PhotographyPage'));
+const MusicPage = lazy(() => import('./pages/MusicPage'));
 
 function HomeSection() {
   return (
@@ -24,6 +27,7 @@ function HomeSection() {
       <Background />
       <About />
       <Blog />
+      <Hobbies />
       <Contact />
     </main>
   );
@@ -61,6 +65,8 @@ function AppContent() {
         <Routes>
           <Route path="/post/:id" element={<BlogPost />} />
           <Route path="/blog" element={<BlogArchivePage />} />
+          <Route path="/photography" element={<PhotographyPage />} />
+          <Route path="/music" element={<MusicPage />} />
         </Routes>
       )}
     </>

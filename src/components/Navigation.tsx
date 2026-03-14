@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import resume from '../assets/resume.pdf';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const sections = ['intro', 'work', 'values', 'background', 'about', 'blog', 'contact'] as const;
+const sections = ['intro', 'work', 'values', 'background', 'about', 'blog', 'hobbies', 'contact'] as const;
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +31,10 @@ export default function Navigation() {
     return () => observer.current?.disconnect();
   }, [isHome]);
 
-  const isActive = (section: string) => isHome && activeSection === section;
+  const isActive = (section: string) => {
+    if (section === 'hobbies' && !isHome && (location.pathname === '/photography' || location.pathname === '/music')) return true;
+    return isHome && activeSection === section;
+  };
 
   const navLinkProps = (sec: string) => {
     if (isHome) {
@@ -105,7 +108,7 @@ export default function Navigation() {
         className="fixed left-0 top-0 z-[101] hidden w-full lg:block"
       >
         <div className="px-8 pt-6">
-          <div className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-3 transition-all duration-500 ${isScrolled || !isHome ? 'border-white/10 bg-white/[0.02] backdrop-blur-md shadow-[0_0_30px_-10px_rgba(255,255,255,0.05)]' : 'border-transparent bg-transparent'} `}>
+          <div className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-3 transition-all duration-500 overflow-visible ${isScrolled || !isHome ? 'border-white/10 bg-white/[0.02] backdrop-blur-md shadow-[0_0_30px_-10px_rgba(255,255,255,0.05)]' : 'border-transparent bg-transparent'} `}>
             {isHome ? (
               <a
                 href="#intro"
