@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { getPostById, posts, Post } from '../data/posts.js';
-import { useEffect, useLayoutEffect, useMemo, Children, isValidElement } from 'react';
+import { useLayoutEffect, useMemo, Children, isValidElement } from 'react';
 
 const CALLOUT_TITLES: Record<string, string> = {
   note: 'Note',
@@ -74,6 +74,7 @@ export default function BlogPost() {
   const { id } = useParams();
   const location = useLocation();
   const post = id ? getPostById(id) : null;
+  const fromArchive = location.state?.fromArchive === true;
   const markdownContent = useMemo(() => normalizeObsidianMarkdown(post?.content ?? ''), [post?.content]);
 
   // Scroll to top when opening a new post route
@@ -99,16 +100,16 @@ export default function BlogPost() {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className="relative w-full min-h-screen pt-32 pb-24 px-6 sm:px-8 lg:px-16 max-w-4xl mx-auto"
     >
-      <div className="mb-12 flex items-center justify-between">
-        <Link
-          to={location.state?.fromArchive ? "/blog" : "/"}
-          state={location.state?.fromArchive ? undefined : { scrollTo: 'blog' }}
-          className="group inline-flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 hover:text-white/90 transition-colors uppercase"
-        >
-          <span className="transition-transform group-hover:-translate-x-1">←</span>
-          <span>{location.state?.fromArchive ? "Back to all posts" : "Back to home"}</span>
-        </Link>
-      </div>
+      <Link
+        to={fromArchive ? '/blog' : '/'}
+        state={fromArchive ? undefined : { scrollTo: 'blog' }}
+        className="group inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-white/40 transition-colors duration-300 hover:text-white mb-10"
+      >
+        <span className="text-white/20 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-white/80">{'<'}</span>
+        <span className="border-b border-transparent transition-colors duration-300 group-hover:border-white/40 pb-0.5">
+          {fromArchive ? 'Back to all posts' : 'Back to home'}
+        </span>
+      </Link>
 
       <div className="mb-8 flex flex-col gap-4">
         <div className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-widest text-white/40">

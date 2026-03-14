@@ -17,18 +17,15 @@ const BlogArchivePage = lazy(() => import('./pages/BlogArchivePage'));
 
 function HomeSection() {
   return (
-    <>
-      <Navigation />
-      <main>
-        <Hero />
-        <Work />
-        <Value />
-        <Background />
-        <About />
-        <Blog />
-        <Contact />
-      </main>
-    </>
+    <main>
+      <Hero />
+      <Work />
+      <Value />
+      <Background />
+      <About />
+      <Blog />
+      <Contact />
+    </main>
   );
 }
 
@@ -56,6 +53,7 @@ function AppContent() {
 
   return (
     <>
+      <Navigation />
       <div style={{ display: isHome ? 'block' : 'none' }}>
         <HomeSection />
       </div>

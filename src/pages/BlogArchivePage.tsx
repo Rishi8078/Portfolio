@@ -1,29 +1,8 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { posts as featuredPosts, Post } from '../data/posts';
+import { posts as featuredPosts } from '../data/posts';
 import { useLayoutEffect } from 'react';
 
-const ImageBlock = ({ className = "", src }: { className?: string; src?: string }) => (
-  <div className={`relative w-full h-full overflow-hidden rounded-xl bg-white/[0.02] border border-white/10 transition-colors duration-300 group-hover:border-white/20 ${className}`}>
-    {src ? (
-      <img src={src} alt="Post cover" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
-    ) : (
-      <div className="absolute inset-0 bg-white/5" />
-    )}
-  </div>
-);
-
-const PostMetadata = ({ post }: { post: Post }) => (
-  <div className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-widest text-white/40">
-    <span>{post.date}</span>
-    {post.category && (
-      <>
-        <span className="h-1 w-1 rounded-full bg-white/20" />
-        <span className="text-white/70">{post.category}</span>
-      </>
-    )}
-  </div>
-);
 
 export default function BlogArchivePage() {
   // Scroll to top on mount
@@ -57,10 +36,12 @@ export default function BlogArchivePage() {
         <Link
           to="/"
           state={{ scrollTo: 'blog' }}
-          className="group inline-flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 hover:text-white/90 transition-colors uppercase mb-12"
+          className="group inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-white/40 transition-colors duration-300 hover:text-white mb-10"
         >
-          <span className="transition-transform group-hover:-translate-x-1">←</span>
-          <span>Back home</span>
+          <span className="text-white/20 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-white/80">{'<'}</span>
+          <span className="border-b border-transparent transition-colors duration-300 group-hover:border-white/40 pb-0.5">
+            Back to home
+          </span>
         </Link>
 
         {/* Header */}
@@ -87,10 +68,10 @@ export default function BlogArchivePage() {
               {/* Thumbnail Image */}
               <div className="relative h-[100px] w-[150px] sm:h-[120px] sm:w-[180px] shrink-0 rounded-xl overflow-hidden bg-white/5 border border-white/10">
                 {post.image && (
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 )}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-80" />
@@ -104,7 +85,7 @@ export default function BlogArchivePage() {
                 <p className="text-sm text-white/40 line-clamp-2 group-hover:text-white/60 transition-colors leading-relaxed">
                   {post.description}
                 </p>
-                
+
                 {/* Metadata */}
                 <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-white/30 mt-1">
                   <span>{post.date}</span>
