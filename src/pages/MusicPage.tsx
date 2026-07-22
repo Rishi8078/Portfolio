@@ -44,7 +44,7 @@ export default function MusicPage() {
                 <div className="mb-12">
                     <Link
                         to="/"
-                        className="group flex w-10 h-10 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+                        className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
                         aria-label="Back to home"
                     >
                         <svg
@@ -103,13 +103,25 @@ export default function MusicPage() {
 
                         {/* Quick Actions */}
                         <div className="flex items-center gap-4 mt-4">
-                            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors">
+                            <button
+                                type="button"
+                                disabled
+                                aria-disabled="true"
+                                title="Coming soon"
+                                className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold opacity-50 cursor-not-allowed"
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="translate-x-0.5">
                                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                 </svg>
                                 Listen Now
                             </button>
-                            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/[0.05] border border-white/10 text-white font-semibold hover:bg-white/10 transition-colors">
+                            <button
+                                type="button"
+                                disabled
+                                aria-disabled="true"
+                                title="Coming soon"
+                                className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/[0.05] border border-white/10 text-white font-semibold opacity-50 cursor-not-allowed"
+                            >
                                 View on Spotify
                             </button>
                         </div>
@@ -128,11 +140,15 @@ export default function MusicPage() {
                                 key={track.id}
                                 className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl hover:bg-white/[0.03] border border-transparent hover:border-white/5 transition-all duration-300 gap-4"
                             >
-                                <div className="flex items-center gap-4">
-                                    <span className="font-mono text-xs text-white/30 w-6 text-center group-hover:hidden">
+                                <div className="flex items-center gap-2">
+                                    <span className="font-mono text-xs text-white/50 w-6 text-center shrink-0">
                                         {index + 1}
                                     </span>
-                                    <button className="hidden group-hover:flex items-center justify-center w-6 h-6 text-white text-xs">
+                                    <button
+                                        type="button"
+                                        aria-label={`Play ${track.title}`}
+                                        className="flex items-center justify-center w-11 h-11 shrink-0 text-white/60 hover:text-white transition-colors"
+                                    >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                         </svg>

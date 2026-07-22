@@ -1,10 +1,6 @@
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
-const fadeUpVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
+import { fadeUpVariants, sectionViewport } from '../lib/motion';
 
 export default function Hobbies() {
     return (
@@ -19,7 +15,7 @@ export default function Hobbies() {
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: '-100px' }}
+                    viewport={sectionViewport}
                     variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
                     className="mb-16 md:mb-24 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
                 >

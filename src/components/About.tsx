@@ -1,9 +1,5 @@
 import { motion } from 'framer-motion';
-
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
+import { fadeUpVariants, sectionViewport } from '../lib/motion';
 
 export default function About() {
   return (
@@ -41,7 +37,7 @@ export default function About() {
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={sectionViewport}
           className="mb-20 flex w-full max-w-4xl flex-col items-center text-center"
         >
           <motion.div variants={fadeUpVariants} className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/50 backdrop-blur-md">
@@ -68,7 +64,7 @@ export default function About() {
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={sectionViewport}
             className="flex flex-col items-center"
           >
             <motion.p variants={fadeUpVariants} className="font-display text-[1.4rem] font-medium leading-relaxed tracking-tight text-white/95 sm:text-[2rem] lg:text-[2.4rem]">

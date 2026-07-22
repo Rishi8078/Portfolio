@@ -105,7 +105,7 @@ export default function BlogPost() {
         <Link
           to={fromArchive ? '/blog' : '/'}
           state={fromArchive ? undefined : { scrollTo: 'blog' }}
-          className="group flex w-10 h-10 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+          className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
           aria-label={fromArchive ? 'Back to all posts' : 'Back to home'}
         >
           <svg
@@ -157,7 +157,7 @@ export default function BlogPost() {
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
           components={{
-            h1: ({ node, ...props }) => <h1 className="text-3xl sm:text-4xl font-bold text-white mt-12 mb-6 break-words leading-tight" {...props} />,
+            h1: ({ node, ...props }) => <h2 className="text-3xl sm:text-4xl font-bold text-white mt-12 mb-6 break-words leading-tight" {...props} />,
             h2: ({ node, ...props }) => <h2 className="text-2xl sm:text-3xl font-bold text-white mt-12 mb-5 break-words leading-tight" {...props} />,
             h3: ({ node, ...props }) => <h3 className="text-xl sm:text-2xl font-bold text-white mt-10 mb-4 break-words leading-tight" {...props} />,
             h4: ({ node, ...props }) => <h4 className="text-lg sm:text-xl font-semibold text-white mt-8 mb-3 break-words" {...props} />,

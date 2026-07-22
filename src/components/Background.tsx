@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { fadeUpVariants, makeContainerVariants, itemVariants, sectionViewport } from '../lib/motion';
 
 const workExperiences = [
   {
@@ -30,27 +31,7 @@ const education = [
   },
 ];
 
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' },
-  },
-};
+const containerVariants = makeContainerVariants(0.1, 0.1);
 
 export default function Background() {
   return (
@@ -90,7 +71,7 @@ export default function Background() {
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={sectionViewport}
           className="mx-auto mb-16 flex max-w-4xl flex-col items-center justify-center text-center sm:mb-24"
         >
           <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
@@ -118,7 +99,7 @@ export default function Background() {
               {workExperiences.map((exp, index) => (
                 <motion.div
                   key={index}
-                  variants={cardVariants}
+                  variants={itemVariants}
                   className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all hover:bg-white/[0.04] hover:border-white/20 sm:p-8"
                 >
                   <div>
@@ -159,7 +140,7 @@ export default function Background() {
               {education.map((edu, index) => (
                 <motion.div
                   key={index}
-                  variants={cardVariants}
+                  variants={itemVariants}
                   className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all hover:bg-white/[0.04] hover:border-white/20 sm:p-8"
                 >
                   <div>

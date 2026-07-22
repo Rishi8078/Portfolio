@@ -3,16 +3,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useEmblaCarousel from 'embla-carousel-react';
 import { posts as featuredPosts } from '../data/posts';
+import { fadeUpVariants, sectionViewport } from '../lib/motion';
 
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const ImageBlock = ({ className = "", src, isActive }: { className?: string; src?: string, isActive?: boolean }) => (
+const ImageBlock = ({ className = "", src, alt = "", isActive }: { className?: string; src?: string; alt?: string; isActive?: boolean }) => (
   <div className={`relative w-full h-full overflow-hidden rounded-xl bg-white/[0.02] border border-white/10 transition-colors duration-300 ${isActive ? 'group-hover:border-white/20' : ''} ${className}`}>
     {src ? (
-      <img src={src} alt="Post cover" className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? 'group-hover:scale-[1.02]' : ''}`} />
+      <img src={src} alt={alt} className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? 'group-hover:scale-[1.02]' : ''}`} />
     ) : (
       <div className="absolute inset-0 bg-white/5" />
     )}
@@ -84,7 +80,7 @@ export default function Blog() {
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={sectionViewport}
           className="mb-16 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
         >
 
@@ -144,7 +140,7 @@ export default function Blog() {
                     </Link>
 
                     <Link to={`/post/${post.id}`} className="lg:col-span-6 w-full h-[300px] lg:h-[450px] z-0 cursor-pointer block group">
-                      <ImageBlock src={post.image} isActive={index === currentSlide} />
+                      <ImageBlock src={post.image} alt={post.title} isActive={index === currentSlide} />
                     </Link>
                   </div>
                 </div>
@@ -162,15 +158,20 @@ export default function Blog() {
                     e.stopPropagation();
                     scrollTo(i);
                   }}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-6 bg-white/80' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+                  className="flex h-11 w-11 items-center justify-center"
                   aria-label={`Go to slide ${i + 1}`}
-                />
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-6 bg-white/80' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+                  />
+                </button>
               ))}
             </div>
 
-            <Link 
+            <Link
               to="/blog"
-              className="flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 hover:text-white/90 transition-colors uppercase group"
+              className="flex items-center gap-2 font-mono text-xs tracking-widest text-white/60 hover:text-white/90 transition-colors uppercase group"
             >
               <span>View All Posts</span>
               <span className="group-hover:translate-x-1 transition-transform">→</span>

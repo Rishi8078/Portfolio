@@ -1,16 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import resume from '../assets/resume.pdf';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useActiveSection } from '../context/ActiveSectionContext';
 
 const sections = ['intro', 'work', 'values', 'background', 'about', 'blog', 'hobbies', 'contact'] as const;
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('intro');
-  const observer = useRef<IntersectionObserver | null>(null);
+  const activeSection = useActiveSection();
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -19,17 +19,6 @@ export default function Navigation() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (!isHome) return;
-    const options = { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 };
-    observer.current = new IntersectionObserver((entries) => {
-      entries.forEach(entry => entry.isIntersecting && setActiveSection(entry.target.id));
-    }, options);
-    const secs = document.querySelectorAll('section[id]');
-    secs.forEach(sec => observer.current?.observe(sec));
-    return () => observer.current?.disconnect();
-  }, [isHome]);
 
   const isActive = (section: string) => {
     if (section === 'hobbies' && !isHome && (location.pathname === '/photography' || location.pathname === '/music')) return true;
@@ -73,7 +62,7 @@ export default function Navigation() {
                     >
                       <Comp
                         {...linkProps}
-                        className={`block font-body text-lg font-medium tracking-wide leading-none py-2 flex items-center gap-3 transition-colors ${isActive(sec) ? 'text-white' : 'text-white/40 hover:text-white/80'}`}
+                        className={`block font-body text-lg font-medium tracking-wide leading-none py-2 flex items-center gap-3 transition-colors ${isActive(sec) ? 'text-white' : 'text-white/60 hover:text-white/90'}`}
                         onClick={() => setIsMenuOpen(false)}
                       >
                         {isActive(sec) && (
@@ -131,7 +120,7 @@ export default function Navigation() {
                   <Comp
                     key={sec}
                     {...linkProps}
-                    className={`text-sm font-medium tracking-wide transition-colors duration-300 ${isActive(sec) ? 'text-white' : 'text-white/40 hover:text-white/90'}`}
+                    className={`text-sm font-medium tracking-wide transition-colors duration-300 ${isActive(sec) ? 'text-white' : 'text-white/60 hover:text-white/90'}`}
                   >
                     {sec.charAt(0).toUpperCase() + sec.slice(1)}
                   </Comp>
@@ -177,7 +166,7 @@ export default function Navigation() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            className="rounded-full border border-white/10 bg-white/[0.02] p-2 text-white/70 transition-colors hover:bg-white/[0.08] hover:text-white"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-white/70 transition-colors hover:bg-white/[0.08] hover:text-white"
           >
             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>

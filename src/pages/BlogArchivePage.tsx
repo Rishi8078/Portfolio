@@ -38,7 +38,7 @@ export default function BlogArchivePage() {
           <Link
             to="/"
             state={{ scrollTo: 'blog' }}
-            className="group flex w-10 h-10 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+            className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
             aria-label="Back to home"
           >
             <svg
@@ -101,7 +101,7 @@ export default function BlogArchivePage() {
                 </p>
 
                 {/* Metadata */}
-                <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-white/30 mt-1">
+                <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-white/50 mt-1">
                   <span>{post.date}</span>
                   <span className="h-1 w-1 rounded-full bg-white/10" />
                   <span className="text-white/50">{post.category}</span>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { fadeUpVariants, makeContainerVariants, itemVariants, sectionViewport } from '../lib/motion';
 
 const projects = [
   {
@@ -45,33 +46,13 @@ const projects = [
   },
 ];
 
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' },
-  },
-};
+const containerVariants = makeContainerVariants(0.1, 0.2);
 
 export default function Work() {
   return (
     <section
       id="work"
-      className="relative -mt-10 min-h-screen w-full bg-[#040810] pt-24 transition-colors sm:-mt-14 sm:pt-28 lg:pt-32"
+      className="relative min-h-screen w-full bg-[#040810] pt-24 transition-colors sm:pt-28 lg:pt-32"
       aria-labelledby="portfolio-title"
     >
       {/* Redesigned Cinematic Background with Glow */}
@@ -105,7 +86,7 @@ export default function Work() {
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={sectionViewport}
           className="flex flex-col items-center text-center max-w-4xl"
         >
 
@@ -153,7 +134,7 @@ export default function Work() {
               target="_blank"
               rel="noopener noreferrer"
               className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:bg-white/[0.06] hover:border-white/25"
-              variants={cardVariants}
+              variants={itemVariants}
             >
               {/* Hover Gradient Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -169,7 +150,7 @@ export default function Work() {
                       0{index + 1}
                     </span>
                   </div>
-                  <div className="rounded-full border border-white/10 bg-black/50 px-3 py-1 font-mono text-[0.6rem] font-medium tracking-[0.2em] text-white/50 transition-colors group-hover:border-white/30 group-hover:text-white/90">
+                  <div className="rounded-full border border-white/10 bg-black/50 px-3 py-1 font-mono text-[0.6rem] font-medium tracking-[0.2em] text-white/65 transition-colors group-hover:border-white/30 group-hover:text-white/90">
                     {project.category}
                   </div>
                 </div>
@@ -196,7 +177,7 @@ export default function Work() {
                   </div>
 
                   {/* Action link */}
-                  <div className="flex items-center text-xs font-mono tracking-widest text-white/30 transition-colors uppercase group-hover:text-white/90">
+                  <div className="flex items-center text-xs font-mono tracking-widest text-white/50 transition-colors uppercase group-hover:text-white/90">
                     <span className="mr-3 font-semibold">View Repository</span>
                     <svg className="h-4 w-4 transform transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

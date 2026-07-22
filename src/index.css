@@ -233,6 +233,20 @@
     0 0 28px rgba(96, 165, 250, 0.08);
 }
 
+/* --- Accessible focus states ---
+   Keyboard/AT users get a visible accent ring consistent with the
+   site's blue accent (#60A5FA), without altering mouse-hover styling. */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #60A5FA;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 
 
 /* ========== ANIMATIONS ========== */

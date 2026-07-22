@@ -36,7 +36,7 @@ export default function PhotographyPage() {
                 <div className="flex flex-col gap-8 mb-16 max-w-4xl mx-auto">
                     <Link
                         to="/"
-                        className="group flex w-10 h-10 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+                        className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
                         aria-label="Back to home"
                     >
                         <svg

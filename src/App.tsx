@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Loading } from './components/Loading';
 import { motion, AnimatePresence } from 'framer-motion';
 import Fireflies from './components/Fireflies';
+import { ActiveSectionProvider } from './context/ActiveSectionContext';
+import BackgroundTint from './components/BackgroundTint';
+import ProgressRail from './components/ProgressRail';
 
 const Navigation = lazy(() => import('./components/Navigation'));
 const Hero = lazy(() => import('./components/Hero'));
@@ -56,7 +59,9 @@ function AppContent() {
   }, [location.key, isHome]);
 
   return (
-    <>
+    <ActiveSectionProvider isHome={isHome}>
+      {isHome && <BackgroundTint />}
+      {isHome && <ProgressRail />}
       <Navigation />
       <div style={{ display: isHome ? 'block' : 'none' }}>
         <HomeSection />
@@ -69,7 +74,7 @@ function AppContent() {
           <Route path="/music" element={<MusicPage />} />
         </Routes>
       )}
-    </>
+    </ActiveSectionProvider>
   );
 }
 

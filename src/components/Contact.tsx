@@ -1,11 +1,7 @@
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import contactAnimation from '../assets/contact-lottie.json';
-
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
+import { fadeUpVariants, sectionViewport } from '../lib/motion';
 
 function MagicContactCard({ link }: { link: any }) {
   const handleMouseMove = (e: any) => {
@@ -49,7 +45,7 @@ function MagicContactCard({ link }: { link: any }) {
         <h3 className="font-display text-xl font-semibold tracking-tight text-white/80 transition-colors group-hover:text-white">
           {link.name}
         </h3>
-        <span className="font-mono text-[0.65rem] tracking-widest text-white/40 transition-colors group-hover:text-white/80">
+        <span className="font-mono text-xs tracking-widest text-white/60 transition-colors group-hover:text-white/80">
           {link.value}
         </span>
       </div>
@@ -100,7 +96,7 @@ export default function Contact() {
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={sectionViewport}
           className="mb-16 flex w-full max-w-4xl flex-col items-center text-center"
         >
           <motion.div variants={fadeUpVariants} className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 backdrop-blur-md">
@@ -166,7 +162,7 @@ export default function Contact() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.6 }}
-        className="relative z-20 mt-32 flex w-full flex-col items-center justify-center gap-4 font-mono text-[0.65rem] uppercase tracking-widest text-white/30 sm:flex-row"
+        className="relative z-20 mt-32 flex w-full flex-col items-center justify-center gap-4 font-mono text-[0.65rem] uppercase tracking-widest text-white/50 sm:flex-row"
       >
         <span>© {new Date().getFullYear()} Rishib Iyapady</span>
       </motion.div>

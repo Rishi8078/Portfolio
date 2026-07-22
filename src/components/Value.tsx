@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { fadeUpVariants, makeContainerVariants, itemVariants, sectionViewport } from '../lib/motion';
 
 const values = [
   {
@@ -18,27 +19,7 @@ const values = [
   },
 ];
 
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
-  },
-};
+const containerVariants = makeContainerVariants(0.2, 0.1);
 
 export default function Value() {
   return (
@@ -85,7 +66,7 @@ export default function Value() {
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={sectionViewport}
             className="mb-20 flex max-w-4xl flex-col items-center text-center"
           >
 
