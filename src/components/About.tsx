@@ -49,14 +49,14 @@ export default function About() {
           </GlitchHeading>
         </motion.div>
 
-        {/* Centered Content Layout */}
+        {/* Centered narrative */}
         <div className="relative flex w-full max-w-4xl flex-col items-center text-center">
           {/* Symmetrical Decorative Elements */}
-          <div 
+          <div
             className="absolute -left-32 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.1),transparent_100%)]"
             style={{ animation: 'orb-glow-no-translate 5s ease-in-out infinite' }}
           />
-          <div 
+          <div
             className="absolute -right-32 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(147,51,234,0.1),transparent_100%)]"
             style={{ animation: 'orb-glow-no-translate 6s ease-in-out 1s infinite' }}
           />
@@ -69,15 +69,15 @@ export default function About() {
             className="flex flex-col items-center"
           >
             <motion.p variants={fadeUpVariants} className="font-display text-[1.4rem] font-medium leading-relaxed tracking-tight text-white/95 sm:text-[2rem] lg:text-[2.4rem]">
-              Most engineers pick a side: <span className="italic text-white/50">Hardware</span> or <span className="italic text-white/50">Software</span>.<br className="hidden md:block" /> I engineer the living layer that connects them.
+              Most engineers choose a side: <span className="text-gradient">Hardware</span> or <span className="text-gradient">Software</span>.<br className="hidden md:block" /> I operate at the intersection where they meet.
             </motion.p>
 
-            <motion.div variants={fadeUpVariants} className="mt-12 flex max-w-3xl flex-col gap-8 text-[1.05rem] leading-relaxed text-white/60 sm:text-[1.15rem]">
+            <motion.div variants={fadeUpVariants} className="mt-12 flex max-w-prose flex-col gap-8 text-[1.05rem] leading-relaxed text-white/60 sm:text-[1.15rem]">
               <p>
-                Currently pursuing my M.Sc. in Microelectronics and Microsystems at TUHH, I've spent the last few years obsessing over how to make physical devices smarter. My background is an unconventional hybrid — blending an academic foundation in rigorous semiconductor technology with battle-tested experience as a Data Engineer at Cognizant.
+                Currently pursuing my M.Sc. in Microelectronics and Microsystems at TUHH, I focus on making physical devices truly intelligent. My background bridges two worlds, combining advanced hardware design with battle-tested industry experience as a Data Engineer at Cognizant.
               </p>
               <p>
-                From debugging bare-metal microcontroller firmware and training low-power TinyML models, to scaling distributed Dockerized ETL pipelines, I thrive at the exact point where these disciplines collide. Whether it's building ROS navigation stacks for autonomous rovers or engineering edge systems with millisecond latency — I build systems that actually survive the real world.
+                From low-power TinyML models and bare-metal firmware to scaling Dockerized ETL pipelines, I thrive at the exact boundary where hardware meets software. Whether I'm configuring ROS stacks for autonomous systems or designing edge infrastructure built for ultra-low latency, I engineer systems designed to operate reliably in the real world.
               </p>
             </motion.div>
           </motion.div>

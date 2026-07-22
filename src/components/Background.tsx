@@ -6,7 +6,13 @@ const workExperiences = [
   {
     company: "Hamburg University of Technology",
     role: "Research Assistant",
-    period: "Mar 2024 – Present",
+    period: "Dec 2025 – Present",
+    description: "Built ROS-based navigation stacks and high-fidelity digital twins (NVIDIA Isaac Sim, Newton, Gazebo) for the Leo Rover, validating LiDAR, IMU, and camera sensor fusion before deployment. Automated teleoperation, localization, and state estimation with modular ROS nodes and Python.",
+  },
+  {
+    company: "Hamburg University of Technology",
+    role: "Research Assistant",
+    period: "Mar 2024 – Dec 2025",
     description: "Automated the research data pipeline by developing a modular suite of MATLAB scripts for end-to-end data ingestion, preprocessing, and analysis. Built a standalone MATLAB App GUI to eliminate manual analysis and improve reproducibility.",
   },
   {

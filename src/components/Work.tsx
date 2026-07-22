@@ -114,7 +114,7 @@ export default function Work() {
             <span className="text-white/40">Builds</span>
           </motion.h2>
           <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
-            Engineering the physical-to-digital layer. Each project tackles real-world constraints across robotics, embedded processing, and deployed automation.
+            Bridging the physical and digital worlds. Every project solves complex, real-world challenges in robotics, embedded systems, and automated deployment.
           </motion.p>
         </motion.div>
 
@@ -167,7 +167,7 @@ export default function Work() {
                 <h3 className="mb-4 font-display text-2xl font-semibold tracking-wide text-white/90 transition-colors duration-300 group-hover:text-white">
                   {project.title}
                 </h3>
-                <p className="mb-8 text-[0.92rem] leading-relaxed text-white/50 transition-colors duration-300 flex-grow group-hover:text-white/75">
+                <p className="mb-8 text-[0.92rem] leading-relaxed text-white/65 transition-colors duration-300 flex-grow group-hover:text-white/75">
                   {project.description}
                 </p>
 
@@ -177,7 +177,7 @@ export default function Work() {
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="flex items-center gap-1.5 rounded-md bg-white/[0.03] px-2.5 py-1.5 font-mono text-[0.65rem] text-white/50 transition-colors group-hover:bg-white/[0.08] group-hover:text-white/90"
+                        className="flex items-center gap-1.5 rounded-md bg-white/[0.03] px-2.5 py-1.5 font-mono text-[0.65rem] text-white/65 transition-colors group-hover:bg-white/[0.08] group-hover:text-white/90"
                       >
                         {tech}
                       </span>
@@ -185,7 +185,7 @@ export default function Work() {
                   </div>
 
                   {/* Action link */}
-                  <div className="flex items-center text-xs font-mono tracking-widest text-white/50 transition-colors uppercase group-hover:text-white/90">
+                  <div className="flex items-center text-xs font-mono tracking-widest text-white/65 transition-colors uppercase group-hover:text-white/90">
                     <span className="mr-3 font-semibold">View Repository</span>
                     <svg className="h-4 w-4 transform transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
