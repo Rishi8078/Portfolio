@@ -4,45 +4,61 @@ import { useActiveSection } from '../context/ActiveSectionContext';
 import { EASE_OUT } from '../lib/motion';
 
 const chapters = [
-  { id: 'intro', label: 'Intro' },
-  { id: 'work', label: 'Work' },
-  { id: 'values', label: 'Values' },
-  { id: 'background', label: 'Background' },
-  { id: 'about', label: 'About' },
-  { id: 'blog', label: 'Blog' },
-  { id: 'hobbies', label: 'Hobbies' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'work', label: 'Work', num: '02' },
+  { id: 'values', label: 'Values', num: '03' },
+  { id: 'background', label: 'Background', num: '04' },
+  { id: 'about', label: 'About', num: '05' },
+  { id: 'blog', label: 'Blog', num: '06' },
+  { id: 'hobbies', label: 'Hobbies', num: '07' },
+  { id: 'contact', label: 'Contact', num: '08' },
 ] as const;
-
-const evenPositions = chapters.map((_, i) => i / (chapters.length - 1));
 
 export default function ProgressRail() {
   const activeSection = useActiveSection();
-  const { scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  /* Dots must sit at the scroll fraction where each section actually starts —
-     sections vary wildly in height (Hero alone is 500vh), so evenly-spaced
-     dots would drift out of sync with the fill line driven by real
-     scrollYProgress. Falls back to even spacing until measured. */
-  const [positions, setPositions] = useState<number[]>(evenPositions);
+  const [sectionProgresses, setSectionProgresses] = useState<Record<string, number>>({});
+
+  const isVisible = activeSection !== 'intro';
 
   useEffect(() => {
-    function measure() {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      setPositions(
-        chapters.map((chapter) => {
-          const el = document.getElementById(chapter.id);
-          return el ? Math.min(el.offsetTop / scrollable, 1) : 0;
-        })
-      );
+    function calculateSectionProgress() {
+      const currentScroll = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const progressMap: Record<string, number> = {};
+
+      chapters.forEach((chapter, index) => {
+        const el = document.getElementById(chapter.id);
+        if (!el) {
+          progressMap[chapter.id] = 0;
+          return;
+        }
+
+        const top = el.offsetTop;
+        const height = el.offsetHeight;
+        const nextEl = chapters[index + 1] ? document.getElementById(chapters[index + 1].id) : null;
+        const end = nextEl ? nextEl.offsetTop : top + height;
+
+        if (currentScroll < top - windowHeight * 0.3) {
+          progressMap[chapter.id] = 0;
+        } else if (currentScroll >= end - windowHeight * 0.3) {
+          progressMap[chapter.id] = 1;
+        } else {
+          const totalDistance = Math.max(end - top, 1);
+          const currentDistance = currentScroll - (top - windowHeight * 0.3);
+          progressMap[chapter.id] = Math.min(Math.max(currentDistance / totalDistance, 0), 1);
+        }
+      });
+
+      setSectionProgresses(progressMap);
     }
-    measure();
-    window.addEventListener('resize', measure);
-    window.addEventListener('load', measure);
+
+    calculateSectionProgress();
+    window.addEventListener('scroll', calculateSectionProgress, { passive: true });
+    window.addEventListener('resize', calculateSectionProgress, { passive: true });
     return () => {
-      window.removeEventListener('resize', measure);
-      window.removeEventListener('load', measure);
+      window.removeEventListener('scroll', calculateSectionProgress);
+      window.removeEventListener('resize', calculateSectionProgress);
     };
   }, []);
 
@@ -50,68 +66,94 @@ export default function ProgressRail() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  return (
-    <nav
-      aria-label="Section progress"
-      className="fixed right-10 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
-    >
-      <div className="relative h-64 w-px bg-white/10">
-        <motion.div
-          className="absolute left-0 top-0 w-px origin-top bg-gradient-to-b from-[#60A5FA] to-[#A78BFA]"
-          style={{ scaleY: scrollYProgress, height: '100%' }}
-        />
-        {chapters.map((chapter, index) => {
-          const isActive = chapter.id === activeSection;
-          const isHovered = hoveredId === chapter.id;
-          const top = `${positions[index] * 100}%`;
-          return (
-            /* Zero-height anchor at the exact track position — both the dot
-               and its label center themselves on this same point via
-               top-0 -translate-y-1/2, instead of one reading a flow-derived
-               box height the other doesn't share. */
-            <div key={chapter.id} className="absolute left-1/2 h-0 w-0" style={{ top }}>
-              <AnimatePresence>
-                {(isActive || isHovered) && (
-                  <motion.span
-                    initial={{ opacity: 0, x: 6 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 6 }}
-                    transition={{ duration: 0.25, ease: EASE_OUT }}
-                    className={`absolute right-full top-0 mr-4 -translate-y-1/2 whitespace-nowrap font-mono text-[0.65rem] uppercase tracking-[0.2em] ${isHovered ? 'text-white/80' : 'text-white/50'}`}
-                  >
-                    {chapter.label}
-                  </motion.span>
-                )}
-              </AnimatePresence>
+  const activeIndex = chapters.findIndex((c) => c.id === activeSection);
 
-              <button
-                type="button"
-                onClick={() => scrollToChapter(chapter.id)}
-                onMouseEnter={() => setHoveredId(chapter.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                onFocus={() => setHoveredId(chapter.id)}
-                onBlur={() => setHoveredId(null)}
-                aria-label={`Go to ${chapter.label}`}
-                aria-current={isActive ? 'true' : undefined}
-                className="absolute left-0 top-0 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full"
-              >
-                <motion.span
-                  animate={{
-                    scale: isActive ? 1.6 : isHovered ? 1.3 : 1,
-                    backgroundColor: isActive
-                      ? 'rgba(167,139,250,0.95)'
-                      : isHovered
-                        ? 'rgba(255,255,255,0.6)'
-                        : 'rgba(255,255,255,0.25)',
-                  }}
-                  transition={{ duration: 0.2, ease: EASE_OUT }}
-                  className="block h-1.5 w-1.5 rounded-full"
-                />
-              </button>
-            </div>
-          );
-        })}
-      </div>
-    </nav>
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.nav
+          initial={{ opacity: 0, x: 16 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 16 }}
+          transition={{ duration: 0.35, ease: EASE_OUT }}
+          aria-label="Section progress scrubber"
+          className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
+        >
+          {/* Segmented Scrub Bar Container */}
+          <div className="flex flex-col items-end gap-2 py-2">
+            {chapters.map((chapter, index) => {
+              const isActive = chapter.id === activeSection;
+              const isHovered = hoveredId === chapter.id;
+              const isPast = activeIndex > index;
+              const progress = sectionProgresses[chapter.id] ?? (isPast ? 1 : 0);
+
+              return (
+                <div key={chapter.id} className="group relative flex items-center justify-end">
+                  {/* Floating Tooltip Label */}
+                  <AnimatePresence>
+                    {isHovered && (
+                      <motion.div
+                        initial={{ opacity: 0, x: 8, scale: 0.95 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: 6, scale: 0.95 }}
+                        transition={{ duration: 0.18, ease: EASE_OUT }}
+                        className="pointer-events-none absolute right-full mr-3.5 flex items-center gap-2 whitespace-nowrap rounded-lg border border-white/10 bg-[#040810]/90 px-2.5 py-1 shadow-xl backdrop-blur-md"
+                      >
+                        <span className="font-mono text-[0.6rem] font-bold text-[#60A5FA]">
+                          {chapter.num}
+                        </span>
+                        <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/90">
+                          {chapter.label}
+                        </span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Segment Bar Button */}
+                  <button
+                    type="button"
+                    onClick={() => scrollToChapter(chapter.id)}
+                    onMouseEnter={() => setHoveredId(chapter.id)}
+                    onMouseLeave={() => setHoveredId(null)}
+                    onFocus={() => setHoveredId(chapter.id)}
+                    onBlur={() => setHoveredId(null)}
+                    aria-label={`Jump to ${chapter.label}`}
+                    aria-current={isActive ? 'true' : undefined}
+                    className="relative flex h-8 w-6 items-center justify-center focus:outline-none"
+                  >
+                    {/* Track Segment */}
+                    <div
+                      className={`relative overflow-hidden rounded-full transition-all duration-300 ${
+                        isActive
+                          ? 'h-8 w-1.5 bg-white/20 shadow-[0_0_10px_rgba(96,165,250,0.5)] ring-1 ring-[#60A5FA]/40'
+                          : isHovered
+                            ? 'h-7 w-1.5 bg-white/20'
+                            : 'h-6 w-1 bg-white/10'
+                      }`}
+                    >
+                      {/* Fill Progress Bar */}
+                      <motion.div
+                        className={`absolute bottom-0 left-0 right-0 rounded-full transition-colors duration-300 ${
+                          isActive
+                            ? 'bg-gradient-to-t from-[#60A5FA] to-white shadow-[0_0_8px_rgba(96,165,250,0.8)]'
+                            : isPast
+                              ? 'bg-[#60A5FA]/80'
+                              : 'bg-transparent'
+                        }`}
+                        style={{
+                          height: `${(isActive ? Math.max(progress, 0.15) : isPast ? 1 : 0) * 100}%`,
+                        }}
+                        transition={{ duration: 0.1, ease: 'linear' }}
+                      />
+                    </div>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 }
+
