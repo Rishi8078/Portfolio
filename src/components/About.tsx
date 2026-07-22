@@ -1,6 +1,44 @@
 import { motion } from 'framer-motion';
-import { fadeUpVariants, sectionViewport } from '../lib/motion';
+import { fadeUpVariants, sectionViewport, EASE_OUT } from '../lib/motion';
 import GlitchHeading from './GlitchHeading';
+
+/* Bio as annotated source: each prose block carries a margin annotation
+   styled like a firmware comment that compresses the block beside it. */
+const blocks = [
+  {
+    annotation: '// thesis',
+    body: (
+      <p className="font-display text-[1.35rem] font-medium leading-snug tracking-tight text-white/95 sm:text-[1.7rem] lg:text-[2rem]">
+        Most engineers choose a side: <span className="text-gradient">Hardware</span> or{' '}
+        <span className="text-gradient">Software</span>. I operate at the intersection where
+        they meet.
+      </p>
+    ),
+  },
+  {
+    annotation: '// path',
+    body: (
+      <p className="max-w-prose text-[1.02rem] leading-relaxed text-white/60 sm:text-[1.1rem]">
+        Currently pursuing my M.Sc. in Microelectronics and Microsystems at TUHH, I focus on
+        making physical devices truly intelligent. My background bridges two worlds, combining
+        advanced hardware design with battle-tested industry experience as a Data Engineer at
+        Cognizant.
+      </p>
+    ),
+  },
+  {
+    annotation: '// practice',
+    body: (
+      <p className="max-w-prose text-[1.02rem] leading-relaxed text-white/60 sm:text-[1.1rem]">
+        From low-power TinyML models and bare-metal firmware to scaling Dockerized ETL
+        pipelines, I thrive at the exact boundary where hardware meets software. Whether I'm
+        configuring ROS stacks for autonomous systems or designing edge infrastructure built
+        for ultra-low latency, I engineer systems designed to operate reliably in the real
+        world.
+      </p>
+    ),
+  },
+];
 
 export default function About() {
   return (
@@ -49,38 +87,50 @@ export default function About() {
           </GlitchHeading>
         </motion.div>
 
-        {/* Centered narrative */}
-        <div className="relative flex w-full max-w-4xl flex-col items-center text-center">
-          {/* Symmetrical Decorative Elements */}
+        {/* Annotated-source narrative: mono comments in the margin, prose in the body */}
+        <div className="relative w-full max-w-4xl">
+          {/* Ambient glows, kept off-axis to match the asymmetric layout */}
           <div
-            className="absolute -left-32 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.1),transparent_100%)]"
+            className="absolute -left-40 top-1/3 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(37,99,235,0.1),transparent_100%)]"
             style={{ animation: 'orb-glow-no-translate 5s ease-in-out infinite' }}
           />
           <div
-            className="absolute -right-32 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-y-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(147,51,234,0.1),transparent_100%)]"
+            className="absolute -right-40 bottom-0 -z-10 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(147,51,234,0.1),transparent_100%)]"
             style={{ animation: 'orb-glow-no-translate 6s ease-in-out 1s infinite' }}
           />
 
+          {/* Gutter rule that draws down as the section reveals */}
           <motion.div
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
-            initial="hidden"
-            whileInView="visible"
+            aria-hidden="true"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
             viewport={sectionViewport}
-            className="flex flex-col items-center"
-          >
-            <motion.p variants={fadeUpVariants} className="font-display text-[1.4rem] font-medium leading-relaxed tracking-tight text-white/95 sm:text-[2rem] lg:text-[2.4rem]">
-              Most engineers choose a side: <span className="text-gradient">Hardware</span> or <span className="text-gradient">Software</span>.<br className="hidden md:block" /> I operate at the intersection where they meet.
-            </motion.p>
+            transition={{ duration: 1.2, ease: EASE_OUT }}
+            className="absolute bottom-0 left-0 top-0 hidden w-px origin-top bg-gradient-to-b from-[#60A5FA]/40 via-white/10 to-transparent sm:left-[10.5rem] sm:block"
+          />
 
-            <motion.div variants={fadeUpVariants} className="mt-12 flex max-w-prose flex-col gap-8 text-[1.05rem] leading-relaxed text-white/60 sm:text-[1.15rem]">
-              <p>
-                Currently pursuing my M.Sc. in Microelectronics and Microsystems at TUHH, I focus on making physical devices truly intelligent. My background bridges two worlds, combining advanced hardware design with battle-tested industry experience as a Data Engineer at Cognizant.
-              </p>
-              <p>
-                From low-power TinyML models and bare-metal firmware to scaling Dockerized ETL pipelines, I thrive at the exact boundary where hardware meets software. Whether I'm configuring ROS stacks for autonomous systems or designing edge infrastructure built for ultra-low latency, I engineer systems designed to operate reliably in the real world.
-              </p>
-            </motion.div>
-          </motion.div>
+          <div className="flex flex-col gap-14 sm:gap-16">
+            {blocks.map((block) => (
+              <motion.div
+                key={block.annotation}
+                variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={sectionViewport}
+                className="grid grid-cols-1 gap-3 text-left sm:grid-cols-[10.5rem_1fr] sm:gap-0"
+              >
+                <motion.span
+                  variants={fadeUpVariants}
+                  className="font-mono text-[0.75rem] font-bold tracking-[0.12em] text-[#60A5FA]/80 sm:pr-8 sm:pt-2 sm:text-right"
+                >
+                  {block.annotation}
+                </motion.span>
+                <motion.div variants={fadeUpVariants} className="sm:pl-10">
+                  {block.body}
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

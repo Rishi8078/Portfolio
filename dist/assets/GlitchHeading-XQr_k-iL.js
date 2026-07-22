@@ -1,1 +1,0 @@
-import{r as i,j as m,m as c}from"./index-D9X3kUgS.js";import{u}from"./use-in-view-D5316wVV.js";function f({dataText:e,variants:s,className:r="",id:n,children:o}){const t=i.useRef(null),a=u(t,{once:!0,margin:"-10% 0px"});return m.jsx(c.h2,{ref:t,variants:s,id:n,className:`${r} ${a?"glitch-text":""}`,"data-text":e,children:o})}export{f as G};
