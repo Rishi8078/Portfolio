@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import contactAnimation from '../assets/contact-lottie.json';
 import { fadeUpVariants, sectionViewport } from '../lib/motion';
+import GlitchHeading from './GlitchHeading';
 
 function MagicContactCard({ link }: { link: any }) {
   const handleMouseMove = (e: any) => {
@@ -104,9 +105,9 @@ export default function Contact() {
               Chapter 07 · Connect
             </span>
           </motion.div>
-          <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+          <GlitchHeading variants={fadeUpVariants} dataText="LET'S CONNECT" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
             Let's <span className="text-white/40">Connect</span>
-          </motion.h2>
+          </GlitchHeading>
           <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
             Whether you're building the next generation of physical products or need to scale your device data pipelines to the edge, I'm ready to collaborate.
           </motion.p>

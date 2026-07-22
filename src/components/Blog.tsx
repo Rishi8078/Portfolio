@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import GlitchHeading from './GlitchHeading';
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -87,9 +88,9 @@ export default function Blog() {
           <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/50 backdrop-blur-md">
             Chapter 05 · Writings
           </motion.div>
-          <motion.h2 variants={fadeUpVariants} id="blog-title" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+          <GlitchHeading variants={fadeUpVariants} id="blog-title" dataText="MY THOUGHTS" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
             My <span className="text-white/40">Thoughts</span>
-          </motion.h2>
+          </GlitchHeading>
           <motion.p variants={fadeUpVariants} className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-white/60 sm:text-[1.15rem]">
             Engineering logs, architectural decisions, and essays on building embedded edge systems.
           </motion.p>

@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { fadeUpVariants, makeContainerVariants, itemVariants, sectionViewport } from '../lib/motion';
 
 const projects = [
@@ -49,6 +50,8 @@ const projects = [
 const containerVariants = makeContainerVariants(0.1, 0.2);
 
 export default function Work() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const isInView = useInView(headingRef, { once: true, margin: '-10% 0px' });
   return (
     <section
       id="work"
@@ -100,7 +103,12 @@ export default function Work() {
             </p>
           </motion.div>
 
-          <motion.h2 variants={fadeUpVariants} className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
+          <motion.h2
+            ref={headingRef}
+            variants={fadeUpVariants}
+            className={`section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] ${isInView ? 'glitch-text' : ''}`}
+            data-text="SELECTED BUILDS"
+          >
             Selected
             <br />
             <span className="text-white/40">Builds</span>
