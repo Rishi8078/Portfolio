@@ -12,7 +12,6 @@ const Hero = lazy(() => import('./components/Hero'));
 const Work = lazy(() => import('./components/Work'));
 const Value = lazy(() => import('./components/Value'));
 const Background = lazy(() => import('./components/Background'));
-const About = lazy(() => import('./components/About'));
 const Blog = lazy(() => import('./components/Blog'));
 const Contact = lazy(() => import('./components/Contact'));
 const Hobbies = lazy(() => import('./components/Hobbies'));
@@ -28,7 +27,6 @@ function HomeSection() {
       <Work />
       <Value />
       <Background />
-      <About />
       <Blog />
       <Hobbies />
       <Contact />

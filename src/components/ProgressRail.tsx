@@ -7,10 +7,9 @@ const chapters = [
   { id: 'work', label: 'Work', num: '02' },
   { id: 'values', label: 'Values', num: '03' },
   { id: 'background', label: 'Background', num: '04' },
-  { id: 'about', label: 'About', num: '05' },
-  { id: 'blog', label: 'Blog', num: '06' },
-  { id: 'hobbies', label: 'Hobbies', num: '07' },
-  { id: 'contact', label: 'Contact', num: '08' },
+  { id: 'blog', label: 'Blog', num: '05' },
+  { id: 'hobbies', label: 'Hobbies', num: '06' },
+  { id: 'contact', label: 'Contact', num: '07' },
 ] as const;
 
 export default function ProgressRail() {

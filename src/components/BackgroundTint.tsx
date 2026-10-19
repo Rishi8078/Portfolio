@@ -7,7 +7,6 @@ const chapterTints: Record<string, string> = {
   work: 'radial-gradient(circle at 50% 30%, rgba(37,99,235,0.07), transparent 60%)',
   values: 'radial-gradient(circle at 50% 30%, rgba(99,102,241,0.07), transparent 60%)',
   background: 'radial-gradient(circle at 50% 30%, rgba(79,70,229,0.07), transparent 60%)',
-  about: 'radial-gradient(circle at 50% 30%, rgba(147,51,234,0.07), transparent 60%)',
   blog: 'radial-gradient(circle at 50% 30%, rgba(37,99,235,0.06), transparent 60%)',
   hobbies: 'radial-gradient(circle at 50% 30%, rgba(5,150,105,0.07), transparent 60%)',
   contact: 'radial-gradient(circle at 50% 30%, rgba(5,150,105,0.07), transparent 60%)',

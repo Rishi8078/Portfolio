@@ -5,7 +5,7 @@ import resume from '../assets/resume.pdf';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useActiveSection } from '../context/ActiveSectionContext';
 
-const sections = ['intro', 'work', 'values', 'background', 'about', 'blog', 'hobbies', 'contact'] as const;
+const sections = ['intro', 'work', 'values', 'background', 'blog', 'hobbies', 'contact'] as const;
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

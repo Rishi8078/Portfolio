@@ -202,10 +202,10 @@ export default function Hero() {
                     <div className="absolute inset-0 z-0 bg-gradient-to-r from-gray-200 to-white opacity-0 transition-opacity group-hover:opacity-100" />
                   </a>
                   <a
-                    href="#about"
+                    href="#background"
                     className="group flex items-center justify-center rounded-full border border-white/20 bg-black/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition hover:border-white/50 hover:bg-white/10"
                   >
-                    About Me
+                    My Background
                   </a>
                 </div>
               </div>
