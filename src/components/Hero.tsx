@@ -148,7 +148,7 @@ export default function Hero() {
               style={{ scale: backgroundScale, y: yParallax }}
             >
               <img
-                src="/hero-bg.png"
+                src="/img/hero-bg.webp"
                 alt=""
                 aria-hidden="true"
                 className="h-full w-full object-cover object-[center_20%] sm:object-[center_30%] opacity-80"

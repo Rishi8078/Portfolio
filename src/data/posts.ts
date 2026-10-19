@@ -22,7 +22,7 @@ export const posts: Post[] = [
     category: "RF Sensing",
     description: "While the physics of RF sensing are real, the hype attracts bad actors. An audit into the massively trending RuView WiFi-DensePose repo reveals a complex, AI-generated scam. Here is the reality of RF sensing.",
     content: wifiSensingContent,
-    image: "/wifi-sensing.png"
+    image: "/img/wifi-sensing.webp"
   },
   {
     id: "decoding-mcp-hype",
@@ -32,7 +32,7 @@ export const posts: Post[] = [
     category: "AI",
     description: "mCP is the new tech buzzword. Is it a fad or the foundation for the next generation of AI apps? Let's break down how this universal translator gives LLMs their true superpowers.",
     content: mcpContent,
-    image: "/mcp.png"
+    image: "/img/mcp.webp"
   },
   {
     id: "gpu-passthrough",
@@ -42,7 +42,7 @@ export const posts: Post[] = [
     category: "Homelab",
     description: "A step-by-step guide to setting up NVIDIA GPU passthrough for LXC containers in Proxmox, enabling GPU-accelerated AI workloads with Docker, Ollama, and OpenWebUI.",
     content: gpuPassthroughContent,
-    image: "/gpu.png"
+    image: "/img/gpu.webp"
   }
 ];
 

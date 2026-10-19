@@ -48,7 +48,7 @@ export default function Hobbies() {
                             {/* Background Image */}
                             <div className="absolute inset-0 z-0">
                                 <img
-                                    src="/DSC09249.JPG"
+                                    src="/img/DSC09249.webp"
                                     alt="Photography"
                                     className="w-full h-full object-cover transition-[transform,opacity] duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                 />

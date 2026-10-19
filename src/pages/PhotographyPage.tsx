@@ -74,18 +74,18 @@ export default function PhotographyPage() {
                 {/* Masonry Layout Grid */}
                 <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
                     {galleryPhotos.map((photo, index) => (
-                        <motion.div
+                        <div
                             key={photo.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.04, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                             className="group relative overflow-hidden rounded-2xl bg-white/[0.02] border border-white/10 break-inside-avoid"
                         >
                             <div className="relative w-full overflow-hidden">
                                 <img
                                     src={photo.url}
                                     alt={photo.caption}
-                                    loading="lazy"
+                                    width={photo.width}
+                                    height={photo.height}
+                                    loading={index < 6 ? 'eager' : 'lazy'}
+                                    decoding="async"
                                     className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
                                 />
 
@@ -99,7 +99,7 @@ export default function PhotographyPage() {
                                     </span>
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </motion.div>
