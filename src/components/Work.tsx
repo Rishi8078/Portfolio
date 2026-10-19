@@ -98,7 +98,7 @@ export default function Work() {
             variants={fadeUpVariants}
             className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2.5 backdrop-blur-md"
           >
-            <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/70">
               Chapter 02 · Work Log
             </p>
           </motion.div>
@@ -111,7 +111,7 @@ export default function Work() {
           >
             Selected
             <br />
-            <span className="text-white/40">Builds</span>
+            <span className="text-white/60">Builds</span>
           </motion.h2>
           <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
             Bridging the physical and digital worlds. Every project solves complex, real-world challenges in robotics, embedded systems, and automated deployment.
@@ -141,20 +141,20 @@ export default function Work() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:bg-white/[0.06] hover:border-white/25"
+              className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm transition duration-300 ease-out hover:-translate-y-1.5 hover:bg-white/[0.06] hover:border-white/25"
               variants={itemVariants}
             >
               {/* Hover Gradient Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               {/* Top line accent */}
-              <div className="absolute left-0 top-0 h-[2px] w-0 bg-white/20 transition-all duration-500 group-hover:w-full" />
+              <div className="absolute left-0 top-0 h-[2px] w-0 bg-white/20 transition-[width] duration-500 group-hover:w-full" />
 
               <div className="relative z-10 flex flex-col flex-grow">
                 {/* Header info */}
                 <div className="flex justify-between items-start mb-8">
                   <div className="flex flex-col">
-                    <span className="font-pixel text-[2.5rem] leading-none text-white/10 transition-colors duration-300 group-hover:text-white/20 select-none pointer-events-none">
+                    <span className="font-pixel text-[2.5rem] leading-none text-white/25 transition-colors duration-300 group-hover:text-white/40 select-none pointer-events-none">
                       0{index + 1}
                     </span>
                   </div>
@@ -177,7 +177,7 @@ export default function Work() {
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="flex items-center gap-1.5 rounded-md bg-white/[0.03] px-2.5 py-1.5 font-mono text-[0.65rem] text-white/65 transition-colors group-hover:bg-white/[0.08] group-hover:text-white/90"
+                        className="flex items-center gap-1.5 rounded-md bg-white/[0.03] px-2.5 py-1.5 font-mono text-xs text-white/65 transition-colors group-hover:bg-white/[0.08] group-hover:text-white/90"
                       >
                         {tech}
                       </span>

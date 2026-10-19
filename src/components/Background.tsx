@@ -81,48 +81,54 @@ export default function Background() {
           viewport={sectionViewport}
           className="mx-auto mb-16 flex max-w-4xl flex-col items-center justify-center text-center sm:mb-24"
         >
-          <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
+          <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
             Chapter 04 · Timeline
           </motion.div>
           <GlitchHeading variants={fadeUpVariants} dataText="WORK & ACADEMIA" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
             Work &<br />
-            <span className="text-white/40">Academia</span>
+            <span className="text-white/60">Academia</span>
           </GlitchHeading>
         </motion.div>
 
         <div className="mx-auto flex max-w-4xl flex-col gap-20">
-          {/* Work Experience */}
+          {/* Work Experience — blue track */}
           <div className="flex flex-col">
-            <h3 className="mb-8 font-mono text-[1.1rem] font-bold uppercase tracking-widest text-white/50">
+            <h3 className="mb-8 font-mono text-[1.1rem] font-bold uppercase tracking-widest text-white/70">
               Industry
             </h3>
             <motion.div
-              className="grid gap-5"
+              className="relative flex flex-col gap-8 sm:pl-10"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
             >
               {workExperiences.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all hover:bg-white/[0.04] hover:border-white/20 sm:p-8"
-                >
-                  <div>
-                    <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                      <div className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">
-                        {exp.company}
+                <motion.div key={index} variants={itemVariants} className="group relative">
+                  {/* Timeline segment — mirrors the progress rail's scrub-bar design */}
+                  <div className="absolute -left-10 top-7 hidden sm:block">
+                    <div className="relative h-8 w-1.5 overflow-hidden rounded-full bg-white/10 transition duration-300 group-hover:bg-white/20 group-hover:shadow-[0_0_10px_rgba(96,165,250,0.5)] group-hover:ring-1 group-hover:ring-[#60A5FA]/40">
+                      <div className="absolute bottom-0 left-0 right-0 h-full rounded-full bg-gradient-to-t from-[#60A5FA] to-white/80 opacity-70 shadow-[0_0_8px_rgba(96,165,250,0.8)] transition-opacity duration-300 group-hover:opacity-100" />
+                    </div>
+                  </div>
+                  <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition group-hover:border-[#60A5FA]/30 group-hover:bg-[#60A5FA]/[0.04] group-hover:shadow-[0_0_30px_-10px_rgba(96,165,250,0.3)] sm:p-8">
+                    {/* Corner glow on hover */}
+                    <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.12),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div>
+                      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+                        <div className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-[#60A5FA]/80">
+                          {exp.company}
+                        </div>
+                        <span className="rounded border border-[#60A5FA]/20 bg-[#60A5FA]/10 px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-[#93C5FD]">
+                          {exp.period}
+                        </span>
                       </div>
-                      <span className="rounded border border-white/15 bg-white/5 px-2.5 py-1 font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-white/80">
-                        {exp.period}
-                      </span>
-                    </div>
-                    <div className="mb-4 font-display text-xl font-semibold leading-tight text-white/95 sm:text-2xl">
-                      {exp.role}
-                    </div>
-                    <div className="text-[0.92rem] leading-relaxed text-white/60">
-                      {exp.description}
+                      <div className="mb-4 font-display text-xl font-semibold leading-tight text-white/95 sm:text-2xl">
+                        {exp.role}
+                      </div>
+                      <div className="text-[0.92rem] leading-relaxed text-white/60">
+                        {exp.description}
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -130,40 +136,47 @@ export default function Background() {
             </motion.div>
           </div>
 
-          <div className="h-px w-full bg-white/10" />
+          {/* Divider carries the blue→violet handoff between tracks */}
+          <div className="h-px w-full bg-gradient-to-r from-[#60A5FA]/30 via-white/10 to-[#A78BFA]/30" />
 
-          {/* Education */}
+          {/* Education — violet track */}
           <div className="flex flex-col">
-            <h3 className="mb-8 font-mono text-[1.1rem] font-bold uppercase tracking-widest text-white/50">
+            <h3 className="mb-8 font-mono text-[1.1rem] font-bold uppercase tracking-widest text-white/70">
               Education
             </h3>
             <motion.div
-              className="grid gap-5"
+              className="relative flex flex-col gap-8 sm:pl-10"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
             >
               {education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all hover:bg-white/[0.04] hover:border-white/20 sm:p-8"
-                >
-                  <div>
-                    <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                      <div className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">
-                        {edu.institution}
+                <motion.div key={index} variants={itemVariants} className="group relative">
+                  {/* Timeline segment — mirrors the progress rail's scrub-bar design */}
+                  <div className="absolute -left-10 top-7 hidden sm:block">
+                    <div className="relative h-8 w-1.5 overflow-hidden rounded-full bg-white/10 transition duration-300 group-hover:bg-white/20 group-hover:shadow-[0_0_10px_rgba(167,139,250,0.5)] group-hover:ring-1 group-hover:ring-[#A78BFA]/40">
+                      <div className="absolute bottom-0 left-0 right-0 h-full rounded-full bg-gradient-to-t from-[#A78BFA] to-white/80 opacity-70 shadow-[0_0_8px_rgba(167,139,250,0.8)] transition-opacity duration-300 group-hover:opacity-100" />
+                    </div>
+                  </div>
+                  <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition group-hover:border-[#A78BFA]/30 group-hover:bg-[#A78BFA]/[0.04] group-hover:shadow-[0_0_30px_-10px_rgba(167,139,250,0.3)] sm:p-8">
+                    {/* Corner glow on hover */}
+                    <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.12),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div>
+                      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+                        <div className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-[#A78BFA]/80">
+                          {edu.institution}
+                        </div>
+                        <span className="rounded border border-[#A78BFA]/20 bg-[#A78BFA]/10 px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-[#C4B5FD]">
+                          {edu.period}
+                        </span>
                       </div>
-                      <span className="rounded border border-white/15 bg-white/5 px-2.5 py-1 font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-white/80">
-                        {edu.period}
-                      </span>
-                    </div>
-                    <div className="mb-4 font-display text-xl font-semibold leading-tight text-white/95 sm:text-2xl">
-                      {edu.degree}
-                    </div>
-                    <div className="text-[0.92rem] leading-relaxed text-white/60">
-                      {edu.description}
+                      <div className="mb-4 font-display text-xl font-semibold leading-tight text-white/95 sm:text-2xl">
+                        {edu.degree}
+                      </div>
+                      <div className="text-[0.92rem] leading-relaxed text-white/60">
+                        {edu.description}
+                      </div>
                     </div>
                   </div>
                 </motion.div>

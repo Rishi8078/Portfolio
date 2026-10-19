@@ -59,7 +59,7 @@ export function Loading({ setIsLoading }: { setIsLoading: (loading: boolean) => 
               className="mt-6 flex items-center justify-center gap-6"
             >
               <div className="h-[1px] w-12 bg-white/20" />
-              <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/50">
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/70">
                 Embedded · Edge AI
               </span>
               <div className="h-[1px] w-12 bg-white/20" />

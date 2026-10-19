@@ -36,7 +36,7 @@ export default function PhotographyPage() {
                 <div className="flex flex-col gap-8 mb-16 max-w-4xl mx-auto">
                     <Link
                         to="/"
-                        className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+                        className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/20 text-white/60 transition duration-200 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
                         aria-label="Back to home"
                     >
                         <svg
@@ -58,14 +58,14 @@ export default function PhotographyPage() {
 
                     <div className="flex flex-col gap-4">
                         <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md self-start">
-                            <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+                            <p className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/70">
                                 Visuals
                             </p>
                         </div>
                         <h2 className="font-pixel text-4xl sm:text-5xl uppercase tracking-tight text-white/90">
-                            Photo<span className="text-white/40">graphy</span>
+                            Photo<span className="text-white/60">graphy</span>
                         </h2>
-                        <p className="max-w-xl text-white/50 text-[1.05rem] leading-relaxed mt-2">
+                        <p className="max-w-xl text-white/70 text-[1.05rem] leading-relaxed mt-2">
                             Captured moments, architectural studies, and experiments with light and shadow.
                         </p>
                     </div>
@@ -90,11 +90,11 @@ export default function PhotographyPage() {
                                 />
 
                                 {/* Dark Vignette Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#040810]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#040810]/80 via-transparent to-transparent [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-500" />
 
                                 {/* Caption on hover */}
-                                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                                    <span className="font-mono text-[0.7rem] uppercase tracking-widest text-white/80">
+                                <div className="absolute bottom-0 left-0 right-0 p-6 [@media(hover:hover)]:translate-y-4 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100 transition duration-500">
+                                    <span className="font-mono text-xs uppercase tracking-widest text-white/80">
                                         {photo.caption}
                                     </span>
                                 </div>

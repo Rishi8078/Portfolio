@@ -21,7 +21,7 @@ const ImageBlock = ({ className = "", src, alt = "", isActive }: { className?: s
 // Content mapped from our centralized data file
 
 const PostMetadata = ({ post }: { post: any }) => (
-  <div className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-widest text-white/40">
+  <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/60">
     <span>{post.date}</span>
     {post.category && (
       <>
@@ -85,11 +85,11 @@ export default function Blog() {
           className="mb-16 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
         >
 
-          <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/50 backdrop-blur-md">
+          <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
             Chapter 05 · Writings
           </motion.div>
           <GlitchHeading variants={fadeUpVariants} id="blog-title" dataText="MY THOUGHTS" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
-            My <span className="text-white/40">Thoughts</span>
+            My <span className="text-white/60">Thoughts</span>
           </GlitchHeading>
           <motion.p variants={fadeUpVariants} className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-white/60 sm:text-[1.15rem]">
             Engineering logs, architectural decisions, and essays on building embedded edge systems.
@@ -118,7 +118,7 @@ export default function Blog() {
               {featuredPosts.map((post, index) => (
                 <div 
                   key={post.id} 
-                  className={`min-w-0 shrink-0 grow-0 basis-full transition-all duration-500 select-none ${
+                  className={`min-w-0 shrink-0 grow-0 basis-full transition-[opacity,filter,transform] duration-500 select-none ${
                     index === currentSlide ? 'opacity-100 blur-0 scale-100' : 'opacity-30 blur-[4px] scale-[0.95]'
                   }`}
                 >
@@ -130,11 +130,11 @@ export default function Blog() {
                         {post.title}
                       </h2>
 
-                      <p className="text-base leading-relaxed text-white/50 max-w-xl pr-6">
+                      <p className="text-base leading-relaxed text-white/70 max-w-xl pr-6">
                         {post.description}
                       </p>
                       
-                      <div className="mt-4 flex items-center text-xs font-mono tracking-widest text-white/40 transition-colors uppercase group-hover:text-white/90">
+                      <div className="mt-4 flex items-center text-xs font-mono tracking-widest text-white/60 transition-colors uppercase group-hover:text-white/90">
                         <span className="mr-3 font-semibold">Read Article</span>
                         <span className="transition-transform group-hover:translate-x-1">→</span>
                       </div>
@@ -164,7 +164,7 @@ export default function Blog() {
                 >
                   <span
                     aria-hidden="true"
-                    className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-6 bg-white/80' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+                    className={`h-1.5 rounded-full transition-[width,background-color] duration-300 ${i === currentSlide ? 'w-6 bg-white/80' : 'w-2 bg-white/20 hover:bg-white/40'}`}
                   />
                 </button>
               ))}

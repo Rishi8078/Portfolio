@@ -20,11 +20,11 @@ export default function Hobbies() {
                     variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
                     className="mb-16 md:mb-24 mx-auto flex w-full max-w-4xl flex-col items-center text-center"
                 >
-                    <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/50 backdrop-blur-md">
+                    <motion.div variants={fadeUpVariants} className="mb-6 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
                         Chapter 06 · Side Quests
                     </motion.div>
                     <GlitchHeading variants={fadeUpVariants} id="hobbies-title" dataText="CREATIVE OUTLETS" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
-                        Creative <span className="text-white/40">Outlets</span>
+                        Creative <span className="text-white/60">Outlets</span>
                     </GlitchHeading>
                     <motion.p variants={fadeUpVariants} className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-white/60 sm:text-[1.15rem]">
                         Outside of coding, I spend most of my time behind the lens or in front of the mic. Exploring light, shadow, and sound.
@@ -43,30 +43,30 @@ export default function Hobbies() {
                     >
                         <Link
                             to="/photography"
-                            className="group relative flex h-[450px] sm:h-[500px] w-full flex-col justify-end overflow-hidden rounded-3xl bg-white/5 border border-white/10 transition-all duration-500 hover:border-white/30"
+                            className="group relative flex h-[450px] sm:h-[500px] w-full flex-col justify-end overflow-hidden rounded-3xl bg-white/5 border border-white/10 transition-colors duration-200 hover:border-white/30"
                         >
                             {/* Background Image */}
                             <div className="absolute inset-0 z-0">
                                 <img
                                     src="/DSC09249.JPG"
                                     alt="Photography"
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 mix-blend-overlay group-hover:opacity-80"
+                                    className="w-full h-full object-cover transition-[transform,opacity] duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#040810]/40 to-[#040810]/90" />
+                                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-50% to-[#040810]/90" />
                             </div>
 
                             {/* Content */}
                             <div className="relative z-10 p-8 sm:p-10 flex flex-col gap-4">
                                 <div className="self-start rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-md">
-                                    <span className="font-mono text-[0.65rem] font-bold uppercase tracking-widest text-white/90">
+                                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-white/90">
                                         Visuals
                                     </span>
                                 </div>
                                 <div>
-                                    <h3 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                    <h3 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-2">
                                         Photography
                                     </h3>
-                                    <p className="font-mono text-sm text-white/50 opacity-0 -translate-y-2 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75">
+                                    <p className="font-mono text-sm text-white/80 group-hover:text-white transition-colors duration-500 delay-75">
                                         View Gallery →
                                     </p>
                                 </div>
@@ -83,30 +83,30 @@ export default function Hobbies() {
                     >
                         <Link
                             to="/music"
-                            className="group relative flex h-[450px] sm:h-[500px] w-full flex-col justify-end overflow-hidden rounded-3xl bg-white/5 border border-white/10 transition-all duration-500 hover:border-white/30"
+                            className="group relative flex h-[450px] sm:h-[500px] w-full flex-col justify-end overflow-hidden rounded-3xl bg-white/5 border border-white/10 transition-colors duration-200 hover:border-white/30"
                         >
                             {/* Background Image */}
                             <div className="absolute inset-0 z-0">
                                 <img
                                     src="https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?q=80&w=2076&auto=format&fit=crop"
                                     alt="Music backdrop"
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 mix-blend-overlay group-hover:opacity-80"
+                                    className="w-full h-full object-cover transition-[transform,opacity] duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#040810]/40 to-[#040810]/90" />
+                                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-50% to-[#040810]/90" />
                             </div>
 
                             {/* Content */}
                             <div className="relative z-10 p-8 sm:p-10 flex flex-col gap-4">
                                 <div className="self-start rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-md">
-                                    <span className="font-mono text-[0.65rem] font-bold uppercase tracking-widest text-white/90">
+                                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-white/90">
                                         Audio
                                     </span>
                                 </div>
                                 <div>
-                                    <h3 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                    <h3 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-2">
                                         Music & Band
                                     </h3>
-                                    <p className="font-mono text-sm text-white/50 opacity-0 -translate-y-2 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75">
+                                    <p className="font-mono text-sm text-white/80 group-hover:text-white transition-colors duration-500 delay-75">
                                         Listen to Tracks →
                                     </p>
                                 </div>

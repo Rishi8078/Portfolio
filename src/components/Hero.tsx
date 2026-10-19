@@ -118,7 +118,7 @@ export default function Hero() {
 
   return (
     <MotionConfig reducedMotion="never">
-      <section ref={containerRef} id="intro" className="relative h-[500vh] w-full bg-black">
+      <section ref={containerRef} id="intro" className="relative h-[250vh] w-full bg-black">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           {/* Animated Scroll Prompt (Visible on initial landing) */}
           <div
@@ -132,7 +132,7 @@ export default function Hero() {
                 className="h-1.5 w-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_8px_rgba(96,165,250,0.9)]"
               />
             </div>
-            <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/70">
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-white/70">
               Scroll to Unfold ↓
             </span>
           </div>
@@ -151,7 +151,7 @@ export default function Hero() {
                 src="/hero-bg.png"
                 alt=""
                 aria-hidden="true"
-                className="h-full w-full object-cover object-[center_20%] sm:object-[center_30%] opacity-60"
+                className="h-full w-full object-cover object-[center_20%] sm:object-[center_30%] opacity-80"
               />
             </motion.div>
 
@@ -159,7 +159,7 @@ export default function Hero() {
               className="absolute inset-0 z-0"
               style={{ backgroundImage: radialOverlay }}
             />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-64 bg-gradient-to-t from-[#040810] via-[#040810]/70 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-64 bg-gradient-to-t from-[#040810] via-[#040810]/40 to-transparent" />
 
             <div
               className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
@@ -177,7 +177,7 @@ export default function Hero() {
             >
               <div className="flex flex-col items-center">
                 <div className="mb-6 rounded-full border border-white/10 bg-white/5 px-5 py-2 backdrop-blur-md">
-                  <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+                  <p className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/70">
                     Hamburg · TUHH
                   </p>
                 </div>
@@ -185,7 +185,7 @@ export default function Hero() {
                 <h1 className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[5rem] md:text-[7.5rem] lg:text-[9rem]">
                   Embedded
                   <br />
-                  <span className="text-white/40">Edge AI</span>
+                  <span className="text-white/60">Edge AI</span>
                 </h1>
 
                 <p className="mt-8 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
@@ -203,7 +203,7 @@ export default function Hero() {
                   </a>
                   <a
                     href="#about"
-                    className="group flex items-center justify-center rounded-full border border-white/20 bg-black/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/10"
+                    className="group flex items-center justify-center rounded-full border border-white/20 bg-black/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition hover:border-white/50 hover:bg-white/10"
                   >
                     About Me
                   </a>
@@ -216,7 +216,7 @@ export default function Hero() {
               style={{ opacity: opacityFade }}
               className="absolute bottom-6 z-20 w-full border-t border-white/5 bg-black/50 py-5 backdrop-blur-md sm:bottom-8 sm:py-6 pointer-events-none select-none"
             >
-              <div className="flex w-max font-mono text-[0.7rem] font-bold uppercase tracking-[0.25em] text-white/55 sm:text-[0.9rem]">
+              <div className="flex w-max font-mono text-xs font-bold uppercase tracking-[0.25em] text-white/55 sm:text-[0.9rem]">
                 <div
                   className="flex gap-16 whitespace-nowrap"
                   style={{ animation: 'ticker-scroll 25s linear infinite' }}
@@ -254,11 +254,11 @@ export default function Hero() {
                   >
                     {/* Chapter Tag Badge */}
                     <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
-                      <span className="font-mono text-[0.65rem] font-bold text-[#60A5FA]">
+                      <span className="font-mono text-xs font-bold text-[#60A5FA]">
                         {beat.num}
                       </span>
                       <span className="text-white/20">/</span>
-                      <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/80">
+                      <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-white/80">
                         {beat.tag}
                       </span>
                     </div>
@@ -278,7 +278,7 @@ export default function Hero() {
                       {beats.map((b) => (
                         <span
                           key={b.num}
-                          className={`h-1.5 rounded-full transition-all duration-300 ${
+                          className={`h-1.5 rounded-full transition-[width,background-color,box-shadow] duration-300 ${
                             b.num === beat.num
                               ? 'w-6 bg-[#60A5FA] shadow-[0_0_8px_rgba(96,165,250,0.8)]'
                               : 'w-1.5 bg-white/20'

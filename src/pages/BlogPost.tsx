@@ -86,7 +86,7 @@ export default function BlogPost() {
     return (
       <div className="min-h-screen py-32 flex flex-col items-center justify-center text-white">
         <h1 className="text-4xl font-pixel section-heading-glow mb-4">Post not found</h1>
-        <Link to="/" className="text-white/50 hover:text-white transition-colors underline font-mono">
+        <Link to="/" className="text-white/70 hover:text-white transition-colors underline font-mono">
           Return Home
         </Link>
       </div>
@@ -105,7 +105,7 @@ export default function BlogPost() {
         <Link
           to={fromArchive ? '/blog' : '/'}
           state={fromArchive ? undefined : { scrollTo: 'blog' }}
-          className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+          className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/20 text-white/60 transition duration-200 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
           aria-label={fromArchive ? 'Back to all posts' : 'Back to home'}
         >
           <svg
@@ -126,7 +126,7 @@ export default function BlogPost() {
         </Link>
 
         <div>
-          <div className="mb-3 flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-widest text-white/40">
+          <div className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/60">
             <span>{post.date}</span>
             {post.category && (
               <>

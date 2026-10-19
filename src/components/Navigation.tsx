@@ -78,7 +78,7 @@ export default function Navigation() {
                     href={resume}
                     download
                     onClick={() => setIsMenuOpen(false)}
-                    className="inline-block rounded-full border border-white/10 bg-white/[0.03] px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] text-white/80 transition-all hover:bg-white/[0.08] hover:text-white"
+                    className="inline-block rounded-full border border-white/10 bg-white/[0.03] px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] text-white/80 transition hover:bg-white/[0.08] hover:text-white"
                   >
                     Resume ↓
                   </a>
@@ -97,7 +97,7 @@ export default function Navigation() {
         className="fixed left-0 top-0 z-[101] hidden w-full lg:block"
       >
         <div className="px-8 pt-6">
-          <div className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-3 transition-all duration-500 overflow-visible ${isScrolled || !isHome ? 'border-white/10 bg-white/[0.02] backdrop-blur-md shadow-[0_0_30px_-10px_rgba(255,255,255,0.05)]' : 'border-transparent bg-transparent'} `}>
+          <div className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-3 transition duration-500 overflow-visible ${isScrolled || !isHome ? 'border-white/10 bg-white/[0.02] backdrop-blur-md shadow-[0_0_30px_-10px_rgba(255,255,255,0.05)]' : 'border-transparent bg-transparent'} `}>
             {isHome ? (
               <a
                 href="#intro"
@@ -131,7 +131,7 @@ export default function Navigation() {
               <a
                 href={resume}
                 download
-                className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white/80 transition-all hover:border-white/30 hover:bg-white/[0.08] hover:text-white"
+                className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white/80 transition hover:border-white/30 hover:bg-white/[0.08] hover:text-white"
               >
                 Resume
               </a>
@@ -145,7 +145,7 @@ export default function Navigation() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className={`lg:hidden fixed top-0 left-0 right-0 z-[101] flex items-center justify-between px-5 py-4 transition-all duration-500 ${isScrolled || isMenuOpen || !isHome ? 'border-b border-white/10 bg-[#040810]/70 backdrop-blur-md' : 'bg-transparent'}`}
+        className={`lg:hidden fixed top-0 left-0 right-0 z-[101] flex items-center justify-between px-5 py-4 transition duration-500 ${isScrolled || isMenuOpen || !isHome ? 'border-b border-white/10 bg-[#040810]/70 backdrop-blur-md' : 'bg-transparent'}`}
       >
         {isHome ? (
           <a

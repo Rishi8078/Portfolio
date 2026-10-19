@@ -79,11 +79,11 @@ export default function About() {
           viewport={sectionViewport}
           className="mb-20 flex w-full max-w-4xl flex-col items-center text-center"
         >
-          <motion.div variants={fadeUpVariants} className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/50 backdrop-blur-md">
+          <motion.div variants={fadeUpVariants} className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
             Chapter 05 · The Developer
           </motion.div>
           <GlitchHeading variants={fadeUpVariants} dataText="ABOUT ME" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
-            About <span className="text-white/40">Me</span>
+            About <span className="text-white/60">Me</span>
           </GlitchHeading>
         </motion.div>
 

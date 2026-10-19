@@ -38,7 +38,7 @@ export default function BlogArchivePage() {
           <Link
             to="/"
             state={{ scrollTo: 'blog' }}
-            className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+            className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/20 text-white/60 transition duration-200 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
             aria-label="Back to home"
           >
             <svg
@@ -60,12 +60,12 @@ export default function BlogArchivePage() {
 
           <div className="flex flex-col gap-4">
             <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md self-start">
-              <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+              <p className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/70">
                 Archive
               </p>
             </div>
             <h2 className="font-pixel text-4xl sm:text-5xl uppercase tracking-tight text-white/90">
-              All <span className="text-white/40">Posts</span>
+              All <span className="text-white/60">Posts</span>
             </h2>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default function BlogArchivePage() {
               key={post.id}
               to={`/post/${post.id}`}
               state={{ fromArchive: true }}
-              className="group flex flex-col sm:flex-row items-start sm:items-center gap-6 p-4 sm:p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.04] transition-all duration-300"
+              className="group flex flex-col sm:flex-row items-start sm:items-center gap-6 p-4 sm:p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.04] transition duration-300"
             >
               {/* Thumbnail Image */}
               <div className="relative h-[100px] w-[150px] sm:h-[120px] sm:w-[180px] shrink-0 rounded-xl overflow-hidden bg-white/5 border border-white/10">
@@ -96,15 +96,15 @@ export default function BlogArchivePage() {
                 <h3 className="font-display text-xl sm:text-2xl font-semibold tracking-tight text-white/80 group-hover:text-white transition-colors truncate">
                   {post.title}
                 </h3>
-                <p className="text-sm text-white/40 line-clamp-2 group-hover:text-white/60 transition-colors leading-relaxed">
+                <p className="text-sm text-white/60 line-clamp-2 group-hover:text-white/90 transition-colors leading-relaxed">
                   {post.description}
                 </p>
 
                 {/* Metadata */}
-                <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-white/50 mt-1">
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/70 mt-1">
                   <span>{post.date}</span>
                   <span className="h-1 w-1 rounded-full bg-white/10" />
-                  <span className="text-white/50">{post.category}</span>
+                  <span className="text-white/70">{post.category}</span>
                 </div>
               </div>
             </Link>

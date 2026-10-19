@@ -44,7 +44,7 @@ export default function MusicPage() {
                 <div className="mb-12">
                     <Link
                         to="/"
-                        className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white/40 transition-all duration-500 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
+                        className="group flex w-11 h-11 items-center justify-center rounded-full bg-white/[0.03] border border-white/20 text-white/60 transition duration-200 hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105"
                         aria-label="Back to home"
                     >
                         <svg
@@ -88,15 +88,15 @@ export default function MusicPage() {
                     {/* Details */}
                     <div className="flex flex-col gap-6 pt-4">
                         <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md self-start">
-                            <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+                            <p className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/70">
                                 Main Singer / Vocals
                             </p>
                         </div>
                         <div>
                             <h2 className="font-pixel text-4xl sm:text-5xl uppercase tracking-tight text-white/90">
-                                The <span className="text-white/40">Sound</span>
+                                The <span className="text-white/60">Sound</span>
                             </h2>
-                            <p className="max-w-xl text-white/50 text-[1.05rem] leading-relaxed mt-4">
+                            <p className="max-w-xl text-white/70 text-[1.05rem] leading-relaxed mt-4">
                                 When I'm not writing code, I'm writing melodies. I am the lead singer for an indie-electronic project. Here's a selection of our latest tracks and upcoming releases.
                             </p>
                         </div>
@@ -138,10 +138,10 @@ export default function MusicPage() {
                         {tracks.map((track, index) => (
                             <div
                                 key={track.id}
-                                className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl hover:bg-white/[0.03] border border-transparent hover:border-white/5 transition-all duration-300 gap-4"
+                                className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl hover:bg-white/[0.03] border border-transparent hover:border-white/5 transition duration-300 gap-4"
                             >
                                 <div className="flex items-center gap-2">
-                                    <span className="font-mono text-xs text-white/50 w-6 text-center shrink-0">
+                                    <span className="font-mono text-xs text-white/70 w-6 text-center shrink-0">
                                         {index + 1}
                                     </span>
                                     <button
@@ -159,10 +159,10 @@ export default function MusicPage() {
                                 </div>
 
                                 <div className="flex items-center justify-between sm:justify-end gap-12 sm:gap-20 sm:w-[250px] pl-10 sm:pl-0">
-                                    <span className="font-mono text-[0.75rem] text-white/40 group-hover:text-white/60 transition-colors">
+                                    <span className="font-mono text-[0.75rem] text-white/60 group-hover:text-white/90 transition-colors">
                                         {track.plays}
                                     </span>
-                                    <span className="font-mono text-[0.7rem] text-white/40 group-hover:text-white/60 transition-colors">
+                                    <span className="font-mono text-xs text-white/60 group-hover:text-white/90 transition-colors">
                                         {track.duration}
                                     </span>
                                 </div>

@@ -75,7 +75,7 @@ export default function Value() {
               variants={fadeUpVariants}
               className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2.5 backdrop-blur-md"
             >
-              <p className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+              <p className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/70">
                 Chapter 03 · Core Principles
               </p>
             </motion.div>
@@ -83,7 +83,7 @@ export default function Value() {
             <GlitchHeading variants={fadeUpVariants} dataText="ENGINEERING PHILOSOPHY" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
               Engineering
               <br />
-              <span className="text-white/40">Philosophy</span>
+              <span className="text-white/60">Philosophy</span>
             </GlitchHeading>
           </motion.div>
 
@@ -101,7 +101,7 @@ export default function Value() {
               <motion.div
                 key={value.title}
                 variants={itemVariants}
-                className="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-black/40 p-8 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/[0.08]"
+                className="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-black/40 p-8 backdrop-blur-sm transition hover:border-white/30 hover:bg-white/[0.08]"
               >
                 {/* Number Watermark */}
                 <div className="pointer-events-none absolute -right-4 -top-8 font-pixel text-[8rem] text-white/[0.03] transition-colors group-hover:text-white/[0.06] select-none">
@@ -109,7 +109,7 @@ export default function Value() {
                 </div>
 
                 <div className="relative z-10">
-                  <span className="mb-6 inline-block font-mono text-[0.8rem] font-semibold text-white/40">
+                  <span className="mb-6 inline-block font-mono text-[0.8rem] font-semibold text-white/60">
                     // {value.number}
                   </span>
                   <h3 className="mb-4 font-display text-[1.4rem] font-semibold tracking-wide text-white/95 sm:text-2xl">

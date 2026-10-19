@@ -102,7 +102,7 @@ export default function ProgressRail() {
                         <span className="font-mono text-[0.6rem] font-bold text-[#60A5FA]">
                           {chapter.num}
                         </span>
-                        <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/90">
+                        <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-white/90">
                           {chapter.label}
                         </span>
                       </motion.div>
@@ -123,7 +123,7 @@ export default function ProgressRail() {
                   >
                     {/* Track Segment */}
                     <div
-                      className={`relative overflow-hidden rounded-full transition-all duration-300 ${
+                      className={`relative overflow-hidden rounded-full transition-[height,width,background-color,box-shadow] duration-300 ${
                         isActive
                           ? 'h-8 w-1.5 bg-white/20 shadow-[0_0_10px_rgba(96,165,250,0.5)] ring-1 ring-[#60A5FA]/40'
                           : isHovered

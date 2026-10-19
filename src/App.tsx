@@ -1,7 +1,7 @@
 import { useState, useEffect, useLayoutEffect, Suspense, lazy, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Loading } from './components/Loading';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import Fireflies from './components/Fireflies';
 import { ActiveSectionProvider } from './context/ActiveSectionContext';
 import BackgroundTint from './components/BackgroundTint';
@@ -93,29 +93,31 @@ export default function App() {
   }, [isLoading]);
 
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-[#040810] text-white selection:bg-white/30 transition-colors relative">
-        <Fireflies count={35} />
-        <AnimatePresence>
-          {isLoading && !hasLoadedOnce && (
-            <Loading setIsLoading={setIsLoading} />
-          )}
-        </AnimatePresence>
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <div className="min-h-screen bg-[#040810] text-white selection:bg-white/30 transition-colors relative">
+          <Fireflies count={35} />
+          <AnimatePresence>
+            {isLoading && !hasLoadedOnce && (
+              <Loading setIsLoading={setIsLoading} />
+            )}
+          </AnimatePresence>
 
-        {(!isLoading || hasLoadedOnce) && (
-          <Suspense fallback={null}>
-            <motion.div
-              key="app-content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2 }}
-              className="pb-safe-bottom"
-            >
-              <AppContent />
-            </motion.div>
-          </Suspense>
-        )}
-      </div>
-    </BrowserRouter>
+          {(!isLoading || hasLoadedOnce) && (
+            <Suspense fallback={null}>
+              <motion.div
+                key="app-content"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2 }}
+                className="pb-safe-bottom"
+              >
+                <AppContent />
+              </motion.div>
+            </Suspense>
+          )}
+        </div>
+      </BrowserRouter>
+    </MotionConfig>
   );
 }

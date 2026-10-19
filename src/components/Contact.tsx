@@ -20,7 +20,7 @@ function MagicContactCard({ link }: { link: any }) {
       target={link.name !== 'Email' ? '_blank' : undefined}
       rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
       onMouseMove={handleMouseMove}
-      className="group relative flex flex-col items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.04]"
+      className="group relative flex flex-col items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-6 text-center transition duration-300 hover:-translate-y-1 hover:bg-white/[0.04]"
     >
       {/* Background Hover Highlight */}
       <div 
@@ -101,12 +101,12 @@ export default function Contact() {
           className="mb-16 flex w-full max-w-4xl flex-col items-center text-center"
         >
           <motion.div variants={fadeUpVariants} className="mb-8 rounded-full border border-white/10 bg-white/5 px-6 py-2 pb-2.5 backdrop-blur-md">
-            <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/70">
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/70">
               Chapter 07 · Connect
             </span>
           </motion.div>
           <GlitchHeading variants={fadeUpVariants} dataText="LET'S CONNECT" className="section-heading-glow font-pixel text-[3rem] uppercase leading-[0.85] tracking-tight text-white sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem]">
-            Let's <span className="text-white/40">Connect</span>
+            Let's <span className="text-white/60">Connect</span>
           </GlitchHeading>
           <motion.p variants={fadeUpVariants} className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-white/70 sm:text-base md:text-lg">
             Whether you're building the next generation of physical products or need to scale your device data pipelines to the edge, I'm ready to collaborate.
@@ -163,7 +163,7 @@ export default function Contact() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.6 }}
-        className="relative z-20 mt-32 flex w-full flex-col items-center justify-center gap-4 font-mono text-[0.65rem] uppercase tracking-widest text-white/50 sm:flex-row"
+        className="relative z-20 mt-32 flex w-full flex-col items-center justify-center gap-4 font-mono text-xs uppercase tracking-widest text-white/70 sm:flex-row"
       >
         <span>© {new Date().getFullYear()} Rishib Iyapady</span>
       </motion.div>
